@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # PracticeAngular
 
 angular の練習に使用するリポジトリ
