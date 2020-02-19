@@ -1,33 +1,35 @@
-import { TestBed, async } from "@angular/core/testing";
+import { ItemListComponent } from "./components/item-list/item-list.component";
+import { TestBed, async, ComponentFixture } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AppComponent } from "./app.component";
+import { ItemComponent } from "./components/item/item.component";
+import { By } from "@angular/platform-browser";
 
 describe("AppComponent", () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [AppComponent]
+      declarations: [AppComponent, ItemListComponent, ItemComponent]
     }).compileComponents();
   }));
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
   it("should create the app", () => {
-    const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'practice-angular'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual("practice-angular");
-  });
-
-  it("should render title", () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector(".content span").textContent).toContain(
-      "practice-angular app is running!"
-    );
+  it(`should have as title 'My ToDo APP'`, () => {
+    const title = fixture.debugElement.query(By.css(".title"));
+    const titleContent = (title.nativeElement as HTMLElement).textContent.trim();
+    expect(titleContent).toContain("My ToDo APP");
   });
 });
