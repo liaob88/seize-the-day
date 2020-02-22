@@ -12,4 +12,8 @@ export class ItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  delete(targetId: number) {
+    this.items = this.items.filter(item => item.id !== targetId);
+  }
 }

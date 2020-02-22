@@ -2,7 +2,7 @@ import { ItemListComponent } from "./components/item-list/item-list.component";
 import { TestBed, async, ComponentFixture } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AppComponent } from "./app.component";
-import { ItemComponent } from "./components/item/item.component";
+import { ItemComponent } from "./components/item-list/components/item/item.component";
 import { By } from "@angular/platform-browser";
 
 describe("AppComponent", () => {

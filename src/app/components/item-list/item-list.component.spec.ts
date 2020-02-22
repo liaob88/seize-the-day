@@ -1,4 +1,4 @@
-import { ItemComponent } from "./../item/item.component";
+import { ItemComponent } from "./components/item/item.component";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ItemListComponent } from "./item-list.component";
