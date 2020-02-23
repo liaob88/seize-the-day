@@ -31,7 +31,7 @@ jobs:
       - checkout
       - run: echo "Start e2e"
       - run: yarn install
-      - run: yarn e2e -- --no-progress --config=protractor-ci.conf.js
+      - run: yarn e2e
 workflows:
   version: 2
   build_and_test:
