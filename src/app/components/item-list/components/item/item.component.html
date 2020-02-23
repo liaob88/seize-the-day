@@ -1,6 +1,6 @@
 <div *ngFor="let item of items">
-  <h4>id: {{ item.id }}</h4>
-  <h3>{{ item.title }}</h3>
-  <p>作成日時: {{ item.createdAt }}</p>
-  <button (click)="delete(item.id)">削除</button>
+  <p class="item-id">id: {{ item.id }}</p>
+  <p class="item-title">{{ item.title }}</p>
+  <p class="item-created_at">作成日時: {{ item.createdAt }}</p>
+  <button class="item-delete-button" (click)="delete(item.id)">削除</button>
 </div>
