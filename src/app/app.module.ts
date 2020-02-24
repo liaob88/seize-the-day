@@ -6,9 +6,15 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ItemComponent } from "./components/item-list/components/item/item.component";
 import { ItemListComponent } from "./components/item-list/item-list.component";
+import { ItemEditComponent } from "./components/item-list/components/item-edit/item-edit.component";
 
 @NgModule({
-  declarations: [AppComponent, ItemComponent, ItemListComponent],
+  declarations: [
+    AppComponent,
+    ItemComponent,
+    ItemListComponent,
+    ItemEditComponent
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]

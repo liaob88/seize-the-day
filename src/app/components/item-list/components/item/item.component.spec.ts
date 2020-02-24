@@ -1,8 +1,10 @@
+import { RouterTestingModule } from "@angular/router/testing";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { ItemComponent } from "./item.component";
 import { Item } from "../../../../shared/models";
 import { NO_ERRORS_SCHEMA, Component } from "@angular/core";
 import { By } from "@angular/platform-browser";
+import { Router } from "@angular/router";
 
 @Component({
   template: `
@@ -23,12 +25,16 @@ describe("ItemComponent", () => {
   let component: ItemComponent;
   let hostComponent: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [ItemComponent, TestComponent]
+      declarations: [ItemComponent, TestComponent],
+      imports: [RouterTestingModule]
     }).compileComponents();
+
+    router = TestBed.get(Router);
   }));
 
   beforeEach(() => {
@@ -87,5 +93,13 @@ describe("ItemComponent", () => {
     );
 
     expect(itemIds).toEqual([2, 3, 4]);
+  });
+
+  it("navigateToEditPage() が呼ばれると、指定された id を持つ item の編集ページに遷移すること", () => {
+    spyOn(router, "navigate");
+    component.navigateToEditPage(3);
+    fixture.detectChanges();
+
+    expect(router.navigate).toHaveBeenCalledWith(["/edit/3"]);
   });
 });

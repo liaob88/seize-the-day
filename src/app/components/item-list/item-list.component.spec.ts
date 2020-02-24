@@ -5,6 +5,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ItemListComponent } from "./item-list.component";
 import { Item } from "src/app/shared/models";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe("ItemListComponent", () => {
   let component: ItemListComponent;
@@ -13,7 +14,7 @@ describe("ItemListComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ItemListComponent, ItemComponent],
-      imports: [FormsModule]
+      imports: [FormsModule, RouterTestingModule]
     }).compileComponents();
   }));
 
