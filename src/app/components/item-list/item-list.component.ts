@@ -1,3 +1,4 @@
+import { ItemListService } from "./item-list.service";
 import { Component, OnInit } from "@angular/core";
 import { Item } from "../../shared/models";
 @Component({
@@ -7,22 +8,28 @@ import { Item } from "../../shared/models";
 })
 export class ItemListComponent implements OnInit {
   title: string;
-  items: Item[] = [
-    new Item(1, "Test 1", "2019-01-01"),
-    new Item(2, "Test 2", "2019-01-02"),
-    new Item(3, "Test 3", "2019-01-03"),
-    new Item(4, "Test 4", "2019-01-04")
-  ];
+  items: Item[];
 
-  constructor() {}
+  constructor(private itemListService: ItemListService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.items = this.itemListService.items;
+    this.itemListService.addItemEmitter.subscribe(item =>
+      this.items.push(item)
+    );
+    this.itemListService.deleteItemEmitter.subscribe(id => {
+      this.items = this.items.filter(item => item.id !== id);
+    });
+  }
 
   addItem() {
     const id = this.items[this.items.length - 1].id + 1;
+    const title = this.title;
     const createdAt = new Date();
-    const newItem = new Item(id, this.title, createdAt);
-    this.items.push(newItem);
+    const newItem = new Item(id, title, createdAt);
+
+    this.itemListService.addedItem(newItem);
+
     this.title = "";
   }
 }

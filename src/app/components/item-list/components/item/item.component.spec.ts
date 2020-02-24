@@ -1,3 +1,4 @@
+import { ItemListService } from "./../../item-list.service";
 import { RouterTestingModule } from "@angular/router/testing";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { ItemComponent } from "./item.component";
@@ -6,49 +7,27 @@ import { NO_ERRORS_SCHEMA, Component } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 
-@Component({
-  template: `
-    <input
-      [(ngModel)]="title"
-      type="text"
-      placeholder="タスクを入力してください"
-    />
-    <button (click)="addItem()">追加</button>
-    <app-item [items]="items"></app-item>
-  `
-})
-class TestComponent {
-  items: Item[];
-}
-
 describe("ItemComponent", () => {
   let component: ItemComponent;
-  let hostComponent: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+  let fixture: ComponentFixture<ItemComponent>;
   let router: Router;
+  let itemListService: ItemListService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      declarations: [ItemComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [ItemComponent, TestComponent],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule],
+      providers: [{ provide: ItemListService, useClass: ItemListService }]
     }).compileComponents();
 
     router = TestBed.get(Router);
+    itemListService = TestBed.get(ItemListService);
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponent);
-    hostComponent = fixture.componentInstance;
-    hostComponent.items = [
-      new Item(1, "Test 1", "2019-01-01"),
-      new Item(2, "Test 2", "2019-01-02"),
-      new Item(3, "Test 3", "2019-01-03"),
-      new Item(4, "Test 4", "2019-01-04")
-    ];
-    // tslint:disable-next-line: no-non-null-assertion
-    component = fixture.debugElement.query(By.directive(ItemComponent))!
-      .componentInstance;
+    fixture = TestBed.createComponent(ItemComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -56,43 +35,20 @@ describe("ItemComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("item が正しく表示されていること", () => {
-    const testContents = [
-      { target: ".item-id", expected: ["id: 1", "id: 2", "id: 3", "id: 4"] },
-      {
-        target: ".item-title",
-        expected: ["Test 1", "Test 2", "Test 3", "Test 4"]
-      },
-      {
-        target: ".item-created_at",
-        expected: [
-          "作成日時: 2019-01-01",
-          "作成日時: 2019-01-02",
-          "作成日時: 2019-01-03",
-          "作成日時: 2019-01-04"
-        ]
-      }
-    ];
+  it("ngOnInit() が呼ばれると、items に指定した items が代入されること ", () => {
+    spyOn(component, "ngOnInit");
+    component.ngOnInit();
+    fixture.detectChanges();
 
-    testContents.forEach(testContent => {
-      const result = fixture.debugElement
-        .queryAll(By.css(`${testContent.target}`))
-        .map(item => item.nativeElement.innerText);
-
-      expect(result).toEqual(testContent.expected);
-    });
+    expect(component.items.length).toBe(4);
   });
 
   it("delete() called", () => {
-    component.delete(1);
+    spyOn(itemListService, "deletedItem");
+    component.delete(3);
     fixture.detectChanges();
 
-    const itemIds = component.items.reduce(
-      (ids, item: Item) => [...ids, item.id],
-      []
-    );
-
-    expect(itemIds).toEqual([2, 3, 4]);
+    expect(itemListService.deletedItem).toHaveBeenCalledWith(3);
   });
 
   it("navigateToEditPage() が呼ばれると、指定された id を持つ item の編集ページに遷移すること", () => {

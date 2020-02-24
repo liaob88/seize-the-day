@@ -1,3 +1,4 @@
+import { ItemListService } from "./../../item-list.service";
 import { Component, OnInit, Input } from "@angular/core";
 import { Item } from "../../../../shared/models";
 import { Router } from "@angular/router";
@@ -8,14 +9,18 @@ import { Router } from "@angular/router";
   styleUrls: ["./item.component.sass"]
 })
 export class ItemComponent implements OnInit {
-  @Input()
   items: Item[];
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private itemListService: ItemListService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.items = this.itemListService.items;
+  }
 
   delete(targetId: number) {
-    this.items = this.items.filter(item => item.id !== targetId);
+    this.itemListService.deletedItem(targetId);
   }
 
   navigateToEditPage(id: number) {

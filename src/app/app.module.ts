@@ -1,3 +1,4 @@
+import { ItemListService } from "./components/item-list/item-list.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -16,7 +17,7 @@ import { ItemEditComponent } from "./components/item-list/components/item-edit/i
     ItemEditComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [ItemListService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
