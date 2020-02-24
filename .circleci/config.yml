@@ -7,4 +7,4 @@ jobs:
     steps:
       - checkout
       - run: yarn install
-      - run: yarn test --single-run
+      - run: yarn test --watch=false
