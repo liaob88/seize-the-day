@@ -20,6 +20,11 @@ export class ItemListComponent implements OnInit {
     this.itemListService.deleteItemEmitter.subscribe(id => {
       this.items = this.items.filter(item => item.id !== id);
     });
+    this.itemListService.updateItemEmitter.subscribe(updatedItem => {
+      const item = this.items.find(({ id }) => id === updatedItem.id);
+      const index = this.items.indexOf(item);
+      this.itemListService.items[index] = updatedItem;
+    });
   }
 
   addItem() {
