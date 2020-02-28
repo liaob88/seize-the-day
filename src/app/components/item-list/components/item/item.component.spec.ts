@@ -1,11 +1,9 @@
-import { ItemListService } from "./../../item-list.service";
-import { RouterTestingModule } from "@angular/router/testing";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { ItemComponent } from "./item.component";
-import { Item } from "../../../../shared/models";
-import { NO_ERRORS_SCHEMA, Component } from "@angular/core";
-import { By } from "@angular/platform-browser";
 import { Router } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ItemListService } from "./../../item-list.service";
+import { ItemComponent } from "./item.component";
 
 describe("ItemComponent", () => {
   let component: ItemComponent;
