@@ -15,6 +15,7 @@ export class ItemListService {
 
   addItemEmitter = new Subject<Item>();
   deleteItemEmitter = new Subject<number>();
+  updateItemEmitter = new Subject<Item>();
 
   addedItem(item: Item) {
     this.addItemEmitter.next(item);
@@ -22,5 +23,9 @@ export class ItemListService {
 
   deletedItem(id: number) {
     this.deleteItemEmitter.next(id);
+  }
+
+  updatedItem(newItem: Item) {
+    this.updateItemEmitter.next(newItem);
   }
 }

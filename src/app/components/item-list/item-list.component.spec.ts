@@ -65,6 +65,28 @@ describe("ItemListComponent", () => {
       expect(result).toEqual([1, 2, 4]);
       expect(component.items.length).toBe(3);
     });
+
+    it("itemListService の updateItemEmitter にデータが流されたら、該当のデータが渡されてきたデータに更新されること", () => {
+      const date = new Date(2020, 2, 5);
+      jasmine.clock().mockDate(date);
+
+      const expected = {
+        id: 1,
+        title: "Test 1 updated",
+        createdAt: new Date()
+      };
+
+      spyOn(component, "ngOnInit");
+      itemListService.updateItemEmitter.next(expected);
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const target = itemListService.items.find(
+        item => item.id === expected.id
+      );
+
+      expect(target).toBe(expected);
+    });
   });
 
   it("addItem() が実行されると、itemListService の addedItem が指定したデータとともに呼ばれること", () => {

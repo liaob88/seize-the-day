@@ -1,6 +1,6 @@
 <div *ngFor="let item of items">
-  <p class="item-id">id: {{ item.id }}</p>
-  <p class="item-title">{{ item.title }}</p>
+  <p class="item-id">Id: {{ item.id }}</p>
+  <p class="item-title">Title: {{ item.title }}</p>
   <p class="item-created_at">作成日時: {{ item.createdAt }}</p>
   <button class="item-delete-button" (click)="navigateToEditPage(item.id)">
     編集
