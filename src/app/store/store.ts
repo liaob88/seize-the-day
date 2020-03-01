@@ -41,7 +41,7 @@ export const initialState: State = {
 const itemListReducer = createReducer(
   initialState,
   on(createItem, (state, { item }) => ({
-    ...state.items,
+    ...state,
     items: [...state.items, item]
   })),
   on(deleteItem, (state, { id }) => ({
