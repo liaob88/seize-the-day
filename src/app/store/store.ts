@@ -15,14 +15,14 @@ const createItem = createAction(
 );
 const deleteItem = createAction(
   "[ Item-List Component ] Delete The Item",
-  props<{ item: Item }>()
+  props<{ id: number }>()
 );
 const updateItem = createAction(
   "[ Item-List Component ] Update The Item",
   props<{ item: Item }>()
 );
 
-const actions = { createItem, deleteItem, updateItem };
+export const actions = { createItem, deleteItem, updateItem };
 const actionUnion = union(actions);
 
 export interface State {
@@ -41,12 +41,12 @@ export const initialState: State = {
 const itemListReducer = createReducer(
   initialState,
   on(createItem, (state, { item }) => ({
-    ...state,
-    item
+    ...state.items,
+    items: [...state.items, item]
   })),
-  on(deleteItem, (state, { item }) => ({
+  on(deleteItem, (state, { id }) => ({
     ...state,
-    items: state.items.filter(i => i.id !== item.id)
+    items: state.items.filter(i => i.id !== id)
   })),
   on(updateItem, (state, { item }) => ({
     ...state,
