@@ -1,5 +1,5 @@
 <ng-container *ngIf="items$ | async as items">
-  <div *ngFor="let item of items['items']">
+  <div class="item-div" *ngFor="let item of items">
     <p class="item-id">Id: {{ item.id }}</p>
     <p class="item-title">Title: {{ item.title }}</p>
     <p class="item-created_at">作成日時: {{ item.createdAt }}</p>

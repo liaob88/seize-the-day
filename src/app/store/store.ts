@@ -25,36 +25,24 @@ const updateItem = createAction(
 export const actions = { createItem, deleteItem, updateItem };
 const actionUnion = union(actions);
 
-export interface State {
-  items: Item[];
-}
-export const initialState: State = {
-  items: [
-    new Item(1, "Test 1", new Date("2019/01/01")),
-    new Item(2, "Test 2", new Date("2019/01/02")),
-    new Item(3, "Test 3", new Date("2019/01/03")),
-    new Item(4, "Test 4", new Date("2019/01/04"))
-  ]
-};
+export const initialState: Item[] = [];
 
 // Reducer
 const itemListReducer = createReducer(
   initialState,
-  on(createItem, (state, { item }) => ({
-    ...state,
-    items: [...state.items, item]
-  })),
-  on(deleteItem, (state, { id }) => ({
-    ...state,
-    items: state.items.filter(i => i.id !== id)
-  })),
-  on(updateItem, (state, { item }) => ({
-    ...state,
-    items: state.items.map(i => (i.id === item.id ? item : i))
-  }))
+  on(createItem, (state, { item }) => [...state, item]),
+  on(deleteItem, (state, { id }) => [...state.filter(i => i.id !== id)]),
+  on(updateItem, (state, { item }) => {
+    state.map(i => {
+      if (i.id === item.id) {
+        state[state.indexOf(i)] = item;
+      }
+    });
+    return [...state];
+  })
 );
 
-export default function reducer(state: State, action: typeof actionUnion) {
+export default function reducer(state: Item[], action: typeof actionUnion) {
   return itemListReducer(state, action);
 }
 
