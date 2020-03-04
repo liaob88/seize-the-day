@@ -45,20 +45,3 @@ const itemListReducer = createReducer(
 export default function reducer(state: Item[], action: typeof actionUnion) {
   return itemListReducer(state, action);
 }
-
-// selector
-
-export interface FeatureState {
-  itemList: Item[];
-}
-
-export interface AppState {
-  feature: FeatureState;
-}
-
-export const selectFeature = (state: AppState) => state.feature;
-
-export const selectFeatureCount = createSelector(
-  selectFeature,
-  (state: FeatureState) => state.itemList
-);
