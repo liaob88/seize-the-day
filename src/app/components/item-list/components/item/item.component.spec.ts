@@ -2,21 +2,31 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
+import { BehaviorSubject } from "rxjs";
+import { Item } from "src/app/shared/models";
 import { ItemListService } from "./../../item-list.service";
 import { ItemComponent } from "./item.component";
+import { By } from "@angular/platform-browser";
+
+class MockItemListService implements Partial<ItemListService> {
+  items$ = new BehaviorSubject<Item[] | null>([
+    new Item(1, "Test 1", new Date("2019/01/01"))
+  ]);
+  deletedItem() {}
+}
 
 describe("ItemComponent", () => {
   let component: ItemComponent;
   let fixture: ComponentFixture<ItemComponent>;
   let router: Router;
-  let itemListService: ItemListService;
+  let itemListService: MockItemListService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ItemComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [RouterTestingModule],
-      providers: [{ provide: ItemListService, useClass: ItemListService }]
+      providers: [{ provide: ItemListService, useClass: MockItemListService }]
     }).compileComponents();
 
     router = TestBed.get(Router);
@@ -33,12 +43,25 @@ describe("ItemComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("ngOnInit() が呼ばれると、items に指定した items が代入されること ", () => {
-    spyOn(component, "ngOnInit");
-    component.ngOnInit();
-    fixture.detectChanges();
+  describe("items$", () => {
+    it("default", () => {
+      itemListService.items$.subscribe(items =>
+        expect(items).toEqual([new Item(1, "Test 1", new Date("2019/01/01"))])
+      );
+    });
 
-    expect(component.items.length).toBe(4);
+    it("store の情報が更新されると items$ が更新されること", () => {
+      const items = [
+        new Item(1, "Test 1", new Date()),
+        new Item(2, "Test 2", new Date())
+      ];
+      itemListService.items$.next(items);
+      fixture.detectChanges();
+
+      const itemElement = fixture.debugElement.queryAll(By.css(".item-div"));
+
+      expect(itemElement.length).toBe(2);
+    });
   });
 
   it("delete() called", () => {
