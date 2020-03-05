@@ -1,3 +1,4 @@
+import { ItemAddComponent } from "./components/item-add/item-add.component";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { RouterTestingModule } from "@angular/router/testing";
@@ -6,6 +7,7 @@ import { provideMockStore } from "@ngrx/store/testing";
 import { ItemComponent } from "./components/item/item.component";
 import { ItemListComponent } from "./item-list.component";
 import { ItemListService } from "./item-list.service";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("ItemListComponent", () => {
   let component: ItemListComponent;
@@ -14,7 +16,8 @@ describe("ItemListComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemListComponent, ItemComponent],
+      declarations: [ItemListComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [ItemListService, provideMockStore({})],
       imports: [FormsModule, RouterTestingModule, StoreModule]
     }).compileComponents();
@@ -30,21 +33,5 @@ describe("ItemListComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-  });
-
-  describe("addItem()", () => {
-    it("itemListService の addedItem が呼ばれること", () => {
-      spyOn(itemListService, "addedItem");
-      component.addItem();
-      expect(itemListService.addedItem).toHaveBeenCalled();
-    });
-
-    it("component.title が '' になること", () => {
-      spyOn(itemListService, "addedItem");
-      component.addItem();
-      fixture.detectChanges();
-
-      expect(component.title).toBeFalsy();
-    });
   });
 });
