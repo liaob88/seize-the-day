@@ -1,23 +1,20 @@
-import { ItemListService } from "./../../item-list.service";
-import { Component, OnInit, Input } from "@angular/core";
-import { Item } from "../../../../shared/models";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Item } from "../../../../shared/models";
+import { ItemListService } from "./../../item-list.service";
 
 @Component({
   selector: "app-item",
   templateUrl: "./item.component.html",
   styleUrls: ["./item.component.sass"]
 })
-export class ItemComponent implements OnInit {
-  items: Item[];
+export class ItemComponent {
   constructor(
     private router: Router,
     private itemListService: ItemListService
   ) {}
 
-  ngOnInit() {
-    this.items = this.itemListService.items;
-  }
+  readonly items$ = this.itemListService.items$;
 
   delete(targetId: number) {
     this.itemListService.deletedItem(targetId);

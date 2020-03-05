@@ -1,31 +1,23 @@
-import { Subject, Subscription } from "rxjs";
 import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
 import { Item } from "../../shared/models";
+import { actions } from "../../store/store";
 
 @Injectable({ providedIn: "root" })
 export class ItemListService {
-  items: Item[] = [
-    new Item(1, "Test 1", new Date("2019/01/01")),
-    new Item(2, "Test 2", new Date("2019/01/02")),
-    new Item(3, "Test 3", new Date("2019/01/03")),
-    new Item(4, "Test 4", new Date("2019/01/04"))
-  ];
+  constructor(private store$: Store<{ itemList: Item[] }>) {}
 
-  itemSub: Subscription;
-
-  addItemEmitter = new Subject<Item>();
-  deleteItemEmitter = new Subject<number>();
-  updateItemEmitter = new Subject<Item>();
+  readonly items$ = this.store$.select("itemList");
 
   addedItem(item: Item) {
-    this.addItemEmitter.next(item);
+    this.store$.dispatch(actions.createItem({ item }));
   }
 
   deletedItem(id: number) {
-    this.deleteItemEmitter.next(id);
+    this.store$.dispatch(actions.deleteItem({ id }));
   }
 
-  updatedItem(newItem: Item) {
-    this.updateItemEmitter.next(newItem);
+  updatedItem(item: Item) {
+    this.store$.dispatch(actions.updateItem({ item }));
   }
 }

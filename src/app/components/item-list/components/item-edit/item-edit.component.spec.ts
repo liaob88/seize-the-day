@@ -1,27 +1,35 @@
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, convertToParamMap, Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
-import { of } from "rxjs";
-import { Item } from "../../../../shared/models";
+import { BehaviorSubject, of } from "rxjs";
+import { Item } from "./../../../../shared/models";
 import { ItemListService } from "./../../item-list.service";
 import { ItemEditComponent } from "./item-edit.component";
 
-const mockActivatedRoute = { paramMap: of(convertToParamMap({ id: 1 })) };
+class MockItemListService implements Partial<ItemListService> {
+  items$ = new BehaviorSubject<Item[]>(null);
+  updatedItem() {}
+}
 
 describe("ItemEditComponent", () => {
   let component: ItemEditComponent;
   let fixture: ComponentFixture<ItemEditComponent>;
-  let itemListService: ItemListService;
+  let itemListService: MockItemListService;
   let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ItemEditComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       imports: [RouterTestingModule, FormsModule],
       providers: [
-        ItemListService,
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+        { provide: ItemListService, useClass: MockItemListService },
+        {
+          provide: ActivatedRoute,
+          useValue: { paramMap: of(convertToParamMap({ id: 1 })) }
+        }
       ]
     }).compileComponents();
 
@@ -32,14 +40,8 @@ describe("ItemEditComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemEditComponent);
     component = fixture.componentInstance;
-    itemListService.items = [
-      new Item(1, "Test 1", new Date("2019/01/01")),
-      new Item(2, "Test 2", new Date("2019/01/02")),
-      new Item(3, "Test 3", new Date("2019/01/03")),
-      new Item(4, "Test 4", new Date("2019/01/04"))
-    ];
+    itemListService.items$.next([new Item(1, "Test 1", new Date())]);
     fixture.detectChanges();
-    component.ngOnInit();
   });
 
   it("should create", () => {
@@ -51,10 +53,7 @@ describe("ItemEditComponent", () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    const expectedItem = itemListService.items.find(item => item.id === 1);
-    const expectedTitle = expectedItem.title;
-    expect(component.item).toBe(expectedItem);
-    expect(component.item.title).toBe(expectedTitle);
+    expect(component.item.id).toBe(1);
   });
 
   describe("updateItem() が呼ばれる", () => {
