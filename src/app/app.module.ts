@@ -10,13 +10,15 @@ import { ItemComponent } from "./components/item-list/components/item/item.compo
 import { ItemListComponent } from "./components/item-list/item-list.component";
 import { ItemListService } from "./components/item-list/item-list.service";
 import reducer from "./store/store";
+import { ItemAddComponent } from './components/item-list/components/item-add/item-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemComponent,
     ItemListComponent,
-    ItemEditComponent
+    ItemEditComponent,
+    ItemAddComponent
   ],
   imports: [
     BrowserModule,
