@@ -8,3 +8,4 @@ jobs:
       - checkout
       - run: yarn install
       - run: yarn test --watch=false
+      - run: yarn lint

@@ -1,10 +1,7 @@
-import { ItemListComponent } from "./components/item-list/item-list.component";
-import { TestBed, async, ComponentFixture } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AppComponent } from "./app.component";
-import { ItemComponent } from "./components/item-list/components/item/item.component";
-import { By } from "@angular/platform-browser";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("AppComponent", () => {
   let component: AppComponent;
@@ -13,8 +10,7 @@ describe("AppComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [AppComponent, ItemListComponent, ItemComponent]
+      declarations: [AppComponent]
     }).compileComponents();
   }));
 

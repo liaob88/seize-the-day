@@ -7,7 +7,6 @@ import { provideMockStore } from "@ngrx/store/testing";
 import { ItemComponent } from "./components/item/item.component";
 import { ItemListComponent } from "./item-list.component";
 import { ItemListService } from "./item-list.service";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("ItemListComponent", () => {
   let component: ItemListComponent;
@@ -16,8 +15,7 @@ describe("ItemListComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemListComponent],
-      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [ItemListComponent, ItemAddComponent, ItemComponent],
       providers: [ItemListService, provideMockStore({})],
       imports: [FormsModule, RouterTestingModule, StoreModule]
     }).compileComponents();
