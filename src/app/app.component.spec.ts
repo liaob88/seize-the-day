@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AppComponent } from "./app.component";
+import { MaterialModule } from "./styles/material.module";
 
 describe("AppComponent", () => {
   let component: AppComponent;
@@ -9,7 +10,7 @@ describe("AppComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, MaterialModule],
       declarations: [AppComponent]
     }).compileComponents();
   }));
@@ -25,9 +26,9 @@ describe("AppComponent", () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'My ToDo APP'`, () => {
+  it(`should have as title 'Seize The Day'`, () => {
     const title = fixture.debugElement.query(By.css(".title"));
     const titleContent = (title.nativeElement as HTMLElement).textContent.trim();
-    expect(titleContent).toContain("My ToDo APP");
+    expect(titleContent).toContain("Seize The Day");
   });
 });
