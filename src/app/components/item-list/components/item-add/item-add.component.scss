@@ -1,0 +1,14 @@
+@import "../../../../shared/styles/common";
+
+.item-add {
+  border-radius: 20px;
+  background-color: $WHITE;
+  padding: 10px 10px;
+  box-shadow: 1px 1px $SHADOW_FOR_WHITE;
+}
+
+.input-field {
+  display: inline-block;
+  padding: 10px 10px;
+  margin-right: 30px;
+}

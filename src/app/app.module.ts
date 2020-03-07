@@ -11,7 +11,7 @@ import { ItemComponent } from "./components/item-list/components/item/item.compo
 import { ItemListComponent } from "./components/item-list/item-list.component";
 import { ItemListService } from "./components/item-list/item-list.service";
 import reducer from "./store/store";
-import { MaterialModule } from "./styles/material.module";
+import { MaterialModule } from "./shared/styles/material.module";
 
 @NgModule({
   declarations: [
