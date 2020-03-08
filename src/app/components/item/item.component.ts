@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { ItemListService } from "./../../item-list.service";
+import { ItemListService } from "../../pages/item-list/item-list.service";
 
 @Component({
   selector: "app-item",

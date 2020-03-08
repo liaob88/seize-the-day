@@ -1,8 +1,7 @@
-import { log } from "util";
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router, ParamMap } from "@angular/router";
-import { Item } from "../../../../shared/models";
-import { ItemListService } from "./../../item-list.service";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { Item } from "../../shared/models";
+import { ItemListService } from "../item-list/item-list.service";
 
 @Component({
   selector: "app-item-edit",

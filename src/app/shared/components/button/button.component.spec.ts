@@ -28,18 +28,19 @@ describe("ButtonComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("input で受け取った ng-children の内容が class 名に反映されていること", () => {
-    const expected = `button ${component.shape} ${component.color}`;
-    const className = fixture.debugElement.query(By.css("button")).nativeElement
-      .className;
-    expect(className).toBe(expected);
-  });
-
   it("button がクリックされた時、 eventEmitter が emit されること", () => {
     spyOn(component.clicked, "emit");
     const button = fixture.debugElement.query(By.css("button")).nativeElement;
     button.click();
 
     expect(component.clicked.emit).toHaveBeenCalled();
+  });
+
+  it("className()", () => {
+    const spy = spyOnProperty(component, "className").and.returnValue(
+      `button ${component.shape} ${component.color}`
+    );
+    expect(component.className).toBe("button circle pink");
+    expect(spy).toHaveBeenCalled();
   });
 });

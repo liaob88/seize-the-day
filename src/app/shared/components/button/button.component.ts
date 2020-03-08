@@ -11,7 +11,7 @@ export class ButtonComponent {
   @Input()
   shape: "large" | "small" | "circle";
   @Input()
-  color: "pink" | "blue" | "green";
+  color: "red" | "pink" | "blue" | "green";
   @Output()
   clicked = new EventEmitter();
 
@@ -21,6 +21,6 @@ export class ButtonComponent {
 
   get className() {
     const { shape, color } = this;
-    return "button" + `${shape}` + `${color}`;
+    return `button ${shape} ${color}`;
   }
 }

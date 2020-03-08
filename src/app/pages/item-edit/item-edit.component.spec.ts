@@ -4,8 +4,8 @@ import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, convertToParamMap, Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { BehaviorSubject, of } from "rxjs";
-import { Item } from "./../../../../shared/models";
-import { ItemListService } from "./../../item-list.service";
+import { Item } from "../../shared/models";
+import { ItemListService } from "../item-list/item-list.service";
 import { ItemEditComponent } from "./item-edit.component";
 
 class MockItemListService implements Partial<ItemListService> {
