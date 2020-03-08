@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { BehaviorSubject } from "rxjs";
 import { Item } from "src/app/shared/models";
-import { ItemListService } from "./../../item-list.service";
+import { ItemListService } from "../../pages/item-list/item-list.service";
 import { ItemComponent } from "./item.component";
 import { By } from "@angular/platform-browser";
 

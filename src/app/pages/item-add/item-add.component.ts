@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ItemListService } from "../../item-list.service";
-import { getUniqueStr } from "../../../../shared/domains/unique_id_maker";
-import { Item } from "../../../../shared/models";
+import { ItemListService } from "../item-list/item-list.service";
+import { getUniqueStr } from "../../shared/domains/unique_id_maker";
+import { Item } from "../../shared/models";
 
 @Component({
   selector: "app-item-add",
