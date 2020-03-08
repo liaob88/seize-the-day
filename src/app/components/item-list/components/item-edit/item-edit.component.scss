@@ -1,15 +1,19 @@
 @import "../../../../shared/styles/common";
 
-.item-add {
-  text-align: center;
+:host {
+  display: block;
+  margin: 0 auto;
+}
+
+.item-div {
+  width: 100%;
   border-radius: 20px;
+  text-align: center;
+  padding: 30px 0;
   background-color: $WHITE;
-  padding: 10px 10px;
   box-shadow: 1px 1px $SHADOW_FOR_WHITE;
 }
 
 .input-field {
-  display: inline-block;
-  padding: 10px 10px;
   margin-right: 30px;
 }

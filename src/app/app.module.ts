@@ -12,6 +12,7 @@ import { ItemListComponent } from "./components/item-list/item-list.component";
 import { ItemListService } from "./components/item-list/item-list.service";
 import reducer from "./store/store";
 import { MaterialModule } from "./shared/styles/material.module";
+import { ButtonComponent } from "./shared/components/button/button.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MaterialModule } from "./shared/styles/material.module";
     ItemComponent,
     ItemListComponent,
     ItemEditComponent,
-    ItemAddComponent
+    ItemAddComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

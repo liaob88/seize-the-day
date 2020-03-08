@@ -1,0 +1,34 @@
+@import "../../styles/common";
+
+.button {
+  border-radius: 25px;
+  color: $WHITE;
+  font-size: $f-size-medium;
+  letter-spacing: 5px;
+}
+
+.large {
+  width: 150px;
+  height: 30px;
+}
+
+.small {
+  width: 100px;
+  height: 30px;
+}
+
+.pink {
+  background-color: $PINK;
+}
+
+.red {
+  background-color: $RED;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: $GREEN;
+}
