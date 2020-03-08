@@ -5,14 +5,18 @@
       <p class="item-title">Title: {{ item.title }}</p>
       <div class="item-footer">
         <app-button
+          shape="circle"
           class="item-button"
-          size="small"
           color="blue"
           (click)="navigateToEditPage(item.id)"
         >
           create
         </app-button>
-        <app-button size="small" color="red" (click)="delete(item.id)">
+        <app-button
+          shape="circle"
+          color="red"
+          (click)="delete(item.id)"
+        >
           delete
         </app-button>
       </div>

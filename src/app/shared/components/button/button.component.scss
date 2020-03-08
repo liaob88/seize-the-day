@@ -1,18 +1,25 @@
 @import "../../styles/common";
 
 .button {
-  border-radius: 25px;
   color: $WHITE;
   font-size: $f-size-medium;
   letter-spacing: 5px;
 }
 
+.circle {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+
 .large {
+  border-radius: 25px;
   width: 150px;
   height: 30px;
 }
 
 .small {
+  border-radius: 25px;
   width: 100px;
   height: 30px;
 }

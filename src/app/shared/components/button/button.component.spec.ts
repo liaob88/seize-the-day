@@ -10,7 +10,7 @@ describe("ButtonComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ButtonComponent],
-      schemas: [NO_ERRORS_SCHEMA],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -18,7 +18,7 @@ describe("ButtonComponent", () => {
     fixture = TestBed.createComponent(ButtonComponent);
     // tslint:disable-next-line: no-non-null-assertion
     component = fixture.componentInstance;
-    component.size = "large";
+    component.shape = "circle";
     component.color = "pink";
 
     fixture.detectChanges();
@@ -29,7 +29,7 @@ describe("ButtonComponent", () => {
   });
 
   it("input で受け取った ng-children の内容が class 名に反映されていること", () => {
-    const expected = `button ${component.size} ${component.color}`;
+    const expected = `button ${component.shape} ${component.color}`;
     const className = fixture.debugElement.query(By.css("button")).nativeElement
       .className;
     expect(className).toBe(expected);

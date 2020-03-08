@@ -2,15 +2,15 @@
   <h2 class="title">edit item</h2>
   <label>Title: </label>
   <mat-form-field class="input-field">
-      <mat-label>タスク名</mat-label>
-      <input
-        matInput
-        placeholder="タスクを入力してください"
-        [(ngModel)]="updatedTitle"
-        value="'title'"
-      />
-    </mat-form-field>
-  <app-button size="large" color="blue" (clicked)="updateItem()"
+    <mat-label>タスク名</mat-label>
+    <input
+      matInput
+      placeholder="タスクを入力してください"
+      [(ngModel)]="updatedTitle"
+      value="'title'"
+    />
+  </mat-form-field>
+  <app-button shape="circle" size="large" color="blue" (clicked)="updateItem()"
     >done</app-button
   >
 </div>

@@ -14,7 +14,11 @@
   margin-right: 40px;
 
   .item-content {
+    .item-created_at {
+      text-align: center;
+    }
     .item-title {
+      text-align: center;
       font-size: $f-size-medium;
       font-weight: $f-weight-bold;
     }

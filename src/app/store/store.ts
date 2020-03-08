@@ -25,7 +25,9 @@ const updateItem = createAction(
 export const actions = { createItem, deleteItem, updateItem };
 const actionUnion = union(actions);
 
-export const initialState: Item[] = [];
+export const initialState: Item[] = [
+  { id: 1, title: "Test 1", createdAt: new Date("2020-01-01") }
+];
 
 // Reducer
 const itemListReducer = createReducer(

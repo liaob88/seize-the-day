@@ -9,13 +9,18 @@ export class ButtonComponent {
   constructor() {}
 
   @Input()
-  size?: "large" | "small";
+  shape: "large" | "small" | "circle";
   @Input()
-  color?: "pink" | "blue" | "green";
+  color: "pink" | "blue" | "green";
   @Output()
   clicked = new EventEmitter();
 
   onClick() {
     this.clicked.emit();
+  }
+
+  get className() {
+    const { shape, color } = this;
+    return "button" + `${shape}` + `${color}`;
   }
 }
