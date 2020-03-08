@@ -3,7 +3,7 @@ import { Action, Store } from "@ngrx/store";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { skip } from "rxjs/operators";
 import { actions as itemListActions } from "../../store/store";
-import { Item } from "./../../shared/models";
+import { Item } from "../../shared/models";
 import { ItemListService } from "./item-list.service";
 
 describe("ItemListService", () => {

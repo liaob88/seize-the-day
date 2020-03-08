@@ -4,9 +4,8 @@ import { FormsModule } from "@angular/forms";
 import { RouterTestingModule } from "@angular/router/testing";
 import { StoreModule } from "@ngrx/store";
 import { provideMockStore } from "@ngrx/store/testing";
-import { ItemListService } from "./../../item-list.service";
+import { ItemListService } from "../item-list/item-list.service";
 import { ItemAddComponent } from "./item-add.component";
-
 
 describe("ItemAddComponent", () => {
   let component: ItemAddComponent;
