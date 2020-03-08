@@ -1,3 +1,8 @@
+@import "../app/shared/styles/_common.scss";
+
+.title {
+  font-family: $f-family-app-title;
+}
 .global-contents {
   padding: 20px;
 }

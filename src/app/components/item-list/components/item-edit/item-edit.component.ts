@@ -7,7 +7,7 @@ import { ItemListService } from "./../../item-list.service";
 @Component({
   selector: "app-item-edit",
   templateUrl: "./item-edit.component.html",
-  styleUrls: ["./item-edit.component.sass"]
+  styleUrls: ["./item-edit.component.scss"]
 })
 export class ItemEditComponent implements OnInit {
   item: Item;

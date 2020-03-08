@@ -1,5 +1,16 @@
-<p>edit item</p>
-<label>Title: </label>
-<input type="text" [(ngModel)]="updatedTitle" />
-<br />
-<button (click)="updateItem()">編集完了</button>
+<div class="item-div">
+  <h2 class="title">edit item</h2>
+  <label>Title: </label>
+  <mat-form-field class="input-field">
+    <mat-label>タスク名</mat-label>
+    <input
+      matInput
+      placeholder="タスクを入力してください"
+      [(ngModel)]="updatedTitle"
+      value="'title'"
+    />
+  </mat-form-field>
+  <app-button shape="circle" size="large" color="blue" (clicked)="updateItem()"
+    >done</app-button
+  >
+</div>

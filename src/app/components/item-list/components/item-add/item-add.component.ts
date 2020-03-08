@@ -6,7 +6,7 @@ import { Item } from "../../../../shared/models";
 @Component({
   selector: "app-item-add",
   templateUrl: "./item-add.component.html",
-  styleUrls: ["./item-add.component.sass"]
+  styleUrls: ["./item-add.component.scss"]
 })
 export class ItemAddComponent implements OnInit {
   title: string;

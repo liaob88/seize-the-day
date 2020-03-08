@@ -1,0 +1,19 @@
+@import "../../../../shared/styles/common";
+
+:host {
+  display: block;
+  margin: 0 auto;
+}
+
+.item-div {
+  width: 100%;
+  border-radius: 20px;
+  text-align: center;
+  padding: 30px 0;
+  background-color: $WHITE;
+  box-shadow: 1px 1px $SHADOW_FOR_WHITE;
+}
+
+.input-field {
+  margin-right: 30px;
+}

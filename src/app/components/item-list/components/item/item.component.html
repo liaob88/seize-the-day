@@ -1,11 +1,25 @@
-<ng-container *ngIf="items$ | async as items">
+<div class="item-container" *ngIf="items$ | async as items">
   <div class="item-div" *ngFor="let item of items">
-    <p class="item-id">Id: {{ item.id }}</p>
-    <p class="item-title">Title: {{ item.title }}</p>
-    <p class="item-created_at">作成日時: {{ item.createdAt }}</p>
-    <button class="item-delete-button" (click)="navigateToEditPage(item.id)">
-      編集
-    </button>
-    <button class="item-delete-button" (click)="delete(item.id)">削除</button>
+    <div class="item-content">
+      <p class="item-created_at">{{ item.createdAt | date }}</p>
+      <p class="item-title">Title: {{ item.title }}</p>
+      <div class="item-footer">
+        <app-button
+          shape="circle"
+          class="item-button"
+          color="blue"
+          (click)="navigateToEditPage(item.id)"
+        >
+          create
+        </app-button>
+        <app-button
+          shape="circle"
+          color="red"
+          (click)="delete(item.id)"
+        >
+          delete
+        </app-button>
+      </div>
+    </div>
   </div>
-</ng-container>
+</div>

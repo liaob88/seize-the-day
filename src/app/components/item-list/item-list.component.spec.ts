@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ItemAddComponent } from "./components/item-add/item-add.component";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
@@ -17,6 +18,7 @@ describe("ItemListComponent", () => {
     TestBed.configureTestingModule({
       declarations: [ItemListComponent, ItemAddComponent, ItemComponent],
       providers: [ItemListService, provideMockStore({})],
+      schemas: [NO_ERRORS_SCHEMA],
       imports: [FormsModule, RouterTestingModule, StoreModule]
     }).compileComponents();
 

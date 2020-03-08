@@ -1,12 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { Item } from "../../../../shared/models";
 import { ItemListService } from "./../../item-list.service";
 
 @Component({
   selector: "app-item",
   templateUrl: "./item.component.html",
-  styleUrls: ["./item.component.sass"]
+  styleUrls: ["./item.component.scss"]
 })
 export class ItemComponent {
   constructor(

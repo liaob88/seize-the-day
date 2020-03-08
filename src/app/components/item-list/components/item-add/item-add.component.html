@@ -1,2 +1,15 @@
-<input [(ngModel)]="title" type="text" placeholder="タスクを入力してください" />
-<button (click)="addItem()">追加</button>
+<div class="item-add">
+  <h3>タスクを追加</h3>
+  <mat-form-field class="input-field">
+    <mat-label>タスク名</mat-label>
+    <input
+      matInput
+      placeholder="タスクを入力してください"
+      [(ngModel)]="title"
+      value="'title'"
+    />
+  </mat-form-field>
+  <app-button shape="circle" color="pink" (clicked)="addItem()"
+    >check</app-button
+  >
+</div>
