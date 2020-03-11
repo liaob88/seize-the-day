@@ -1,12 +1,15 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
+import { ItemAddComponent } from "./pages/item-add/item-add.component";
 import { ItemEditComponent } from "./pages/item-edit/item-edit.component";
 import { ItemListComponent } from "./pages/item-list/item-list.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "list", pathMatch: "full" },
   { path: "list", component: ItemListComponent },
-  { path: "edit/:id", component: ItemEditComponent }
+  { path: "create", component: ItemAddComponent },
+  { path: "edit/:id", component: ItemEditComponent },
+  { path: "**", redirectTo: "list", pathMatch: "full" }
 ];
 
 @NgModule({
