@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { ItemListService } from "../item-list/item-list.service";
+import { Router } from "@angular/router";
 import { getUniqueStr } from "../../shared/domains/unique_id_maker";
 import { Item } from "../../shared/models";
+import { ItemListService } from "../item-list/item-list.service";
 
 @Component({
   selector: "app-item-add",
@@ -11,9 +12,14 @@ import { Item } from "../../shared/models";
 export class ItemAddComponent implements OnInit {
   title: string;
 
-  constructor(private itemListService: ItemListService) {}
+  constructor(
+    private itemListService: ItemListService,
+    private route: Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.title = "";
+  }
 
   async addItem() {
     const id = getUniqueStr();
@@ -22,6 +28,6 @@ export class ItemAddComponent implements OnInit {
     const newItem = new Item(id, title, createdAt);
     await this.itemListService.addedItem(newItem);
 
-    this.title = "";
+    this.route.navigateByUrl("/list");
   }
 }
