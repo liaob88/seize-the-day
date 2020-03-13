@@ -12,6 +12,10 @@
   padding: 30px 10px;
   box-shadow: 1px 1px $SHADOW_FOR_WHITE;
   margin-right: 40px;
+  @include mq-m {
+    margin: 0 auto 20px;
+    width: 100%;
+  }
 
   .item-content {
     .item-created_at {
