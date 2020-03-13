@@ -19,3 +19,18 @@ $SHADOW_FOR_WHITE: #ffe8e8;
 $PINK: #ff8181;
 $GREEN: #b8f3b8;
 $RED: red;
+
+// media query
+$tab: 680px; // タブレット
+$sp: 480px; // スマホ
+
+@mixin mq-m {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin mq-sm {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
