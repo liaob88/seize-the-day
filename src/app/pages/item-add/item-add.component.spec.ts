@@ -6,10 +6,12 @@ import { StoreModule } from "@ngrx/store";
 import { provideMockStore } from "@ngrx/store/testing";
 import { ItemListService } from "../item-list/item-list.service";
 import { ItemAddComponent } from "./item-add.component";
+import { Router } from "@angular/router";
 
 describe("ItemAddComponent", () => {
   let component: ItemAddComponent;
   let fixture: ComponentFixture<ItemAddComponent>;
+  let router: Router;
   let itemListService: ItemListService;
 
   beforeEach(async(() => {
@@ -23,6 +25,7 @@ describe("ItemAddComponent", () => {
       imports: [FormsModule, RouterTestingModule, StoreModule]
     }).compileComponents();
 
+    router = TestBed.get(Router);
     itemListService = TestBed.get(ItemListService);
   }));
 
@@ -36,19 +39,19 @@ describe("ItemAddComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  describe("addItem()", () => {
-    it("itemListService の addedItem が呼ばれること", () => {
-      spyOn(itemListService, "addedItem");
-      component.addItem();
-      expect(itemListService.addedItem).toHaveBeenCalled();
-    });
+  it("ngOnInit() が呼ばれると、component.title が空文字になること", () => {
+    spyOn(component, "ngOnInit");
+    component.ngOnInit();
+    expect(component.title).toBe("");
+  });
 
-    it("component.title が '' になること", () => {
-      spyOn(itemListService, "addedItem");
-      component.addItem();
-      fixture.detectChanges();
+  it("addItem() が呼ばれると、itemListService の addedItem が呼ばれ、その後 index ページに飛ぶこと", async () => {
+    spyOn(itemListService, "addedItem");
+    spyOn(router, "navigateByUrl");
 
-      expect(component.title).toBeFalsy();
-    });
+    await component.addItem();
+
+    expect(itemListService.addedItem).toHaveBeenCalled();
+    expect(router.navigateByUrl).toHaveBeenCalledWith("/list");
   });
 });

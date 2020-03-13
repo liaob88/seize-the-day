@@ -1,8 +1,27 @@
 @import "../app/shared/styles/_common.scss";
 
+.global-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  
+}
+
 .title {
+  color: $WHITE;
   font-family: $f-family-app-title;
 }
+
+.header-link {
+  text-decoration: none;
+}
+
+.subtitle {
+  color: $WHITE;
+  display: flex;
+}
+
 .global-contents {
   padding: 20px;
 }
