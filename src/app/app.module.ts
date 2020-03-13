@@ -13,6 +13,7 @@ import { ItemListService } from "./pages/item-list/item-list.service";
 import reducer from "./store/store";
 import { MaterialModule } from "./shared/styles/material.module";
 import { ButtonComponent } from "./shared/components/button/button.component";
+import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ButtonComponent } from "./shared/components/button/button.component";
     ItemListComponent,
     ItemEditComponent,
     ItemAddComponent,
-    ButtonComponent
+    ButtonComponent,
+    MarkdownPipe
   ],
   imports: [
     BrowserModule,
