@@ -74,11 +74,19 @@ describe('ItemCardComponent', () => {
     expect(itemListService.deletedItem).toHaveBeenCalledWith(3);
   });
 
+  it('navigateToItemPage() が呼ばれると、指定された id を持つ item のページに遷移すること', () => {
+    spyOn(router, 'navigate');
+    component.navigateToItemPage(3);
+    fixture.detectChanges();
+
+    expect(router.navigate).toHaveBeenCalledWith(['/item/3']);
+  });
+
   it('navigateToEditPage() が呼ばれると、指定された id を持つ item の編集ページに遷移すること', () => {
     spyOn(router, 'navigate');
     component.navigateToEditPage(3);
     fixture.detectChanges();
 
-    expect(router.navigate).toHaveBeenCalledWith(['/edit/3']);
+    expect(router.navigate).toHaveBeenCalledWith(['/item/3/edit']);
   });
 });
