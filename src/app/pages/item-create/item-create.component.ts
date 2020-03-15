@@ -6,11 +6,11 @@ import { ItemListService } from '../item-list/item-list.service';
 
 @Component({
   selector: 'app-item-add',
-  templateUrl: './item-add.component.html',
-  styleUrls: ['./item-add.component.scss'],
+  templateUrl: './item-create.component.html',
+  styleUrls: ['./item-create.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ItemAddComponent implements OnInit {
+export class ItemCreateComponent implements OnInit {
   title: string = '';
   contents: string = '';
   constructor(

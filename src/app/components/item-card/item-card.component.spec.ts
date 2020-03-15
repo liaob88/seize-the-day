@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject } from 'rxjs';
 import { Item } from 'src/app/shared/models';
 import { ItemListService } from '../../pages/item-list/item-list.service';
-import { ItemComponent } from './item.component';
+import { ItemCardComponent } from './item-card.component';
 import { By } from '@angular/platform-browser';
 
 class MockItemListService implements Partial<ItemListService> {
@@ -15,15 +15,15 @@ class MockItemListService implements Partial<ItemListService> {
   deletedItem() {}
 }
 
-describe('ItemComponent', () => {
-  let component: ItemComponent;
-  let fixture: ComponentFixture<ItemComponent>;
+describe('ItemCardComponent', () => {
+  let component: ItemCardComponent;
+  let fixture: ComponentFixture<ItemCardComponent>;
   let router: Router;
   let itemListService: MockItemListService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemComponent],
+      declarations: [ItemCardComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [RouterTestingModule],
       providers: [{ provide: ItemListService, useClass: MockItemListService }]
@@ -34,7 +34,7 @@ describe('ItemComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemComponent);
+    fixture = TestBed.createComponent(ItemCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

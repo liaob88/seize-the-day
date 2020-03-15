@@ -4,10 +4,10 @@ import { ItemListService } from '../../pages/item-list/item-list.service';
 
 @Component({
   selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+  templateUrl: './item-card.component.html',
+  styleUrls: ['./item-card.component.scss']
 })
-export class ItemComponent {
+export class ItemCardComponent {
   constructor(
     private router: Router,
     private itemListService: ItemListService

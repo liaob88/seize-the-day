@@ -1,23 +1,23 @@
-import { MarkdownPipe } from './../../shared/pipes/markdown.pipe';
+import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { ItemListService } from '../item-list/item-list.service';
-import { ItemAddComponent } from './item-add.component';
+import { ItemCreateComponent } from './item-create.component';
 import { Router } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-describe('ItemAddComponent', () => {
-  let component: ItemAddComponent;
-  let fixture: ComponentFixture<ItemAddComponent>;
+describe('ItemCreateComponent', () => {
+  let component: ItemCreateComponent;
+  let fixture: ComponentFixture<ItemCreateComponent>;
   let router: Router;
   let itemListService: ItemListService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemAddComponent, MarkdownPipe],
+      declarations: [ItemCreateComponent, MarkdownPipe],
       providers: [
         { provide: itemListService, useClass: ItemListService },
         provideMockStore({})
@@ -31,7 +31,7 @@ describe('ItemAddComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemAddComponent);
+    fixture = TestBed.createComponent(ItemCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

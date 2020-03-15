@@ -1,4 +1,4 @@
-import { ItemAddComponent } from './pages/item-add/item-add.component';
+import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,7 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ItemEditComponent } from './pages/item-edit/item-edit.component';
-import { ItemComponent } from './components/item/item.component';
+import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemListComponent } from './pages/item-list/item-list.component';
 import { ItemListService } from './pages/item-list/item-list.service';
 import reducer from './store/store';
@@ -18,10 +18,10 @@ import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    ItemComponent,
+    ItemCardComponent,
     ItemListComponent,
     ItemEditComponent,
-    ItemAddComponent,
+    ItemCreateComponent,
     ButtonComponent,
     MarkdownPipe
   ],
