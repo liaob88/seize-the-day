@@ -6,6 +6,9 @@ import * as marked from 'marked';
 })
 export class MarkdownPipe implements PipeTransform {
   markDown(md: string) {
+    if (md === undefined || md === '') {
+      return '';
+    }
     return marked(md);
   }
 

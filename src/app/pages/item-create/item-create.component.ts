@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { getUniqueStr } from '../../shared/domains/unique_id_maker';
 import { Item } from '../../shared/models';
 import { ItemListService } from '../item-list/item-list.service';
+import * as marked from 'marked';
 
 @Component({
   selector: 'app-item-add',
@@ -23,7 +24,7 @@ export class ItemCreateComponent implements OnInit {
   async addItem() {
     const id = getUniqueStr();
     const title = this.title;
-    const contents = this.contents;
+    const contents = marked(this.contents);
     const createdAt = new Date();
     const newItem = new Item(id, title, contents, createdAt);
     await this.itemListService.addedItem(newItem);
