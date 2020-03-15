@@ -14,6 +14,7 @@ import reducer from './store/store';
 import { MaterialModule } from './shared/styles/material.module';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { MarkdownPipe } from './shared/pipes/markdown.pipe';
+import { ItemComponent } from './pages/item/item.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MarkdownPipe } from './shared/pipes/markdown.pipe';
     ItemEditComponent,
     ItemCreateComponent,
     ButtonComponent,
-    MarkdownPipe
+    MarkdownPipe,
+    ItemComponent
   ],
   imports: [
     BrowserModule,
