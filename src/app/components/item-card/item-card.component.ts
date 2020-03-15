@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ItemListService } from '../../pages/item-list/item-list.service';
 
 @Component({
-  selector: 'app-item',
+  selector: 'app-item-card',
   templateUrl: './item-card.component.html',
   styleUrls: ['./item-card.component.scss']
 })
