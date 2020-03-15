@@ -1,4 +1,4 @@
-import { Item } from "./../shared/models";
+import { Item } from './../shared/models';
 import {
   createAction,
   createReducer,
@@ -6,19 +6,19 @@ import {
   on,
   props,
   union
-} from "@ngrx/store";
+} from '@ngrx/store';
 
 // Actions
 const createItem = createAction(
-  "[ Item-List Component ] Create New Item",
+  '[ Item-List Component ] Create New Item',
   props<{ item: Item }>()
 );
 const deleteItem = createAction(
-  "[ Item-List Component ] Delete The Item",
+  '[ Item-List Component ] Delete The Item',
   props<{ id: number }>()
 );
 const updateItem = createAction(
-  "[ Item-List Component ] Update The Item",
+  '[ Item-List Component ] Update The Item',
   props<{ item: Item }>()
 );
 
@@ -26,7 +26,12 @@ export const actions = { createItem, deleteItem, updateItem };
 const actionUnion = union(actions);
 
 export const initialState: Item[] = [
-  { id: 1, title: "Test 1", createdAt: new Date("2020-01-01") }
+  {
+    id: 1,
+    title: 'Test 1',
+    contents: 'contents',
+    createdAt: new Date('2020-01-01')
+  }
 ];
 
 // Reducer

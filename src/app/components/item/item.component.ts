@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import { ItemListService } from "../../pages/item-list/item-list.service";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ItemListService } from '../../pages/item-list/item-list.service';
 
 @Component({
-  selector: "app-item",
-  templateUrl: "./item.component.html",
-  styleUrls: ["./item.component.scss"]
+  selector: 'app-item',
+  templateUrl: './item.component.html',
+  styleUrls: ['./item.component.scss']
 })
 export class ItemComponent {
   constructor(

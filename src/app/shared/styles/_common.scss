@@ -21,7 +21,7 @@ $GREEN: #b8f3b8;
 $RED: red;
 
 // media query
-$tab: 680px; // タブレット
+$tab: 768px; // タブレット
 $sp: 480px; // スマホ
 
 @mixin mq-m {
@@ -29,7 +29,7 @@ $sp: 480px; // スマホ
     @content;
   }
 }
-@mixin mq-sm {
+@mixin mq-sp {
   @media (max-width: ($sp)) {
     @content;
   }

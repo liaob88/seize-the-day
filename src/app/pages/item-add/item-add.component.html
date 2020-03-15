@@ -1,14 +1,17 @@
 <div class="item-add">
-  <h3>タスクを追加</h3>
-  <mat-form-field class="input-field">
-    <mat-label>タスク名</mat-label>
-    <input
-      matInput
-      placeholder="タスクを入力してください"
-      [(ngModel)]="title"
-      value="'title'"
-    />
-  </mat-form-field>
+  <div class="item-add-container">
+    <h2>記事作成</h2>
+    <div class="item-add-contents">
+      <div class="item-add-preview">
+        <h1 [innerHTML]="title | markdown"></h1>
+        <div class="highLight" [innerHTML]="contents | markdown"></div>
+      </div>
+      <div class="item-add-editor">
+        <input class="title-area" [(ngModel)]="title" type="text" />
+        <textarea class="text-area" [(ngModel)]="contents"></textarea>
+      </div>
+    </div>
+  </div>
   <app-button shape="circle" color="pink" (clicked)="addItem()"
     >check</app-button
   >
