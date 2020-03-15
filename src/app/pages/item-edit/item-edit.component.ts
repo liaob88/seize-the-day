@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, ParamMap, Router } from "@angular/router";
-import { Item } from "../../shared/models";
-import { ItemListService } from "../item-list/item-list.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Item } from '../../shared/models';
+import { ItemListService } from '../item-list/item-list.service';
 
 @Component({
-  selector: "app-item-edit",
-  templateUrl: "./item-edit.component.html",
-  styleUrls: ["./item-edit.component.scss"]
+  selector: 'app-item-edit',
+  templateUrl: './item-edit.component.html',
+  styleUrls: ['./item-edit.component.scss']
 })
 export class ItemEditComponent implements OnInit {
   item: Item;
@@ -22,7 +22,7 @@ export class ItemEditComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      const itemId = Number(params.get("id"));
+      const itemId = Number(params.get('id'));
 
       this.items$.subscribe(items => {
         this.item = items.find(item => item.id === itemId);
@@ -41,6 +41,6 @@ export class ItemEditComponent implements OnInit {
 
     this.itemListService.updatedItem(updatedItem);
 
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
   }
 }
