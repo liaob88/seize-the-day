@@ -18,7 +18,7 @@ describe('ButtonComponent', () => {
     fixture = TestBed.createComponent(ButtonComponent);
     // tslint:disable-next-line: no-non-null-assertion
     component = fixture.componentInstance;
-    component.shape = 'circle';
+    component.type = 'circle';
     component.color = 'pink';
 
     fixture.detectChanges();
@@ -38,7 +38,7 @@ describe('ButtonComponent', () => {
 
   it('className()', () => {
     const spy = spyOnProperty(component, 'className').and.returnValue(
-      `button ${component.shape} ${component.color}`
+      `button ${component.type} ${component.color}`
     );
     expect(component.className).toBe('button circle pink');
     expect(spy).toHaveBeenCalled();

@@ -9,7 +9,7 @@ export class ButtonComponent {
   constructor() {}
 
   @Input()
-  shape: 'large' | 'small' | 'circle';
+  type: 'large' | 'small' | 'circle';
   @Input()
   color: 'red' | 'pink' | 'blue' | 'green';
   @Output()
@@ -20,7 +20,7 @@ export class ButtonComponent {
   }
 
   get className() {
-    const { shape, color } = this;
-    return `button ${shape} ${color}`;
+    const { type, color } = this;
+    return `button ${type} ${color}`;
   }
 }
