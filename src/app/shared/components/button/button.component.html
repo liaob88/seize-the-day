@@ -1,3 +1,14 @@
+<ng-template #child>
+  <ng-content></ng-content>
+</ng-template>
+
 <button [class]="className" (click)="onClick()">
-  <mat-icon><ng-content></ng-content></mat-icon>
+  <ng-container *ngIf="type !== 'circle'; else typeIcon">
+    <ng-container *ngTemplateOutlet="child"></ng-container>
+  </ng-container>
+  <ng-template #typeIcon>
+    <mat-icon>
+      <ng-container *ngTemplateOutlet="child"></ng-container>
+    </mat-icon>
+  </ng-template>
 </button>

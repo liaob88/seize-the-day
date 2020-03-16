@@ -1,9 +1,9 @@
-@import "../../styles/common";
+@import '../../styles/common';
 
 .button {
   color: $WHITE;
   font-size: $f-size-medium;
-  letter-spacing: 5px;
+  background-color: $WHITE;
 }
 
 .circle {
@@ -16,26 +16,32 @@
   border-radius: 25px;
   width: 150px;
   height: 30px;
+  letter-spacing: 3px;
 }
 
 .small {
   border-radius: 25px;
   width: 100px;
   height: 30px;
+  letter-spacing: 3px;
 }
 
 .pink {
-  background-color: $PINK;
+  border: $PINK solid 3px;
+  color: $PINK;
 }
 
 .red {
-  background-color: $RED;
+  border: $RED solid 3px;
+  color: $RED;
 }
 
 .blue {
-  background-color: blue;
+  border: blue solid 3px;
+  color: blue;
 }
 
 .green {
-  background-color: $GREEN;
+  border: $GREEN solid 3px;
+  color: $GREEN;
 }

@@ -3,20 +3,25 @@
     <div class="item-content">
       <p class="item-created_at">{{ item.createdAt | date }}</p>
       <p class="item-title">Title: {{ item.title }}</p>
+      <div class="item-read-button">
+        <app-button
+          type="small"
+          class="more-button"
+          color="blue"
+          (click)="navigateToItemPage(item.id)"
+          >Read</app-button
+        >
+      </div>
       <div class="item-footer">
         <app-button
-          shape="circle"
+          type="circle"
           class="item-button"
           color="blue"
           (click)="navigateToEditPage(item.id)"
         >
           create
         </app-button>
-        <app-button
-          shape="circle"
-          color="pink"
-          (click)="delete(item.id)"
-        >
+        <app-button type="circle" color="pink" (click)="delete(item.id)">
           delete
         </app-button>
       </div>

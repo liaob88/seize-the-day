@@ -19,7 +19,11 @@ export class ItemCardComponent {
     this.itemListService.deletedItem(targetId);
   }
 
+  navigateToItemPage(id: number) {
+    this.router.navigate([`/item/${id}`]);
+  }
+
   navigateToEditPage(id: number) {
-    this.router.navigate([`/edit/${id}`]);
+    this.router.navigate([`/item/${id}/edit`]);
   }
 }

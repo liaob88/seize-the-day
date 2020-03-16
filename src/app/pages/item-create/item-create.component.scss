@@ -39,13 +39,13 @@
     border: 1px solid;
     box-sizing: border-box;
     margin-bottom: 20px;
-    font-size: 15px;
+    font-size: $f-size-medium;
     padding: 15px;
 
     @include mq-m {
       min-height: 30px;
       max-height: 30px;
-      font-size: 10px;
+      font-size: $f-size-small;
     }
   }
 
@@ -58,13 +58,13 @@
     border: 1px solid;
     min-height: 1000px;
     max-height: 1000px;
-    font-size: 15px;
+    font-size: $f-size-medium;
     padding: 15px;
 
     @include mq-m {
       min-height: 500px;
       max-height: 500px;
-      font-size: 10px;
+      font-size: $f-size-small;
     }
   }
 }
@@ -80,7 +80,7 @@
 
 .highLight {
   h1 {
-    font-size: 32px;
+    font-size: $f-size-h1;
   }
   code {
     background-color: #eee;
