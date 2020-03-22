@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { getUniqueStr } from '../../shared/domains/unique_id_maker';
-import { Item } from '../../shared/models';
-import { ItemListService } from '../item-list/item-list.service';
 import * as marked from 'marked';
+import { getUniqueStr } from '../../shared/domains/unique_id_maker';
+import { Item, ItemCreateFormValue } from '../../shared/models';
+import { ItemListService } from '../item-list/item-list.service';
 
 @Component({
   selector: 'app-item-add',
@@ -12,8 +13,11 @@ import * as marked from 'marked';
   encapsulation: ViewEncapsulation.None
 })
 export class ItemCreateComponent implements OnInit {
-  title: string = '';
-  contents: string = '';
+  itemCreateForm: FormGroup = new FormGroup({
+    title: new FormControl(''),
+    contents: new FormControl('')
+  });
+
   constructor(
     private itemListService: ItemListService,
     private route: Router
@@ -21,16 +25,14 @@ export class ItemCreateComponent implements OnInit {
 
   ngOnInit() {}
 
-  async addItem() {
+  async onSubmit(formValue: ItemCreateFormValue) {
+    const { title, contents } = formValue;
     const id = getUniqueStr();
-    const title = this.title;
-    const contents = marked(this.contents);
+    const markedContents = marked(contents);
     const createdAt = new Date();
-    const newItem = new Item(id, title, contents, createdAt);
-    await this.itemListService.addedItem(newItem);
 
-    this.title = '';
-    this.contents = '';
+    const newItem = new Item(id, title, markedContents, createdAt);
+    await this.itemListService.addedItem(newItem);
 
     this.route.navigateByUrl('/list');
   }

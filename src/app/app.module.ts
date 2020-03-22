@@ -1,6 +1,6 @@
 import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -33,7 +33,8 @@ import { ItemComponent } from './pages/item/item.component';
     FormsModule,
     MaterialModule,
     StoreModule.forRoot({ itemList: reducer }),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    ReactiveFormsModule
   ],
   providers: [ItemListService],
   bootstrap: [AppComponent]

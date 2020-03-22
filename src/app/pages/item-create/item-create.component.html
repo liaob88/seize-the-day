@@ -1,18 +1,30 @@
-<div class="item-add">
-  <div class="item-add-container">
+<div class="item-create">
+  <div class="item-create-container">
     <h2>記事作成</h2>
-    <div class="item-add-contents">
-      <div class="item-add-preview">
-        <h1 [innerHTML]="title | markdown"></h1>
-        <div class="highLight" [innerHTML]="contents | markdown"></div>
+    <form
+      [formGroup]="itemCreateForm"
+      (ngSubmit)="onSubmit(itemCreateForm.value)"
+    >
+      <div class="item-create-contents">
+        <div class="item-create-preview">
+          <h1
+            name="preview-title"
+            [innerHTML]="itemCreateForm.value.title | markdown"
+          ></h1>
+          <div
+            name="preview-contents"
+            class="highLight"
+            [innerHTML]="itemCreateForm.value.contents | markdown"
+          ></div>
+        </div>
+        <div class="item-create-editor">
+          <input class="title-area" formControlName="title" type="text" />
+          <textarea class="text-area" formControlName="contents"></textarea>
+          <button type="submit">
+            <app-button type="circle" color="pink">check</app-button>
+          </button>
+        </div>
       </div>
-      <div class="item-add-editor">
-        <input class="title-area" [(ngModel)]="title" type="text" />
-        <textarea class="text-area" [(ngModel)]="contents"></textarea>
-      </div>
-    </div>
+    </form>
   </div>
-  <app-button type="circle" color="pink" (clicked)="addItem()"
-    >check</app-button
-  >
 </div>
