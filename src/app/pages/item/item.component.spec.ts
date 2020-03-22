@@ -1,13 +1,10 @@
-import { Item } from 'src/app/shared/models';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ItemComponent } from './item.component';
-import { Router, ActivatedRoute, convertToParamMap } from '@angular/router';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { StoreModule } from '@ngrx/store';
+import { BehaviorSubject, of } from 'rxjs';
+import { Item } from 'src/app/shared/models';
 import { ItemListService } from '../item-list/item-list.service';
-import { provideMockStore } from '@ngrx/store/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { of, BehaviorSubject } from 'rxjs';
+import { ItemComponent } from './item.component';
 
 class MockItemListService implements Partial<ItemListService> {
   items$ = new BehaviorSubject<Item[]>(null);

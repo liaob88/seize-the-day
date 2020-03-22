@@ -11,3 +11,8 @@ export class Item {
     this.createdAt = createdAt;
   }
 }
+
+export class ItemCreateFormValue {
+  title: string;
+  contents: string;
+}
