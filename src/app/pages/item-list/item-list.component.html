@@ -1,3 +1,5 @@
-<div class="app-item">
-  <app-item-card></app-item-card>
-</div>
+<ng-container *ngIf="itemsStoreState$ | async as itemsState">
+  <div class="app-item">
+    <app-item-card [items]="itemsState.items"></app-item-card>
+  </div>
+</ng-container>

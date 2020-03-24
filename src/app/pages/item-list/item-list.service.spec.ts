@@ -1,29 +1,30 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Action, Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { skip } from 'rxjs/operators';
-import { actions as itemListActions } from '../../store/store';
 import { Item } from '../../shared/models';
-import { ItemListService } from './item-list.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
+import * as itemsStore from '../../store/store';
+import { actions as itemListActions } from '../../store/store';
+import { ItemListService } from './item-list.service';
+
+interface MockStoreType {
+  [itemsStore.featureName]: itemsStore.ItemsStoreState;
+}
+
+const initialState: MockStoreType = {
+  [itemsStore.featureName]: itemsStore.initialState
+};
 
 describe('ItemListService', () => {
   let itemListService: ItemListService;
-  let store: MockStore<{}>;
-  const initialState: Item[] = [
-    {
-      id: 1,
-      title: 'Test 1',
-      contents: 'contents',
-      createdAt: new Date('2020-01-01')
-    }
-  ];
+  let store: MockStore<MockStoreType>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MarkdownPipe],
-      providers: [ItemListService, provideMockStore({ initialState })],
+      providers: [provideMockStore({ initialState })],
       schemas: [NO_ERRORS_SCHEMA]
     });
     itemListService = TestBed.get(ItemListService);
@@ -34,6 +35,33 @@ describe('ItemListService', () => {
   it('should be created', () => {
     const type: ItemListService = TestBed.get(ItemListService);
     expect(type).toBeTruthy();
+  });
+
+  it('items$ default', () => {
+    itemListService.itemsStoreState$.subscribe(itemsStoreState => {
+      expect(itemsStoreState.items.length).toBe(2);
+    });
+  });
+
+  it('store の情報が更新された時、items も更新されること', () => {
+    const newItem = {
+      id: 3,
+      title: 'Test 3',
+      contents: 'contents',
+      createdAt: new Date('2020-01-03')
+    };
+    const newStates: MockStoreType = {
+      ...initialState,
+      [itemsStore.featureName]: {
+        items: [...itemsStore.initialState.items, newItem]
+      }
+    };
+
+    store.setState(newStates);
+
+    itemListService.itemsStoreState$.subscribe(itemsStoreState => {
+      expect(itemsStoreState.items.length).toBe(3);
+    });
   });
 
   it('addedItem() が実行されると、 actions.createItem が dispatch されること', async () => {

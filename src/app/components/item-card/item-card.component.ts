@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Item } from 'src/app/shared/models';
 import { ItemListService } from '../../pages/item-list/item-list.service';
 
 @Component({
@@ -12,8 +13,8 @@ export class ItemCardComponent {
     private router: Router,
     private itemListService: ItemListService
   ) {}
-
-  readonly items$ = this.itemListService.items$;
+  @Input()
+  items: Item[];
 
   delete(targetId: number) {
     this.itemListService.deletedItem(targetId);
