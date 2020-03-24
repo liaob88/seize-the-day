@@ -1,6 +1,6 @@
-import { Item } from 'src/app/shared/models';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Item } from '../../shared/models';
 import { ItemListService } from '../item-list/item-list.service';
 
 @Component({
@@ -20,8 +20,8 @@ export class ItemComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-      this.itemListService.items$.subscribe(items => {
-        this.item = items.find(i => i.id === id);
+      this.itemListService.itemsStoreState$.subscribe(itemsStoreState => {
+        this.item = itemsStoreState.items.find(i => i.id === id);
       });
     });
   }

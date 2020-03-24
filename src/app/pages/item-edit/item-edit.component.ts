@@ -18,14 +18,12 @@ export class ItemEditComponent implements OnInit {
     private router: Router
   ) {}
 
-  readonly items$ = this.itemListService.items$;
-
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       const itemId = Number(params.get('id'));
 
-      this.items$.subscribe(items => {
-        this.item = items.find(item => item.id === itemId);
+      this.itemListService.itemsStoreState$.subscribe(itemsStoreState => {
+        this.item = itemsStoreState.items.find(item => item.id === itemId);
       });
 
       this.updatedTitle = this.item.title;
