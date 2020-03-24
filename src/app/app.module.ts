@@ -1,4 +1,3 @@
-import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,15 +5,16 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ItemEditComponent } from './pages/item-edit/item-edit.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
+import { ItemCreateComponent } from './pages/item-create/item-create.component';
+import { ItemEditComponent } from './pages/item-edit/item-edit.component';
 import { ItemListComponent } from './pages/item-list/item-list.component';
 import { ItemListService } from './pages/item-list/item-list.service';
-import reducer from './store/store';
-import { MaterialModule } from './shared/styles/material.module';
+import { ItemComponent } from './pages/item/item.component';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { MarkdownPipe } from './shared/pipes/markdown.pipe';
-import { ItemComponent } from './pages/item/item.component';
+import { MaterialModule } from './shared/styles/material.module';
+import { default as itemsReducer, featureName } from './store/store';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { ItemComponent } from './pages/item/item.component';
     AppRoutingModule,
     FormsModule,
     MaterialModule,
-    StoreModule.forRoot({ itemList: reducer }),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(featureName, itemsReducer),
     StoreDevtoolsModule.instrument(),
     ReactiveFormsModule
   ],

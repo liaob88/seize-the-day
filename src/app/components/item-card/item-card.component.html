@@ -1,4 +1,4 @@
-<div class="item-container" *ngIf="items$ | async as items">
+<div class="item-container">
   <div class="item-div" *ngFor="let item of items">
     <div class="item-content">
       <p class="item-created_at">{{ item.createdAt | date }}</p>

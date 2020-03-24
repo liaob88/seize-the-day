@@ -3,15 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject } from 'rxjs';
-import { Item } from 'src/app/shared/models';
 import { ItemListService } from '../../pages/item-list/item-list.service';
+import { ItemsStoreState } from './../../store/store';
 import { ItemCardComponent } from './item-card.component';
-import { By } from '@angular/platform-browser';
 
 class MockItemListService implements Partial<ItemListService> {
-  items$ = new BehaviorSubject<Item[] | null>([
-    new Item(1, 'Test 1', 'contents', new Date('2019/01/01'))
-  ]);
+  itemsStoreState$ = new BehaviorSubject<ItemsStoreState>(null);
   deletedItem() {}
 }
 
@@ -41,29 +38,6 @@ describe('ItemCardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('items$', () => {
-    it('default', () => {
-      itemListService.items$.subscribe(items =>
-        expect(items).toEqual([
-          new Item(1, 'Test 1', 'contents', new Date('2019/01/01'))
-        ])
-      );
-    });
-
-    it('store の情報が更新されると items$ が更新されること', () => {
-      const items = [
-        new Item(1, 'Test 1', 'contents', new Date()),
-        new Item(2, 'Test 2', 'contents', new Date())
-      ];
-      itemListService.items$.next(items);
-      fixture.detectChanges();
-
-      const itemElement = fixture.debugElement.queryAll(By.css('.item-div'));
-
-      expect(itemElement.length).toBe(2);
-    });
   });
 
   it('delete() called', () => {

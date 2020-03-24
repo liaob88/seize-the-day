@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Item } from '../../shared/models';
-import { actions } from '../../store/store';
+import { actions, featureName, ItemsStoreState } from '../../store/store';
 
 @Injectable({ providedIn: 'root' })
 export class ItemListService {
-  constructor(private store$: Store<{ itemList: Item[] }>) {}
+  constructor(private store$: Store<{ [featureName]: ItemsStoreState }>) {}
 
-  readonly items$ = this.store$.select('itemList');
+  readonly itemsStoreState$: Observable<ItemsStoreState> = this.store$.select(
+    featureName
+  );
 
   addedItem(item: Item) {
     this.store$.dispatch(actions.createItem({ item }));

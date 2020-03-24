@@ -1,3 +1,4 @@
+import { ItemsStoreState } from 'src/app/store/store';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +10,7 @@ import { ItemListService } from '../item-list/item-list.service';
 import { ItemEditComponent } from './item-edit.component';
 
 class MockItemListService implements Partial<ItemListService> {
-  items$ = new BehaviorSubject<Item[]>(null);
+  itemsStoreState$ = new BehaviorSubject<ItemsStoreState>(null);
   updatedItem() {}
 }
 
@@ -40,7 +41,9 @@ describe('ItemEditComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemEditComponent);
     component = fixture.componentInstance;
-    itemListService.items$.next([new Item(1, 'Test 1', 'contents', new Date())]);
+    itemListService.itemsStoreState$.next({
+      items: [new Item(1, 'Test 1', 'contents', new Date())]
+    });
     fixture.detectChanges();
   });
 

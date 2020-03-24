@@ -1,3 +1,4 @@
+import { ItemsStoreState } from './../../store/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -7,7 +8,7 @@ import { ItemListService } from '../item-list/item-list.service';
 import { ItemComponent } from './item.component';
 
 class MockItemListService implements Partial<ItemListService> {
-  items$ = new BehaviorSubject<Item[]>(null);
+  itemsStoreState$ = new BehaviorSubject<ItemsStoreState>(null);
 }
 
 describe('ItemComponent', () => {
@@ -34,10 +35,12 @@ describe('ItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemComponent);
     component = fixture.componentInstance;
-    itemListService.items$.next([
-      new Item(1, 'Test 1', 'contents', new Date()),
-      new Item(2, 'Test 2', 'contents2', new Date())
-    ]);
+    itemListService.itemsStoreState$.next({
+      items: [
+        new Item(1, 'Test 1', 'contents', new Date()),
+        new Item(2, 'Test 2', 'contents2', new Date())
+      ]
+    });
     fixture.detectChanges();
   });
 
