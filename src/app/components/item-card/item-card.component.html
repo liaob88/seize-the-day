@@ -1,8 +1,13 @@
 <div class="item-container">
   <div class="item-div" *ngFor="let item of items">
     <div class="item-content">
-      <p class="item-created_at">{{ item.createdAt | date }}</p>
-      <p class="item-title">Title: {{ item.title }}</p>
+      <div class="item-info-area">
+        <p class="item-created_at">{{ item.createdAt | date }}</p>
+        <p class="item-title">Title: {{ item.title }}</p>
+      </div>
+      <div class="item-image-area">
+        <img class="item-image" src="{{ item.imageSrc }}" alt="" />
+      </div>
       <div class="item-read-button">
         <app-button
           type="small"
