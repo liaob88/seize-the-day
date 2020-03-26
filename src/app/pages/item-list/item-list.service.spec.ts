@@ -8,6 +8,7 @@ import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import * as itemsStore from '../../store/store';
 import { actions as itemListActions } from '../../store/store';
 import { ItemListService } from './item-list.service';
+import { createMockItem } from 'src/app/shared/factory/item';
 
 interface MockStoreType {
   [itemsStore.featureName]: itemsStore.ItemsStoreState;
@@ -39,17 +40,15 @@ describe('ItemListService', () => {
 
   it('items$ default', () => {
     itemListService.itemsStoreState$.subscribe(itemsStoreState => {
-      expect(itemsStoreState.items.length).toBe(2);
+      expect(itemsStoreState.items.length).toBe(1);
     });
   });
 
   it('store の情報が更新された時、items も更新されること', () => {
-    const newItem = {
+    const newItem = createMockItem({
       id: 3,
-      title: 'Test 3',
-      contents: 'contents',
-      createdAt: new Date('2020-01-03')
-    };
+      title: 'Test 3'
+    });
     const newStates: MockStoreType = {
       ...initialState,
       [itemsStore.featureName]: {
@@ -60,17 +59,12 @@ describe('ItemListService', () => {
     store.setState(newStates);
 
     itemListService.itemsStoreState$.subscribe(itemsStoreState => {
-      expect(itemsStoreState.items.length).toBe(3);
+      expect(itemsStoreState.items.length).toBe(2);
     });
   });
 
   it('addedItem() が実行されると、 actions.createItem が dispatch されること', async () => {
-    const newItem: Item = {
-      id: 2,
-      title: 'Test 2',
-      contents: 'contents',
-      createdAt: new Date('2020-01-01')
-    };
+    const newItem: Item = createMockItem({});
     const createItemAction = itemListActions.createItem({ item: newItem });
     const expected = [createItemAction];
     const actions: Action[] = [];
@@ -96,12 +90,10 @@ describe('ItemListService', () => {
   });
 
   it('updatedItem() が実行されると、 actions.updateItem が dispatch されること', async () => {
-    const updatedItem: Item = {
+    const updatedItem: Item = createMockItem({
       id: 1,
-      title: 'Test 1 updated',
-      contents: 'contents',
-      createdAt: new Date('2020-01-01')
-    };
+      title: 'Test 1 updated'
+    });
     const updateItemAction = itemListActions.updateItem({ item: updatedItem });
     const expected = [updateItemAction];
     const actions: Action[] = [];

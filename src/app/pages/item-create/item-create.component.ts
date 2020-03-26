@@ -29,14 +29,11 @@ export class ItemCreateComponent implements OnInit {
   ngOnInit() {}
 
   onImageUpload(evt) {
-    console.log(evt);
-
     const reader = new FileReader();
-
     const file = evt.target.files[0];
     reader.onload = e => {
       // tslint:disable-next-line: no-string-literal
-      console.log(e)
+      console.log(e);
       this.imageSrc = e.target['result'];
     };
     reader.readAsDataURL(file);
@@ -46,9 +43,10 @@ export class ItemCreateComponent implements OnInit {
     const { title, contents } = formValue;
     const id = getUniqueStr();
     const markedContents = marked(contents);
+    const imageSrc = this.imageSrc;
     const createdAt = new Date();
 
-    const newItem = new Item(id, title, markedContents, createdAt);
+    const newItem = new Item(id, title, markedContents, imageSrc, createdAt);
     await this.itemListService.addedItem(newItem);
 
     this.route.navigateByUrl('/list');

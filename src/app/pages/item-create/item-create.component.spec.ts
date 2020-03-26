@@ -1,3 +1,4 @@
+import { createMockLongContentsItem } from './../../shared/factory/item';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -54,15 +55,10 @@ describe('ItemCreateComponent', () => {
   });
 
   it('onSubmit() が呼ばれると、itemListService の addedItem が呼ばれ、その後 index ページに飛ぶこと', async () => {
-    // onSubmit が引数が必要なので mockFormData を作成
-    const mockFormData: ItemCreateFormValue = {
-      title: 'abc',
-      contents: '123'
-    };
     spyOn(itemListService, 'addedItem');
     spyOn(router, 'navigateByUrl');
 
-    await component.onSubmit(mockFormData);
+    await component.onSubmit(createMockLongContentsItem({}));
 
     expect(itemListService.addedItem).toHaveBeenCalled();
     expect(router.navigateByUrl).toHaveBeenCalledWith('/list');

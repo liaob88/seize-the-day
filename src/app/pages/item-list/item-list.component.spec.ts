@@ -1,3 +1,4 @@
+import { createMockLongContentsItem } from 'src/app/shared/factory/item';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
@@ -44,7 +45,7 @@ describe('ItemListComponent', () => {
 
     it('itemListService の itemsStoreState$ が更新された時、component 側の itemsStoreState$ が更新されること', () => {
       const newState = {
-        items: [new Item(1, 'Test 1', 'contents', new Date('2019/01/01'))]
+        items: [createMockLongContentsItem({})]
       };
 
       itemListService.itemsStoreState$.next(newState);

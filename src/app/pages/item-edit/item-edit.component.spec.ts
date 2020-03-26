@@ -8,6 +8,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { Item } from '../../shared/models';
 import { ItemListService } from '../item-list/item-list.service';
 import { ItemEditComponent } from './item-edit.component';
+import { createMockLongContentsItem } from 'src/app/shared/factory/item';
 
 class MockItemListService implements Partial<ItemListService> {
   itemsStoreState$ = new BehaviorSubject<ItemsStoreState>(null);
@@ -42,7 +43,7 @@ describe('ItemEditComponent', () => {
     fixture = TestBed.createComponent(ItemEditComponent);
     component = fixture.componentInstance;
     itemListService.itemsStoreState$.next({
-      items: [new Item(1, 'Test 1', 'contents', new Date())]
+      items: [createMockLongContentsItem({})]
     });
     fixture.detectChanges();
   });
