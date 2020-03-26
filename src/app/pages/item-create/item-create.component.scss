@@ -30,6 +30,11 @@
     margin-bottom: 20px;
   }
 
+  .image-upload-area {
+    border: 1px solid $GREY;
+    margin-bottom: 20px;
+  }
+
   .title-area {
     width: 100%;
     min-height: 50px;
@@ -71,11 +76,19 @@
 
 .item-create-preview {
   text-align: start;
-  width: 45%;
+  width: 500px;
+  height: auto;
+  display: inline-block;
 
   @include mq-m {
     width: 100%;
   }
+}
+
+.item-create-image {
+  width: 100%;
+  height: auto;
+  background-size: cover;
 }
 
 .highLight {

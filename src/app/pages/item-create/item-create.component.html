@@ -11,6 +11,7 @@
             name="preview-title"
             [innerHTML]="itemCreateForm.value.title | markdown"
           ></h1>
+          <img class="item-create-image" [src]="imageSrc" alt="" />
           <div
             name="preview-contents"
             class="highLight"
@@ -19,6 +20,11 @@
         </div>
         <div class="item-create-editor">
           <input class="title-area" formControlName="title" type="text" />
+          <input
+            (change)="onImageUpload($event)"
+            type="file"
+            formControlName="image"
+          />
           <textarea class="text-area" formControlName="contents"></textarea>
           <button type="submit">
             <app-button type="circle" color="pink">check</app-button>
