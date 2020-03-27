@@ -33,7 +33,6 @@ export class ItemCreateComponent implements OnInit {
     const file = evt.target.files[0];
     reader.onload = e => {
       // tslint:disable-next-line: no-string-literal
-      console.log(e);
       this.imageSrc = e.target['result'];
     };
     reader.readAsDataURL(file);
