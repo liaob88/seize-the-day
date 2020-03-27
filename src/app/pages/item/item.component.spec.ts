@@ -1,10 +1,10 @@
-import { ItemsStoreState } from './../../store/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject, of } from 'rxjs';
-import { Item } from 'src/app/shared/models';
 import { ItemListService } from '../item-list/item-list.service';
+import { createMockLongContentsItem } from './../../shared/factory/item';
+import { ItemsStoreState } from './../../store/store';
 import { ItemComponent } from './item.component';
 
 class MockItemListService implements Partial<ItemListService> {
@@ -36,10 +36,7 @@ describe('ItemComponent', () => {
     fixture = TestBed.createComponent(ItemComponent);
     component = fixture.componentInstance;
     itemListService.itemsStoreState$.next({
-      items: [
-        new Item(1, 'Test 1', 'contents', new Date()),
-        new Item(2, 'Test 2', 'contents2', new Date())
-      ]
+      items: [createMockLongContentsItem({})]
     });
     fixture.detectChanges();
   });

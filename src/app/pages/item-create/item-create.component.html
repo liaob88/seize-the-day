@@ -11,6 +11,7 @@
             name="preview-title"
             [innerHTML]="itemCreateForm.value.title | markdown"
           ></h1>
+          <img class="preview-image" [src]="imageSrc" alt="" />
           <div
             name="preview-contents"
             class="highLight"
@@ -19,6 +20,18 @@
         </div>
         <div class="item-create-editor">
           <input class="title-area" formControlName="title" type="text" />
+          <button type="button" class="image-btn" (click)="fileInput.click()">
+            写真をつける
+          </button>
+          <input
+            id="imageInput"
+            type="file"
+            class="image-btn-display-none"
+            hidden
+            #fileInput
+            (change)="onImageUpload($event)"
+            formControlName="image"
+          />
           <textarea class="text-area" formControlName="contents"></textarea>
           <button type="submit">
             <app-button type="circle" color="pink">check</app-button>

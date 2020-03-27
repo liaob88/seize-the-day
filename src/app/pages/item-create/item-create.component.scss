@@ -30,6 +30,21 @@
     margin-bottom: 20px;
   }
 
+  .image-btn {
+    margin: 22px auto;
+    padding: 15px;
+    border-radius: 4px;
+    max-width: 120px;
+    text-align: center;
+    display: block;
+    background-color: #f1f1f1;
+    color: #73a9ff;
+    box-shadow: 0 0 4px rgba(146, 146, 146, 0.8);
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+
   .title-area {
     width: 100%;
     min-height: 50px;
@@ -71,11 +86,19 @@
 
 .item-create-preview {
   text-align: start;
-  width: 45%;
+  width: 500px;
+  height: auto;
+  display: inline-block;
 
   @include mq-m {
     width: 100%;
   }
+}
+
+.preview-image {
+  width: 100%;
+  height: auto;
+  background-size: cover;
 }
 
 .highLight {

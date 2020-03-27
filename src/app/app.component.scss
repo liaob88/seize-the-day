@@ -1,4 +1,8 @@
-@import "../app/shared/styles/_common.scss";
+@import '../app/shared/styles/_common.scss';
+
+body {
+  word-wrap: break-word;
+}
 
 .global-header {
   display: flex;

@@ -15,8 +15,11 @@ import { ItemListService } from '../item-list/item-list.service';
 export class ItemCreateComponent implements OnInit {
   itemCreateForm: FormGroup = new FormGroup({
     title: new FormControl(''),
+    image: new FormControl(''),
     contents: new FormControl('')
   });
+
+  imageSrc: string;
 
   constructor(
     private itemListService: ItemListService,
@@ -25,13 +28,24 @@ export class ItemCreateComponent implements OnInit {
 
   ngOnInit() {}
 
+  onImageUpload(evt) {
+    const reader = new FileReader();
+    const file = evt.target.files[0];
+    reader.onload = e => {
+      // tslint:disable-next-line: no-string-literal
+      this.imageSrc = e.target['result'];
+    };
+    reader.readAsDataURL(file);
+  }
+
   async onSubmit(formValue: ItemCreateFormValue) {
     const { title, contents } = formValue;
     const id = getUniqueStr();
     const markedContents = marked(contents);
+    const imageSrc = this.imageSrc;
     const createdAt = new Date();
 
-    const newItem = new Item(id, title, markedContents, createdAt);
+    const newItem = new Item(id, title, markedContents, imageSrc, createdAt);
     await this.itemListService.addedItem(newItem);
 
     this.route.navigateByUrl('/list');
