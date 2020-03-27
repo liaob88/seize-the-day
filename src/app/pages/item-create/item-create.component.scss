@@ -30,9 +30,19 @@
     margin-bottom: 20px;
   }
 
-  .image-upload-area {
-    border: 1px solid $GREY;
-    margin-bottom: 20px;
+  .image-btn {
+    margin: 22px auto;
+    padding: 15px;
+    border-radius: 4px;
+    max-width: 120px;
+    text-align: center;
+    display: block;
+    background-color: #f1f1f1;
+    color: #73a9ff;
+    box-shadow: 0 0 4px rgba(146, 146, 146, 0.8);
+    outline: none;
+    border: none;
+    cursor: pointer;
   }
 
   .title-area {
@@ -85,7 +95,7 @@
   }
 }
 
-.item-create-image {
+.preview-image {
   width: 100%;
   height: auto;
   background-size: cover;
