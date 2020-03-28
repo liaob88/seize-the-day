@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +16,10 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 import { MaterialModule } from './shared/styles/material.module';
 import { default as itemsReducer, featureName } from './store/store';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +38,9 @@ import { default as itemsReducer, featureName } from './store/store';
     FormsModule,
     MaterialModule,
     StoreModule.forRoot({}),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule,
     StoreModule.forFeature(featureName, itemsReducer),
     StoreDevtoolsModule.instrument(),
     ReactiveFormsModule
