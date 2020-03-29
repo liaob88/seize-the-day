@@ -20,8 +20,15 @@ export class Item {
   }
 }
 
-export class ItemCreateFormValue {
+export class Article {
+  id: number;
   title: string;
   contents: string;
   imageSrc: string;
+  createdAt: Date;
+}
+
+export class ArticleFormValue {
+  title: string;
+  contents: string;
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as marked from 'marked';
-import { getUniqueStr } from '../../shared/domains/unique_id_maker';
-import { Item, ItemCreateFormValue } from '../../shared/models';
+import { ArticleFormValue } from '../../shared/models';
 import { ItemListService } from '../item-list/item-list.service';
 
 @Component({
@@ -13,41 +11,34 @@ import { ItemListService } from '../item-list/item-list.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ItemCreateComponent implements OnInit {
-  itemCreateForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    image: new FormControl(''),
-    contents: new FormControl('')
+  image: any = null;
+  previewImageSrc: string = '';
+
+  itemCreateForm: FormGroup = this.fb.group({
+    title: [''],
+    contents: ['']
   });
 
-  imageSrc: string;
-
   constructor(
+    private fb: FormBuilder,
     private itemListService: ItemListService,
     private route: Router
   ) {}
 
   ngOnInit() {}
 
-  onImageUpload(evt) {
+  onImageUpload(event: Event): void {
+    this.image = event.target['files'];
+
     const reader = new FileReader();
-    const file = evt.target.files[0];
     reader.onload = e => {
-      // tslint:disable-next-line: no-string-literal
-      this.imageSrc = e.target['result'];
+      this.previewImageSrc = e.target['result'];
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(event.target['files'][0]);
   }
 
-  async onSubmit(formValue: ItemCreateFormValue) {
-    const { title, contents } = formValue;
-    const id = getUniqueStr();
-    const markedContents = marked(contents);
-    const imageSrc = this.imageSrc;
-    const createdAt = new Date();
-
-    const newItem = new Item(id, title, markedContents, imageSrc, createdAt);
-    await this.itemListService.addedItem(newItem);
-
+  async onSubmit(formValue: ArticleFormValue) {
+    await this.itemListService.createArticle(formValue, this.image);
     this.route.navigateByUrl('/list');
   }
 }
