@@ -1,5 +1,7 @@
-<div class="item-div">
-  <h2 class="title">{{ item.title }}</h2>
-  <img class="item-image" src="{{ item.imageSrc }}" alt="" />
-  <div [innerHTML]="item.contents"></div>
-</div>
+<ng-container *ngIf="item">
+  <div class="item-div">
+    <h2 class="title">{{ item.title }}</h2>
+    <img class="item-image" src="{{ item.imageSrc }}" alt="" />
+    <div [innerHTML]="item.contents"></div>
+  </div>
+</ng-container>

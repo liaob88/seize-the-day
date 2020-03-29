@@ -2,13 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject, of } from 'rxjs';
+import { Item } from '../../shared/models';
 import { ItemListService } from '../item-list/item-list.service';
-import { createMockLongContentsItem } from './../../shared/factory/item';
-import { ItemsStoreState } from './../../store/store';
+import { createMockFirestoreItem } from './../../shared/factory/item';
 import { ItemComponent } from './item.component';
 
 class MockItemListService implements Partial<ItemListService> {
-  itemsStoreState$ = new BehaviorSubject<ItemsStoreState>(null);
+  items$ = new BehaviorSubject<Item[]>(null);
 }
 
 describe('ItemComponent', () => {
@@ -35,9 +35,7 @@ describe('ItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemComponent);
     component = fixture.componentInstance;
-    itemListService.itemsStoreState$.next({
-      items: [createMockLongContentsItem({})]
-    });
+    itemListService.items$.next([createMockFirestoreItem({})]);
     fixture.detectChanges();
   });
 
@@ -51,5 +49,7 @@ describe('ItemComponent', () => {
     fixture.detectChanges();
 
     expect(component.item.id).toBe(1);
+    expect(component.item.title).toBe('FirestoreItem 1');
+
   });
 });
