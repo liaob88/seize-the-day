@@ -1,14 +1,13 @@
-import { createMockLongContentsItem } from 'src/app/shared/factory/item';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
+import { createMockLongContentsItem } from 'src/app/shared/factory/item';
 import { Item } from 'src/app/shared/models';
-import { ItemsStoreState } from '../../store/store';
 import { ItemListComponent } from './item-list.component';
 import { ItemListService } from './item-list.service';
 
 class MockItemListService implements Partial<ItemListService> {
-  itemsStoreState$ = new BehaviorSubject<ItemsStoreState>(null);
+  items$ = new BehaviorSubject<Item[]>(null);
 }
 
 describe('ItemListComponent', () => {
@@ -36,24 +35,23 @@ describe('ItemListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('itemsStoreState$', () => {
+  describe('items$', () => {
     it('default', () => {
-      component.itemsStoreState$.subscribe(itemsStoreState => {
-        expect(itemsStoreState).toBe(null);
+      component.items$.subscribe(items => {
+        expect(items).toBe(null);
       });
     });
 
-    it('itemListService の itemsStoreState$ が更新された時、component 側の itemsStoreState$ が更新されること', () => {
+    it('itemListService の items$ が更新された時、component 側の items$ が更新されること', () => {
       const newState = {
         items: [createMockLongContentsItem({})]
       };
 
-      itemListService.itemsStoreState$.next(newState);
+      //TODO: createMockLongContentsItem の型を変えて、items のみ渡せるようにする
+      itemListService.items$.next(newState.items);
       fixture.detectChanges();
 
-      component.itemsStoreState$.subscribe(itemsStoreState =>
-        expect(itemsStoreState).toBe(newState)
-      );
+      component.items$.subscribe(items => expect(items).toBe(newState.items));
     });
   });
 });

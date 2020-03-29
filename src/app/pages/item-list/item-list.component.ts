@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ItemsStoreState } from './../../store/store';
+import { Item } from '../../shared/models';
 import { ItemListService } from './item-list.service';
 
 @Component({
@@ -8,7 +8,12 @@ import { ItemListService } from './item-list.service';
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss']
 })
-export class ItemListComponent {
+export class ItemListComponent implements OnInit {
+  items$: Observable<Item[]>;
+
   constructor(private itemListService: ItemListService) {}
-  itemsStoreState$: Observable<ItemsStoreState> = this.itemListService.itemsStoreState$;
+
+  ngOnInit() {
+    this.items$ = this.itemListService.items$;
+  }
 }
