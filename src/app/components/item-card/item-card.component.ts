@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Item } from 'src/app/shared/models';
 import { ItemListService } from '../../pages/item-list/item-list.service';
+import { Article } from './../../shared/models';
 
 @Component({
   selector: 'app-item-card',
@@ -14,7 +14,7 @@ export class ItemCardComponent {
     private itemListService: ItemListService
   ) {}
   @Input()
-  items: Item[];
+  articles: Article[];
 
   delete(targetId: number) {
     this.itemListService.deletedItem(targetId);

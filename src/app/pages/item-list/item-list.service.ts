@@ -31,20 +31,11 @@ export class ItemListService {
 
   async createArticle(article: ArticleFormValue, image: any) {
     const { title, contents } = article;
-    // uniqueID の作成
     const articleId = getUniqueId();
-    // 記事内容を HTML に変換
     const markedContents = marked(contents);
-    // created_at
     const createdAt = new Date();
 
     const filePath = `/article_thumbnails/${image[0]['name']}`;
-
-    const promise = new Promise((resolve, reject) => {
-      this.storage.upload(filePath, image[0]);
-      resolve('image upload done');
-    });
-
     this.storage.upload(filePath, image[0]).then(() => {
       this.storage
         .ref(filePath)
