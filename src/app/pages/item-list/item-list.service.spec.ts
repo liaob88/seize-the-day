@@ -1,48 +1,90 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Action, Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { skip } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { createMockItem } from '../../shared/factory/item';
 import { Item } from '../../shared/models';
 import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import * as itemsStore from '../../store/store';
 import { actions as itemListActions } from '../../store/store';
 import { ItemListService } from './item-list.service';
-import { createMockItem } from 'src/app/shared/factory/item';
 
+// delete
 interface MockStoreType {
   [itemsStore.featureName]: itemsStore.ItemsStoreState;
 }
-
+// delete
 const initialState: MockStoreType = {
   [itemsStore.featureName]: itemsStore.initialState
 };
+
+// const fakeInput: Item[][] = [[createMockFirestoreItem({})]];
+// const fakeData = of(fakeInput);
+
+// const collectionStub = {
+//   valueChanges: jasmine.createSpy('valueChanges').and.returnValue(fakeData)
+// };
+
+// const angularFiresotreStub = {
+//   collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+// };
+
+// class MockFirestore implements Partial<AngularFirestore> {
+//   collection = jasmine.createSpy('collection').and.returnValue(collectionStub);
+// }
+
+// class MockItemListService implements Partial<ItemListService> {
+//   items$ = new BehaviorSubject<Item[]>(null);
+// }
 
 describe('ItemListService', () => {
   let itemListService: ItemListService;
   let store: MockStore<MockStoreType>;
 
+  // let angularFirestore: AngularFirestore;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule
+      ],
       declarations: [MarkdownPipe],
-      providers: [provideMockStore({ initialState })],
+      providers: [
+        provideMockStore({ initialState })
+        // ItemListService,
+        // { provide: AngularFirestore, useValue: angularFiresotreStub }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
     itemListService = TestBed.get(ItemListService);
     store = TestBed.get(Store);
+    // angularFirestore = TestBed.get(AngularFirestore);
     spyOn(store, 'dispatch').and.callThrough();
   });
 
   it('should be created', () => {
-    const type: ItemListService = TestBed.get(ItemListService);
-    expect(type).toBeTruthy();
+    expect(itemListService).toBeTruthy();
+    // expect(angularFirestore.collection).toHaveBeenCalledWith('items');
   });
 
-  it('items$ default', () => {
-    itemListService.itemsStoreState$.subscribe(itemsStoreState => {
-      expect(itemsStoreState.items.length).toBe(1);
-    });
-  });
+  // it('firestore の data が更新された時、itemListService の items$ が更新されること ', () => {
+  //   angularFirestore.itemListService.items$.subscribe(itemListService => {
+  //     console.log(itemListService);
+
+  //     // expect(itemListService)
+  //   });
+  // });
+
+  // it('items$ default', () => {
+  //   itemListService.items$.subscribe(items => {
+  //     expect(items.length).toBe(1);
+  //   });
+  // });
 
   it('store の情報が更新された時、items も更新されること', () => {
     const newItem = createMockItem({
