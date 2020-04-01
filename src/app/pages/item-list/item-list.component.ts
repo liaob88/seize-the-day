@@ -1,6 +1,7 @@
+import { ArticleOfStore } from './../../shared/models';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Item } from '../../shared/models';
+import { Article } from '../../shared/models';
 import { ItemListService } from './item-list.service';
 
 @Component({
@@ -9,11 +10,11 @@ import { ItemListService } from './item-list.service';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
-  items$: Observable<Item[]>;
+  items$: Observable<ArticleOfStore[]>;
 
   constructor(private itemListService: ItemListService) {}
 
   ngOnInit() {
-    this.items$ = this.itemListService.items$;
+    this.items$ = this.itemListService.getArticles();
   }
 }

@@ -7,7 +7,7 @@ import { ItemListComponent } from './item-list.component';
 import { ItemListService } from './item-list.service';
 
 class MockItemListService implements Partial<ItemListService> {
-  items$ = new BehaviorSubject<Item[]>(null);
+  articlese$ = new BehaviorSubject<Item[]>(null);
 }
 
 describe('ItemListComponent', () => {
@@ -48,7 +48,7 @@ describe('ItemListComponent', () => {
       };
 
       //TODO: createMockLongContentsItem の型を変えて、items のみ渡せるようにする
-      itemListService.items$.next(newState.items);
+      itemListService.articlese$.next(newState.items);
       fixture.detectChanges();
 
       component.items$.subscribe(items => expect(items).toBe(newState.items));
