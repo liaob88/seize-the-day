@@ -1,66 +1,83 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { Store } from '@ngrx/store';
+import * as firebase from 'firebase';
 import * as marked from 'marked';
 import { Observable } from 'rxjs';
-import { getUniqueId } from '../../shared/domains/unique_id_maker';
-import { Article, ArticleFormValue, Item } from '../../shared/models';
+import { Article, ArticleFormValue } from '../../shared/models';
 import { actions, featureName, ItemsStoreState } from '../../store/store';
+import { ArticleOfStore } from './../../shared/models';
+import { FirebaseService } from './../../shared/services/firebase.service';
 
 @Injectable({ providedIn: 'root' })
 export class ItemListService {
-  private itemsCollection: AngularFirestoreCollection<Item>;
-  readonly items$: Observable<Item[]>;
-
+  private readonly collectionName = 'articles';
   constructor(
     private store$: Store<{ [featureName]: ItemsStoreState }>,
-    private db: AngularFirestore,
-    private storage: AngularFireStorage
-  ) {
-    this.itemsCollection = this.db.collection<Item>('articles');
-    this.items$ = this.itemsCollection.valueChanges();
-  }
+    private firebaseService: FirebaseService
+  ) {}
 
   readonly itemsStoreState$: Observable<ItemsStoreState> = this.store$.select(
     featureName
   );
 
-  async createArticle(article: ArticleFormValue, image: any) {
+  getArticle(id: string): Observable<ArticleOfStore> {
+    return this.firebaseService.getDoc<ArticleOfStore>(id, this.collectionName);
+  }
+
+  getArticles(): Observable<ArticleOfStore[]> {
+    return this.firebaseService.getCollection<ArticleOfStore>(
+      this.collectionName
+    );
+  }
+
+  createArticle(article: ArticleFormValue, image: any) {
     const { title, contents } = article;
-    const articleId = getUniqueId();
     const markedContents = marked(contents);
-    const createdAt = new Date();
+    const createdAt = firebase.firestore.Timestamp.fromDate(new Date());
 
     const filePath = `/article_thumbnails/${image[0]['name']}`;
-    this.storage.upload(filePath, image[0]).then(() => {
-      this.storage
-        .ref(filePath)
-        .getDownloadURL()
-        .subscribe(url =>
-          this.db.collection<Article>('articles').add({
-            id: articleId,
-            title,
-            contents: markedContents,
-            imageSrc: url,
-            createdAt
-          })
-        );
+
+    this.firebaseService.uploadToStorage(filePath, image[0]).then(() => {
+      this.firebaseService.getDLUrl(filePath).subscribe(url =>
+        this.firebaseService.createDoc<Article>(this.collectionName, {
+          title,
+          contents: markedContents,
+          imageSrc: url,
+          createdAt
+        })
+      );
     });
   }
 
-  addedItem(item: Item) {
-    this.store$.dispatch(actions.createItem({ item }));
+  updateArticle(id: string, article: ArticleFormValue, image?: File) {
+    const { title, contents } = article;
+    const markedContents = marked(contents);
+    const updatedAt = firebase.firestore.Timestamp.fromDate(new Date());
+
+    // サムネイルが更新されない場合は、store の更新のみ
+    if (!image) {
+      this.firebaseService.updateDoc<Article>(this.collectionName, id, {
+        contents: markedContents,
+        title,
+        updatedAt
+      });
+      return;
+    }
+
+    const filePath = `/article_thumbnails/${image[0]['name']}`;
+    this.firebaseService.uploadToStorage(filePath, image[0]).then(() =>
+      this.firebaseService.getDLUrl(filePath).subscribe(url =>
+        this.firebaseService.updateDoc<Article>(this.collectionName, id, {
+          contents: markedContents,
+          title,
+          imageSrc: url,
+          updatedAt
+        })
+      )
+    );
   }
 
   deletedItem(id: number) {
     this.store$.dispatch(actions.deleteItem({ id }));
-  }
-
-  updatedItem(item: Item) {
-    this.store$.dispatch(actions.updateItem({ item }));
   }
 }

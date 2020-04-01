@@ -21,11 +21,15 @@ export class Item {
 }
 
 export class Article {
-  id: number;
   title: string;
   contents: string;
   imageSrc: string;
-  createdAt: Date;
+  createdAt: firebase.firestore.Timestamp;
+  updatedAt?: firebase.firestore.Timestamp;
+}
+
+export class ArticleOfStore extends Article {
+  id: string;
 }
 
 export class ArticleFormValue {
