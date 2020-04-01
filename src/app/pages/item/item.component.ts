@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Item } from '../../shared/models';
 import { ItemListService } from '../item-list/item-list.service';
+import { Article } from './../../shared/models';
 
 @Component({
   selector: 'app-item',
@@ -14,14 +14,14 @@ export class ItemComponent implements OnInit {
     private itemListService: ItemListService
   ) {}
 
-  item: Item;
+  item: Article;
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
-      this.itemListService.items$.subscribe(items => {
-        this.item = items.find(i => i.id === id);
-      });
+      const id = params.get('id');
+      this.itemListService
+        .getArticle(id)
+        .subscribe(article => (this.item = article));
     });
   }
 }

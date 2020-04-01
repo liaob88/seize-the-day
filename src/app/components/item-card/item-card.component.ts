@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemListService } from '../../pages/item-list/item-list.service';
-import { Article } from './../../shared/models';
+import { Article, ArticleOfStore } from './../../shared/models';
 
 @Component({
   selector: 'app-item-card',
@@ -14,17 +14,24 @@ export class ItemCardComponent {
     private itemListService: ItemListService
   ) {}
   @Input()
-  articles: Article[];
+  articles: ArticleOfStore[];
+
+  getDisplayedDate(article: Article): Date {
+    const displayedDate = article.updatedAt
+      ? article.updatedAt
+      : article.createdAt;
+    return displayedDate.toDate();
+  }
 
   delete(targetId: number) {
     this.itemListService.deletedItem(targetId);
   }
 
   navigateToItemPage(id: number) {
-    this.router.navigate([`/item/${id}`]);
+    this.router.navigate([`/articles/${id}`]);
   }
 
   navigateToEditPage(id: number) {
-    this.router.navigate([`/item/${id}/edit`]);
+    this.router.navigate([`/articles/${id}/edit`]);
   }
 }

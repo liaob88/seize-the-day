@@ -11,7 +11,7 @@ import { ItemListService } from '../item-list/item-list.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ItemCreateComponent implements OnInit {
-  image: any = null;
+  image: FileList = null;
   previewImageSrc: string = '';
 
   itemCreateForm: FormGroup = this.fb.group({
@@ -28,8 +28,10 @@ export class ItemCreateComponent implements OnInit {
   ngOnInit() {}
 
   onImageUpload(event: Event): void {
+    // submit 用
     this.image = event.target['files'];
 
+    // preview 用
     const reader = new FileReader();
     reader.onload = e => {
       this.previewImageSrc = e.target['result'];

@@ -11,7 +11,7 @@ import { ItemListService } from '../item-list/item-list.service';
 })
 export class ItemEditComponent implements OnInit {
   id: string;
-  image: any = null;
+  image: FileList = null;
   previewImageSrc: string = '';
   hasImageEditted: boolean = false;
 

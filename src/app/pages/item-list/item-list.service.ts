@@ -30,7 +30,7 @@ export class ItemListService {
     );
   }
 
-  createArticle(article: ArticleFormValue, image: any) {
+  createArticle(article: ArticleFormValue, image: FileList) {
     const { title, contents } = article;
     const markedContents = marked(contents);
     const createdAt = firebase.firestore.Timestamp.fromDate(new Date());
@@ -49,7 +49,7 @@ export class ItemListService {
     });
   }
 
-  updateArticle(id: string, article: ArticleFormValue, image?: File) {
+  updateArticle(id: string, article: ArticleFormValue, image?: FileList) {
     const { title, contents } = article;
     const markedContents = marked(contents);
     const updatedAt = firebase.firestore.Timestamp.fromDate(new Date());

@@ -3,9 +3,9 @@
     <div class="item-content">
       <div class="item-info-area">
         <p class="item-created_at">
-          {{ article.createdAt.toDate() | date }}
+          {{ getDisplayedDate(article) | date }}
         </p>
-        <p class="item-title">Title: {{ article.title }}</p>
+        <p class="item-title">{{ article.title }}</p>
       </div>
       <div class="item-image-area">
         <img class="image" src="{{ article.imageSrc }}" alt="" />
