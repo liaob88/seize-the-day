@@ -77,7 +77,7 @@ export class ItemListService {
     );
   }
 
-  deletedItem(id: number) {
-    this.store$.dispatch(actions.deleteItem({ id }));
+  deletedArticle(id: string) {
+    this.firebaseService.deleteDoc(this.collectionName, id);
   }
 }

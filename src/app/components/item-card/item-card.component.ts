@@ -23,8 +23,8 @@ export class ItemCardComponent {
     return displayedDate.toDate();
   }
 
-  delete(targetId: number) {
-    this.itemListService.deletedItem(targetId);
+  delete(id: string) {
+    this.itemListService.deletedArticle(id);
   }
 
   navigateToItemPage(id: number) {

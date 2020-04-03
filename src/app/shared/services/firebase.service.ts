@@ -47,6 +47,13 @@ export class FirebaseService {
       .update(data);
   }
 
+  deleteDoc<T>(collectionName: string, id: string) {
+    return this.store
+      .collection<T>(collectionName)
+      .doc(id)
+      .delete();
+  }
+
   // firestorage
   uploadToStorage(filePath: string, image: File) {
     return this.storage.upload(filePath, image);
