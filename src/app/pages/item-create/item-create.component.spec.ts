@@ -40,33 +40,15 @@ describe('ItemCreateComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('image input に event が走ると、onImageUpload が呼ばれる', () => {
-    spyOn(component, 'onImageUpload');
-    fixture.detectChanges();
-
-    const input = fixture.debugElement.query(By.css('input[type=file]'));
-    const event = new Event('change');
-    input.nativeElement.dispatchEvent(event);
-    fixture.detectChanges();
-
-    expect(component.onImageUpload).toHaveBeenCalledWith(event);
-  });
-
   describe('onSubmit()', () => {
     it('itemListService の createArticle が呼ばれる', async () => {
       spyOn(itemListService, 'createArticle');
-      await component.onSubmit({
-        title: 'Test',
-        contents: 'Test Test'
-      });
+      await component.post();
       expect(itemListService.createArticle).toHaveBeenCalled();
     });
     it('処理後 list ページに飛ぶこと', async () => {
       spyOn(router, 'navigateByUrl');
-      await component.onSubmit({
-        title: 'Test',
-        contents: 'Test Test'
-      });
+      await component.post();
       expect(router.navigateByUrl).toHaveBeenCalledWith('/list');
     });
   });

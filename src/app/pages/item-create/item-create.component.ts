@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ArticleFormValue } from '../../shared/models';
 import { ItemListService } from '../item-list/item-list.service';
 
 @Component({
@@ -11,10 +10,11 @@ import { ItemListService } from '../item-list/item-list.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ItemCreateComponent implements OnInit {
+  // MEMO: default 画像ができたらここに URL を用意
   image: FileList = null;
-  previewImageSrc: string = '';
+  previewImageSrc: string;
 
-  itemCreateForm: FormGroup = this.fb.group({
+  formValue: FormGroup = this.fb.group({
     title: [''],
     contents: ['']
   });
@@ -27,23 +27,16 @@ export class ItemCreateComponent implements OnInit {
 
   ngOnInit() {}
 
-  onImageUpload(event: Event): void {
-    // submit 用
+  imageUploaded(event: Event): void {
     // tslint:disable-next-line: no-string-literal
     this.image = event.target['files'];
-
-    // preview 用
-    const reader = new FileReader();
-    reader.onload = e => {
-      // tslint:disable-next-line: no-string-literal
-      this.previewImageSrc = e.target['result'];
-    };
-    // tslint:disable-next-line: no-string-literal
-    reader.readAsDataURL(event.target['files'][0]);
   }
 
-  async onSubmit(formValue: ArticleFormValue) {
-    await this.itemListService.createArticle(formValue, this.image);
+  async post() {
+    await this.itemListService.createArticle(
+      this.formValue.value,
+      this.image
+    );
     this.route.navigateByUrl('/list');
   }
 }
