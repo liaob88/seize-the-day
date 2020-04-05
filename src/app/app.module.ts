@@ -20,6 +20,7 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 import { MaterialModule } from './shared/styles/material.module';
 import { default as itemsReducer, featureName } from './store/store';
+import { EditorComponent } from './components/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { default as itemsReducer, featureName } from './store/store';
     ItemCreateComponent,
     ButtonComponent,
     MarkdownPipe,
-    ItemComponent
+    ItemComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
