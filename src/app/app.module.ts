@@ -1,9 +1,13 @@
-import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
@@ -16,10 +20,6 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 import { MaterialModule } from './shared/styles/material.module';
 import { default as itemsReducer, featureName } from './store/store';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     StoreModule.forFeature(featureName, itemsReducer),
     StoreDevtoolsModule.instrument(),
     ReactiveFormsModule

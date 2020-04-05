@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Item } from '../../shared/models';
+import { ArticleFormValue } from '../../shared/models';
 import { ItemListService } from '../item-list/item-list.service';
 
 @Component({
@@ -9,36 +10,60 @@ import { ItemListService } from '../item-list/item-list.service';
   styleUrls: ['./item-edit.component.scss']
 })
 export class ItemEditComponent implements OnInit {
-  item: Item;
-  updatedTitle: string;
+  id: string;
+  image: FileList = null;
+  previewImageSrc: string = '';
+  hasImageEditted: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
     private itemListService: ItemListService,
-    private router: Router
+    private route: Router
   ) {}
+
+  formValue: FormGroup = this.fb.group({
+    title: [''],
+    contents: ['']
+  });
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      const itemId = Number(params.get('id'));
+      this.id = params.get('id');
 
-      this.itemListService.itemsStoreState$.subscribe(itemsStoreState => {
-        this.item = itemsStoreState.items.find(item => item.id === itemId);
+      this.itemListService.getArticle(this.id).subscribe(article => {
+        this.formValue.patchValue({
+          title: article.title,
+          contents: article.contents
+        });
+        this.previewImageSrc = article.imageSrc;
       });
-
-      this.updatedTitle = this.item.title;
     });
   }
 
-  updateItem() {
-    const updatedItem = {
-      ...this.item,
-      title: this.updatedTitle,
-      createdAt: new Date()
+  onImageUpload(event: Event): void {
+    // submit 用
+    this.hasImageEditted = true;
+    // tslint:disable-next-line: no-string-literal
+    this.image = event.target['files'];
+
+    // preview 用
+    const reader = new FileReader();
+    reader.onload = e => {
+      // tslint:disable-next-line: no-string-literal
+      this.previewImageSrc = e.target['result'];
     };
+    // tslint:disable-next-line: no-string-literal
+    reader.readAsDataURL(event.target['files'][0]);
+  }
 
-    this.itemListService.updatedItem(updatedItem);
-
-    this.router.navigate(['/']);
+  async onSubmit(formValue: ArticleFormValue) {
+    if (this.hasImageEditted) {
+      await this.itemListService.updateArticle(this.id, formValue, this.image);
+    }
+    if (!this.hasImageEditted) {
+      await this.itemListService.updateArticle(this.id, formValue);
+    }
+    this.route.navigateByUrl('/list');
   }
 }

@@ -1,19 +1,21 @@
 <div class="item-container">
-  <div class="item-div" *ngFor="let item of items">
+  <div class="item-div" *ngFor="let article of articles">
     <div class="item-content">
       <div class="item-info-area">
-        <p class="item-created_at">{{ item.createdAt | date }}</p>
-        <p class="item-title">Title: {{ item.title }}</p>
+        <p class="item-created_at">
+          {{ getDateString(article) | date }}
+        </p>
+        <p class="item-title">{{ article.title }}</p>
       </div>
       <div class="item-image-area">
-        <img class="image" src="{{ item.imageSrc }}" alt="" />
+        <img class="image" src="{{ article.imageSrc }}" alt="" />
       </div>
       <div class="item-read-button">
         <app-button
           type="small"
           class="more-button"
           color="blue"
-          (click)="navigateToItemPage(item.id)"
+          (click)="navigateToItemPage(article.id)"
           >Read</app-button
         >
       </div>
@@ -22,11 +24,15 @@
           type="circle"
           class="item-button"
           color="blue"
-          (click)="navigateToEditPage(item.id)"
+          (click)="navigateToEditPage(article.id)"
         >
           create
         </app-button>
-        <app-button type="circle" color="pink" (click)="delete(item.id)">
+        <app-button
+          type="circle"
+          color="pink"
+          (click)="deleteArticle(article.id)"
+        >
           delete
         </app-button>
       </div>

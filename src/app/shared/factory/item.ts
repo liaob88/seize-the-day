@@ -27,3 +27,17 @@ export const createMockItem = (override: Partial<Item>): Item => {
     ...override
   };
 };
+
+export const createMockFirestoreItem = (override: Partial<Item>): Item => {
+  return {
+    ...{
+      id: 1,
+      title: 'FirestoreItem 1',
+      contents:
+        'テストテストテストテストテストテストテストテストテストテストテストテストテストテスト',
+      imageSrc: 'https://homepages.cae.wisc.edu/~ece533/images/tulips.png',
+      createdAt: new Date('2020/01/01')
+    },
+    ...override
+  };
+};

@@ -20,8 +20,19 @@ export class Item {
   }
 }
 
-export class ItemCreateFormValue {
+export class Article {
   title: string;
   contents: string;
   imageSrc: string;
+  createdAt: firebase.firestore.Timestamp;
+  updatedAt?: firebase.firestore.Timestamp;
+}
+
+export class ArticleOfStore extends Article {
+  id: string;
+}
+
+export class ArticleFormValue {
+  title: string;
+  contents: string;
 }

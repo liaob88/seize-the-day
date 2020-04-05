@@ -1,14 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BehaviorSubject, of } from 'rxjs';
+import { of } from 'rxjs';
+import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
 import { ItemListService } from '../item-list/item-list.service';
-import { createMockLongContentsItem } from './../../shared/factory/item';
-import { ItemsStoreState } from './../../store/store';
+import { createMockFirestoreItem } from './../../shared/factory/item';
 import { ItemComponent } from './item.component';
 
 class MockItemListService implements Partial<ItemListService> {
-  itemsStoreState$ = new BehaviorSubject<ItemsStoreState>(null);
+  getArticle(id: string) {
+    return of(createMockArticleDocOfStore());
+  }
 }
 
 describe('ItemComponent', () => {
@@ -23,7 +25,7 @@ describe('ItemComponent', () => {
         { provide: ItemListService, useClass: MockItemListService },
         {
           provide: ActivatedRoute,
-          useValue: { paramMap: of(convertToParamMap({ id: 1 })) }
+          useValue: { paramMap: of(convertToParamMap({ id: '1' })) }
         }
       ],
       imports: [RouterTestingModule]
@@ -35,9 +37,6 @@ describe('ItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemComponent);
     component = fixture.componentInstance;
-    itemListService.itemsStoreState$.next({
-      items: [createMockLongContentsItem({})]
-    });
     fixture.detectChanges();
   });
 
@@ -45,11 +44,12 @@ describe('ItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('current url に沿って正しい item が component.item に代入されること', () => {
-    spyOn(component, 'ngOnInit');
+  it('ngOnInit() が呼ばれると、current url に沿って正しい item が component.item に代入されること', () => {
+    spyOn(itemListService, 'getArticle');
     component.ngOnInit();
     fixture.detectChanges();
 
-    expect(component.item.id).toBe(1);
+    expect(component.item.id).toBe('1');
+    expect(itemListService.getArticle).toHaveBeenCalledWith('1');
   });
 });
