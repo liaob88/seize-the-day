@@ -29,13 +29,16 @@ export class ItemCreateComponent implements OnInit {
 
   onImageUpload(event: Event): void {
     // submit 用
+    // tslint:disable-next-line: no-string-literal
     this.image = event.target['files'];
 
     // preview 用
     const reader = new FileReader();
     reader.onload = e => {
+      // tslint:disable-next-line: no-string-literal
       this.previewImageSrc = e.target['result'];
     };
+    // tslint:disable-next-line: no-string-literal
     reader.readAsDataURL(event.target['files'][0]);
   }
 

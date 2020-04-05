@@ -3,7 +3,7 @@
     <div class="item-content">
       <div class="item-info-area">
         <p class="item-created_at">
-          {{ getDisplayedDate(article) | date }}
+          {{ getDateString(article) | date }}
         </p>
         <p class="item-title">{{ article.title }}</p>
       </div>
@@ -28,7 +28,11 @@
         >
           create
         </app-button>
-        <app-button type="circle" color="pink" (click)="delete(article.id)">
+        <app-button
+          type="circle"
+          color="pink"
+          (click)="deleteArticle(article.id)"
+        >
           delete
         </app-button>
       </div>

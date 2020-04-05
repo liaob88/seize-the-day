@@ -1,24 +1,22 @@
-import { createMockLongContentsItem } from './../../shared/factory/item';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ItemCreateFormValue } from '../../shared/models';
 import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import { ItemListService } from '../item-list/item-list.service';
 import { ItemCreateComponent } from './item-create.component';
 
 class MockItemListService implements Partial<ItemListService> {
-  addedItem() {}
+  createArticle() {}
 }
 
 describe('ItemCreateComponent', () => {
   let component: ItemCreateComponent;
   let fixture: ComponentFixture<ItemCreateComponent>;
   let router: Router;
-  let itemListService: ItemListService;
+  let itemListService: MockItemListService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -42,7 +40,7 @@ describe('ItemCreateComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('onImageUpload が呼ばれると、this.imageSrc に ファイルの image url が保存される', () => {
+  it('image input に event が走ると、onImageUpload が呼ばれる', () => {
     spyOn(component, 'onImageUpload');
     fixture.detectChanges();
 
@@ -54,13 +52,22 @@ describe('ItemCreateComponent', () => {
     expect(component.onImageUpload).toHaveBeenCalledWith(event);
   });
 
-  it('onSubmit() が呼ばれると、itemListService の addedItem が呼ばれ、その後 index ページに飛ぶこと', async () => {
-    spyOn(itemListService, 'addedItem');
-    spyOn(router, 'navigateByUrl');
-
-    await component.onSubmit(createMockLongContentsItem({}));
-
-    expect(itemListService.addedItem).toHaveBeenCalled();
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/list');
+  describe('onSubmit()', () => {
+    it('itemListService の createArticle が呼ばれる', async () => {
+      spyOn(itemListService, 'createArticle');
+      await component.onSubmit({
+        title: 'Test',
+        contents: 'Test Test'
+      });
+      expect(itemListService.createArticle).toHaveBeenCalled();
+    });
+    it('処理後 list ページに飛ぶこと', async () => {
+      spyOn(router, 'navigateByUrl');
+      await component.onSubmit({
+        title: 'Test',
+        contents: 'Test Test'
+      });
+      expect(router.navigateByUrl).toHaveBeenCalledWith('/list');
+    });
   });
 });

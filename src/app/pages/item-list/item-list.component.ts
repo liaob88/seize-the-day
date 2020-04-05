@@ -9,11 +9,11 @@ import { ItemListService } from './item-list.service';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
-  items$: Observable<ArticleOfStore[]>;
+  articles$: Observable<ArticleOfStore[]>;
 
   constructor(private itemListService: ItemListService) {}
 
   ngOnInit() {
-    this.items$ = this.itemListService.getArticles();
+    this.articles$ = this.itemListService.getArticles();
   }
 }

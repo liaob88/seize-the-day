@@ -16,22 +16,22 @@ export class ItemCardComponent {
   @Input()
   articles: ArticleOfStore[];
 
-  getDisplayedDate(article: Article): Date {
+  getDateString(article: ArticleOfStore): Date {
     const displayedDate = article.updatedAt
       ? article.updatedAt
       : article.createdAt;
     return displayedDate.toDate();
   }
 
-  delete(id: string) {
-    this.itemListService.deletedArticle(id);
+  deleteArticle(id: string) {
+    this.itemListService.delete(id);
   }
 
-  navigateToItemPage(id: number) {
-    this.router.navigate([`/articles/${id}`]);
+  navigateToItemPage(id: string) {
+    this.router.navigateByUrl(`/articles/${id}`);
   }
 
-  navigateToEditPage(id: number) {
-    this.router.navigate([`/articles/${id}/edit`]);
+  navigateToEditPage(id: string) {
+    this.router.navigateByUrl(`/articles/${id}/edit`);
   }
 }

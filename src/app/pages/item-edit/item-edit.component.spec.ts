@@ -1,18 +1,52 @@
-import { ItemsStoreState } from 'src/app/store/store';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BehaviorSubject, of } from 'rxjs';
-import { Item } from '../../shared/models';
+import { of } from 'rxjs';
+import {
+  createMockArticleDocOfStore,
+  mockArticleDocOfStore
+} from 'src/app/shared/factory/article';
 import { ItemListService } from '../item-list/item-list.service';
+import { MarkdownPipe } from './../../shared/pipes/markdown.pipe';
 import { ItemEditComponent } from './item-edit.component';
-import { createMockLongContentsItem } from 'src/app/shared/factory/item';
+import { By } from '@angular/platform-browser';
+
+interface MockFile {
+  name: string;
+  body: string;
+  mimeType: string;
+}
+
+const createFileFromMockFile = (file: MockFile): File => {
+  const blob = new Blob([file.body], { type: file.mimeType }) as any;
+  // tslint:disable-next-line: no-string-literal
+  blob['lastModifiedDate'] = new Date();
+  // tslint:disable-next-line: no-string-literal
+  blob['name'] = file.name;
+  return blob as File;
+};
+
+const createFileList = (files: MockFile[]) => {
+  const fileList: FileList = {
+    length: files.length,
+    item(index: number): File {
+      return fileList[index];
+    }
+  };
+  files.forEach((file, index) => {
+    fileList[index] = createFileFromMockFile(file);
+  });
+
+  return fileList;
+};
 
 class MockItemListService implements Partial<ItemListService> {
-  itemsStoreState$ = new BehaviorSubject<ItemsStoreState>(null);
-  updatedItem() {}
+  getArticle(id: string) {
+    return of(createMockArticleDocOfStore({}));
+  }
+  updateArticle() {}
 }
 
 describe('ItemEditComponent', () => {
@@ -23,14 +57,14 @@ describe('ItemEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemEditComponent],
+      declarations: [ItemEditComponent, MarkdownPipe],
       schemas: [NO_ERRORS_SCHEMA],
-      imports: [RouterTestingModule, FormsModule],
+      imports: [RouterTestingModule, FormsModule, ReactiveFormsModule],
       providers: [
         { provide: ItemListService, useClass: MockItemListService },
         {
           provide: ActivatedRoute,
-          useValue: { paramMap: of(convertToParamMap({ id: 1 })) }
+          useValue: { paramMap: of(convertToParamMap({ id: '1' })) }
         }
       ]
     }).compileComponents();
@@ -42,9 +76,6 @@ describe('ItemEditComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemEditComponent);
     component = fixture.componentInstance;
-    itemListService.itemsStoreState$.next({
-      items: [createMockLongContentsItem({})]
-    });
     fixture.detectChanges();
   });
 
@@ -52,39 +83,52 @@ describe('ItemEditComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnInit() が呼ばれると表示すべき item が取得でき、 item.title がコンポーネントの title に代入できる', () => {
-    spyOn(component, 'ngOnInit');
-    component.ngOnInit();
-    fixture.detectChanges();
-
-    expect(component.item.id).toBe(1);
+  describe('ngOnInit() が呼ばれると', () => {
+    // itemListService.getArticle が呼ばれていることを確認しようとすると、エラーが起きるので一旦見送り
+    it('取得した Article の value が、コンポーネントの対応する value に代入されること', () => {
+      expect(component.formValue.value.title).toBe(mockArticleDocOfStore.title);
+      expect(component.formValue.value.contents).toBe(
+        mockArticleDocOfStore.contents
+      );
+    });
   });
 
-  describe('updateItem() が呼ばれる', () => {
-    it('updatedItem が作成され、itemListService.updatedItem(updatedItem) が呼ばれること', () => {
-      component.updatedTitle = 'Test 1 updated';
+  it('image input に event が走ると、onImageUpload が呼ばれる', () => {
+    spyOn(component, 'onImageUpload');
+    fixture.detectChanges();
 
-      const now = new Date(2020, 2, 2);
-      jasmine.clock().mockDate(now);
+    const input = fixture.debugElement.query(By.css('input[type=file]'));
+    const event = new Event('change');
+    input.nativeElement.dispatchEvent(event);
+    fixture.detectChanges();
 
-      const newItem = {
-        ...component.item,
-        title: component.updatedTitle,
-        createdAt: new Date()
-      };
+    expect(component.onImageUpload).toHaveBeenCalledWith(event);
+  });
 
-      spyOn(itemListService, 'updatedItem');
-      component.updateItem();
+  describe('onSubmit() が呼ばれる', () => {
+    it('component.image に value がある場合', async () => {
+      spyOn(itemListService, 'updateArticle');
 
-      expect(itemListService.updatedItem).toHaveBeenCalledWith(newItem);
-    });
-
-    it('ホームに遷移すること', () => {
-      spyOn(router, 'navigate');
-      component.updateItem();
+      component.id = '1';
+      component.image = createFileList([
+        { body: 'test', mimeType: 'text/plain', name: 'test.txt' }
+      ]);
+      component.hasImageEditted = true;
       fixture.detectChanges();
 
-      expect(router.navigate).toHaveBeenCalledWith(['/']);
+      await component.onSubmit(component.formValue.value);
+      expect(itemListService.updateArticle).toHaveBeenCalledWith(
+        component.id,
+        component.formValue.value,
+        component.image
+      );
+    });
+
+    it('ホームに遷移すること', async () => {
+      spyOn(router, 'navigateByUrl');
+      await component.onSubmit(component.formValue.value);
+
+      expect(router.navigateByUrl).toHaveBeenCalledWith('/list');
     });
   });
 });
