@@ -4,7 +4,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
 import { ItemListService } from '../item-list/item-list.service';
-import { createMockFirestoreItem } from './../../shared/factory/item';
 import { ItemComponent } from './item.component';
 
 class MockItemListService implements Partial<ItemListService> {
@@ -44,12 +43,11 @@ describe('ItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnInit() が呼ばれると、current url に沿って正しい item が component.item に代入されること', () => {
-    spyOn(itemListService, 'getArticle');
-    component.ngOnInit();
-    fixture.detectChanges();
-
-    expect(component.item.id).toBe('1');
-    expect(itemListService.getArticle).toHaveBeenCalledWith('1');
+  describe('ngOnInit()', () => {
+    it('component.id を引数として itemListService の getArticle が呼ばれる', () => {
+      spyOn(itemListService, 'getArticle');
+      component.ngOnInit();
+      expect(itemListService.getArticle).toHaveBeenCalledWith('1');
+    });
   });
 });

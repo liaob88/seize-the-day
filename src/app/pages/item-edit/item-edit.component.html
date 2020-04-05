@@ -1,44 +1,13 @@
 <div class="item-create">
   <div class="item-create-container">
     <h2>編集</h2>
-    <form [formGroup]="formValue" (ngSubmit)="onSubmit(formValue.value)">
-      <div class="item-create-contents">
-        <div class="item-create-preview">
-          <h1
-            name="preview-title"
-            [innerHTML]="formValue.value.title | markdown"
-          ></h1>
-          <img class="preview-image" [src]="previewImageSrc" alt="" />
-          <div
-            name="preview-contents"
-            class="highLight"
-            [innerHTML]="formValue.value.contents | markdown"
-          ></div>
-        </div>
-        <div class="item-create-editor">
-          <input class="title-area" formControlName="title" type="text" />
-          <button type="button" class="image-btn" (click)="imageInput.click()">
-            写真をつける
-          </button>
-          <input
-            id="imageInput"
-            type="file"
-            class="image-btn-display-none"
-            hidden
-            #imageInput
-            (change)="onImageUpload($event)"
-            value="formValue.value.title"
-          />
-          <textarea
-            class="text-area"
-            formControlName="contents"
-            value="formValue.value.contents"
-          ></textarea>
-          <button type="submit">
-            <app-button type="circle" color="pink">check</app-button>
-          </button>
-        </div>
-      </div>
-    </form>
+    <ng-container *ngIf="hasValueSet">
+      <app-editor
+        [subForm]="formValue"
+        [imageSrc]="imageSrc"
+        (imageUpload)="onImageUpload($event)"
+        (submitted)="onSubmit()"
+      ></app-editor>
+    </ng-container>
   </div>
 </div>

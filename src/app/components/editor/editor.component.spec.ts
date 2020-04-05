@@ -59,4 +59,10 @@ describe('EditorComponent', () => {
 
     expect(component.imageUpload.emit).toHaveBeenCalledWith(event);
   });
+
+  it('onSubmit() が呼ばれると、submitted が emit される', () => {
+    spyOn(component.submitted, 'emit');
+    component.onSubmit();
+    expect(component.submitted.emit).toHaveBeenCalled();
+  });
 });

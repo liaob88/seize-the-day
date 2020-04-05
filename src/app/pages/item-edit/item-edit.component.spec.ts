@@ -4,43 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import {
-  createMockArticleDocOfStore,
-  mockArticleDocOfStore
-} from 'src/app/shared/factory/article';
+import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
+import { createFileList } from 'src/app/shared/factory/file';
 import { ItemListService } from '../item-list/item-list.service';
+import { EditorComponent } from './../../components/editor/editor.component';
 import { MarkdownPipe } from './../../shared/pipes/markdown.pipe';
 import { ItemEditComponent } from './item-edit.component';
-import { By } from '@angular/platform-browser';
-
-interface MockFile {
-  name: string;
-  body: string;
-  mimeType: string;
-}
-
-const createFileFromMockFile = (file: MockFile): File => {
-  const blob = new Blob([file.body], { type: file.mimeType }) as any;
-  // tslint:disable-next-line: no-string-literal
-  blob['lastModifiedDate'] = new Date();
-  // tslint:disable-next-line: no-string-literal
-  blob['name'] = file.name;
-  return blob as File;
-};
-
-const createFileList = (files: MockFile[]) => {
-  const fileList: FileList = {
-    length: files.length,
-    item(index: number): File {
-      return fileList[index];
-    }
-  };
-  files.forEach((file, index) => {
-    fileList[index] = createFileFromMockFile(file);
-  });
-
-  return fileList;
-};
 
 class MockItemListService implements Partial<ItemListService> {
   getArticle(id: string) {
@@ -57,7 +26,7 @@ describe('ItemEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemEditComponent, MarkdownPipe],
+      declarations: [ItemEditComponent, MarkdownPipe, EditorComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [RouterTestingModule, FormsModule, ReactiveFormsModule],
       providers: [
@@ -84,50 +53,66 @@ describe('ItemEditComponent', () => {
   });
 
   describe('ngOnInit() が呼ばれると', () => {
-    // itemListService.getArticle が呼ばれていることを確認しようとすると、エラーが起きるので一旦見送り
-    it('取得した Article の value が、コンポーネントの対応する value に代入されること', () => {
-      expect(component.formValue.value.title).toBe(mockArticleDocOfStore.title);
-      expect(component.formValue.value.contents).toBe(
-        mockArticleDocOfStore.contents
-      );
+    it('url に従って適切な値が component.id に代入される', () => {
+      component.ngOnInit();
+      expect(component.id).toBe('1');
+    });
+
+    it('itemListService.getArticle が component.id を引数にして呼び出され、component.articles$ にその結果が入る', () => {
+      spyOn(itemListService, 'getArticle');
+      component.ngOnInit();
+      expect(itemListService.getArticle).toHaveBeenCalledWith('1');
+      expect(component.article$).toBe(itemListService.getArticle('1'));
     });
   });
 
-  it('image input に event が走ると、onImageUpload が呼ばれる', () => {
-    spyOn(component, 'onImageUpload');
-    fixture.detectChanges();
+  it('onImageUpload() が呼ばれると、hasImageEdited が true になり、指定された image が component.image に入れられる', () => {
+    const mockEvent: any = {
+      target: {
+        ['files']: createFileList([
+          { body: 'test', mimeType: 'image/jpeg', name: 'test.jpeg' }
+        ])
+      }
+    };
+    component.onImageUpload(mockEvent as any);
 
-    const input = fixture.debugElement.query(By.css('input[type=file]'));
-    const event = new Event('change');
-    input.nativeElement.dispatchEvent(event);
-    fixture.detectChanges();
-
-    expect(component.onImageUpload).toHaveBeenCalledWith(event);
+    expect(component.hasImageEdited).toBe(true);
+    // tslint:disable-next-line: no-string-literal
+    expect(component.image).toBe(mockEvent.target['files']);
   });
 
-  describe('onSubmit() が呼ばれる', () => {
-    it('component.image に value がある場合', async () => {
-      spyOn(itemListService, 'updateArticle');
+  describe('onSubmit() が呼ばれると、', () => {
+    describe('itemListService の updateArticle の引数について', () => {
+      it('hasImageEdited が true の場合、id, formValue, image が渡される', async () => {
+        spyOn(itemListService, 'updateArticle');
+        component.id = '1';
+        component.image = createFileList([
+          { body: 'test', mimeType: 'image/jpeg', name: 'test.jpeg' }
+        ]);
+        component.hasImageEdited = true;
+        fixture.detectChanges();
+        await component.onSubmit();
+        expect(itemListService.updateArticle).toHaveBeenCalledWith(
+          component.id,
+          component.formValue.value,
+          component.image
+        );
+      });
 
-      component.id = '1';
-      component.image = createFileList([
-        { body: 'test', mimeType: 'text/plain', name: 'test.txt' }
-      ]);
-      component.hasImageEditted = true;
-      fixture.detectChanges();
-
-      await component.onSubmit(component.formValue.value);
-      expect(itemListService.updateArticle).toHaveBeenCalledWith(
-        component.id,
-        component.formValue.value,
-        component.image
-      );
+      it('hasImageEdited が false の場合、id, image が渡される', async () => {
+        spyOn(itemListService, 'updateArticle');
+        component.hasImageEdited = false;
+        component.onSubmit();
+        expect(itemListService.updateArticle).toHaveBeenCalledWith(
+          component.id,
+          component.formValue.value
+        );
+      });
     });
 
     it('ホームに遷移すること', async () => {
       spyOn(router, 'navigateByUrl');
-      await component.onSubmit(component.formValue.value);
-
+      await component.onSubmit();
       expect(router.navigateByUrl).toHaveBeenCalledWith('/list');
     });
   });
