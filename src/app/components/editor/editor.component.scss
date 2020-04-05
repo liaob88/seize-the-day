@@ -1,0 +1,105 @@
+@import '../../shared/styles/common';
+
+.editor {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @include mq-m {
+    display: block;
+  }
+}
+
+.editor-area {
+  width: 45%;
+
+  @include mq-m {
+    margin-bottom: 20px;
+  }
+
+  .editor-input-btn {
+    margin: 22px auto;
+    padding: 15px;
+    border-radius: 4px;
+    max-width: 120px;
+    text-align: center;
+    display: block;
+    background-color: $GREY;
+    color: $LIGHT_BLUE;
+    box-shadow: 0 0 4px rgba(146, 146, 146, 0.8);
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .editor-title {
+    width: 100%;
+    min-height: 50px;
+    max-height: 50px;
+    outline: none;
+    background-color: $GREY;
+    border: 1px solid;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    font-size: $f-size-medium;
+    padding: 15px;
+
+    @include mq-m {
+      min-height: 30px;
+      max-height: 30px;
+      font-size: $f-size-small;
+    }
+  }
+
+  .editor-text-area {
+    resize: none;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: $GREY;
+    border: 1px solid;
+    min-height: 1000px;
+    max-height: 1000px;
+    font-size: $f-size-medium;
+    padding: 15px;
+
+    @include mq-m {
+      min-height: 500px;
+      max-height: 500px;
+      font-size: $f-size-small;
+    }
+  }
+}
+
+.preview-area {
+  text-align: start;
+  width: 500px;
+  height: auto;
+  display: inline-block;
+
+  @include mq-m {
+    width: 100%;
+  }
+}
+
+.preview-image {
+  width: 100%;
+  height: auto;
+  background-size: cover;
+}
+
+.highLight {
+  h1 {
+    font-size: $f-size-h1;
+  }
+  code {
+    background-color: $CODE_AREA;
+    color: $BLACK;
+    padding: 0.1em 0.4em;
+  }
+  a {
+    text-decoration: none;
+    color: $LIGHT_BLUE;
+    font-weight: $f-weight-bold;
+  }
+}

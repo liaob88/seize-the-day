@@ -1,3 +1,4 @@
+import { FirebaseService } from './shared/services/firebase.service';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
@@ -10,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EditorComponent } from './components/editor/editor.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { ItemEditComponent } from './pages/item-edit/item-edit.component';
@@ -20,7 +22,6 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 import { MaterialModule } from './shared/styles/material.module';
 import { default as itemsReducer, featureName } from './store/store';
-import { EditorComponent } from './components/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { EditorComponent } from './components/editor/editor.component';
     StoreDevtoolsModule.instrument(),
     ReactiveFormsModule
   ],
-  providers: [ItemListService],
+  providers: [ItemListService, FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
