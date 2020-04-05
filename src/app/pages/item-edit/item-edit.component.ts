@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ArticleFormValue } from '../../shared/models';
+import { Observable } from 'rxjs';
 import { ItemListService } from '../item-list/item-list.service';
+import { ArticleOfStore } from './../../shared/models';
 
 @Component({
   selector: 'app-item-edit',
@@ -12,8 +13,11 @@ import { ItemListService } from '../item-list/item-list.service';
 export class ItemEditComponent implements OnInit {
   id: string;
   image: FileList = null;
-  previewImageSrc: string = '';
-  hasImageEditted: boolean = false;
+  previewImageSrc: string;
+  hasImageEdited: boolean = false;
+  article$: Observable<ArticleOfStore>;
+  hasValueSet: boolean;
+  imageSrc: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,39 +34,43 @@ export class ItemEditComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
-
       this.itemListService.getArticle(this.id).subscribe(article => {
-        this.formValue.patchValue({
+        this.formValue.setValue({
           title: article.title,
           contents: article.contents
         });
-        this.previewImageSrc = article.imageSrc;
+        this.imageSrc = article.imageSrc;
+        this.hasValueSet = true;
       });
     });
   }
 
-  onImageUpload(event: Event): void {
-    // submit 用
-    this.hasImageEditted = true;
-    // tslint:disable-next-line: no-string-literal
-    this.image = event.target['files'];
-
-    // preview 用
-    const reader = new FileReader();
-    reader.onload = e => {
-      // tslint:disable-next-line: no-string-literal
-      this.previewImageSrc = e.target['result'];
-    };
-    // tslint:disable-next-line: no-string-literal
-    reader.readAsDataURL(event.target['files'][0]);
+  patchFormValue(article: ArticleOfStore) {
+    this.formValue.patchValue({
+      title: article.title,
+      contents: article.contents
+    });
+    return this.formValue;
   }
 
-  async onSubmit(formValue: ArticleFormValue) {
-    if (this.hasImageEditted) {
-      await this.itemListService.updateArticle(this.id, formValue, this.image);
+  onImageUpload(event: Event): void {
+    console.log(event);
+
+    this.hasImageEdited = true;
+    // tslint:disable-next-line: no-string-literal
+    this.image = event.target['files'];
+  }
+
+  async onSubmit() {
+    if (this.hasImageEdited) {
+      await this.itemListService.updateArticle(
+        this.id,
+        this.formValue.value,
+        this.image
+      );
     }
-    if (!this.hasImageEditted) {
-      await this.itemListService.updateArticle(this.id, formValue);
+    if (!this.hasImageEdited) {
+      await this.itemListService.updateArticle(this.id, this.formValue.value);
     }
     this.route.navigateByUrl('/list');
   }

@@ -1,11 +1,11 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import { ItemListService } from '../item-list/item-list.service';
+import { createFileList } from './../../shared/factory/file';
 import { ItemCreateComponent } from './item-create.component';
 
 class MockItemListService implements Partial<ItemListService> {
@@ -40,33 +40,28 @@ describe('ItemCreateComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('image input に event が走ると、onImageUpload が呼ばれる', () => {
-    spyOn(component, 'onImageUpload');
-    fixture.detectChanges();
-
-    const input = fixture.debugElement.query(By.css('input[type=file]'));
-    const event = new Event('change');
-    input.nativeElement.dispatchEvent(event);
-    fixture.detectChanges();
-
-    expect(component.onImageUpload).toHaveBeenCalledWith(event);
+  it('imageUploaded() が呼ばれると、component.image に受け取った event から取得した image data が格納される', () => {
+    const mockEvent: any = {
+      target: {
+        ['files']: createFileList([
+          { body: 'test', mimeType: 'image/jpeg', name: 'test.jpeg' }
+        ])
+      }
+    };
+    component.imageUploaded(mockEvent);
+    // tslint:disable-next-line: no-string-literal
+    expect(component.image).toBe(mockEvent.target['files']);
   });
 
   describe('onSubmit()', () => {
     it('itemListService の createArticle が呼ばれる', async () => {
       spyOn(itemListService, 'createArticle');
-      await component.onSubmit({
-        title: 'Test',
-        contents: 'Test Test'
-      });
+      await component.post();
       expect(itemListService.createArticle).toHaveBeenCalled();
     });
     it('処理後 list ページに飛ぶこと', async () => {
       spyOn(router, 'navigateByUrl');
-      await component.onSubmit({
-        title: 'Test',
-        contents: 'Test Test'
-      });
+      await component.post();
       expect(router.navigateByUrl).toHaveBeenCalledWith('/list');
     });
   });

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemListService } from '../item-list/item-list.service';
@@ -14,14 +15,12 @@ export class ItemComponent implements OnInit {
     private itemListService: ItemListService
   ) {}
 
-  item: ArticleOfStore;
+  item$: Observable<ArticleOfStore>;
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
       const id = params.get('id');
-      this.itemListService
-        .getArticle(id)
-        .subscribe(article => (this.item = article));
+      this.item$ = this.itemListService.getArticle(id);
     });
   }
 }
