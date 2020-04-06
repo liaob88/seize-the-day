@@ -12,6 +12,14 @@
     </div>
     <div class="editor-area">
       <input type="text" class="editor-title" formControlName="title" />
+      <div
+        class="error-area"
+        *ngIf="
+          formControls.title.touched && formControls.title.errors?.required
+        "
+      >
+        Name is required.
+      </div>
       <button
         type="button"
         class="editor-input-btn"
@@ -25,10 +33,22 @@
         hidden
         #imageInput
         (change)="onImageUpload($event)"
+        required
       />
       <textarea class="editor-text-area" formControlName="contents"></textarea>
+      <div
+        class="error-area"
+        *ngIf="
+          formControls.contents.touched &&
+          formControls.contents.errors?.required
+        "
+      >
+        Contents is required
+      </div>
       <button type="submit">
-        <app-button type="circle" color="pink">check</app-button>
+        <app-button disabled="subForm.invalid" type="circle" color="pink"
+          >check</app-button
+        >
       </button>
     </div>
   </div>
