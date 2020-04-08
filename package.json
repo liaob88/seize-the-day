@@ -22,7 +22,6 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "@ngrx/store-devtools": "^8.6.0",
     "acorn": "^6.4.1",
     "firebase": "^7.13.1",
     "marked": "^0.8.0",
