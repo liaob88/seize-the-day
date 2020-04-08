@@ -3,9 +3,96 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.16.0-browsers
-
     steps:
       - checkout
-      - run: yarn install
-      - run: yarn test --watch=false
-      - run: yarn lint
+      - run:
+          name: buid を開始
+          command: echo "Start build"
+      - run:
+          name: yarn install の実行
+          command: yarn install
+      - run:
+          name: yarn build の実行
+          command: yarn build
+  lint:
+    docker:
+      - image: circleci/node:10.16.0-browsers
+    steps:
+      - checkout
+      - run:
+          name: lint を開始
+          command: echo "Start lint"
+      - run:
+          name: yarn install の実行
+          command: yarn install
+      - run:
+          name: yarn lint の実行
+          command: yarn lint
+  test:
+    docker:
+      - image: circleci/node:10.16.0-browsers
+    steps:
+      - checkout
+      - run:
+          name: test を開始
+          command: echo "Start test"
+      - run:
+          name: yarn install の実行
+          command: yarn install
+      - run:
+          name: test の実行、watch は false
+          command: yarn test --watch=false
+  #
+  ########################################################
+  # ChromeDriver の version の mismatch を解決できず一旦保留 #
+  ########################################################
+  #
+  # e2e:
+  #   docker:
+  #     - image: circleci/node:10.16.0-browsers
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: e2e を開始
+  #         command: echo "Start e2e"
+  #     - run:
+  #         name: yarn install の実行
+  #         command: yarn install
+  #     - run:
+  #         name: yarn e2e の実行
+  #         command: yarn e2e
+  deploy:
+    docker:
+      - image: circleci/node:10.16.0-browsers
+    steps:
+      - checkout
+      - run:
+          name: deploy を開始
+          command: echo "Start deploy"
+      - run:
+          name: yarn install の実行
+          command: yarn install
+      - run:
+          name: yarn build の実行
+          command: yarn build
+      - run:
+          name: firebase deploy の実行
+          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - build
+      - lint:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - lint
+            - test
+          filters:
+            branches:
+              only: master
