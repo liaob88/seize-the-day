@@ -16,7 +16,6 @@ import { ItemListComponent } from './pages/item-list/item-list.component';
 import { ItemListService } from './pages/item-list/item-list.service';
 import { ItemComponent } from './pages/item/item.component';
 import { ButtonComponent } from './shared/components/button/button.component';
-import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 import { FirebaseService } from './shared/services/firebase.service';
 import { MaterialModule } from './shared/styles/material.module';
 
@@ -28,7 +27,6 @@ import { MaterialModule } from './shared/styles/material.module';
     ItemEditComponent,
     ItemCreateComponent,
     ButtonComponent,
-    MarkdownPipe,
     ItemComponent,
     EditorComponent
   ],
