@@ -87,19 +87,3 @@
   height: auto;
   background-size: cover;
 }
-
-.highLight {
-  h1 {
-    font-size: $f-size-h1;
-  }
-  code {
-    background-color: $CODE_AREA;
-    color: $BLACK;
-    padding: 0.1em 0.4em;
-  }
-  a {
-    text-decoration: none;
-    color: $LIGHT_BLUE;
-    font-weight: $f-weight-bold;
-  }
-}
