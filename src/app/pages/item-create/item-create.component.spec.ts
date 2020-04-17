@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import { ItemListService } from '../item-list/item-list.service';
 import { createFileList } from './../../shared/factory/file';
 import { ItemCreateComponent } from './item-create.component';
@@ -20,7 +19,7 @@ describe('ItemCreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemCreateComponent, MarkdownPipe],
+      declarations: [ItemCreateComponent],
       providers: [{ provide: ItemListService, useClass: MockItemListService }],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [FormsModule, RouterTestingModule, ReactiveFormsModule]

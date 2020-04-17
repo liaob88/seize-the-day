@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MarkdownPipe } from 'src/app/shared/pipes/markdown.pipe';
 import { EditorComponent } from './editor.component';
 
 @Component({
@@ -31,7 +30,7 @@ describe('EditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditorComponent, MarkdownPipe, TestComponent],
+      declarations: [EditorComponent, TestComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [FormsModule, RouterTestingModule, ReactiveFormsModule]
     }).compileComponents();

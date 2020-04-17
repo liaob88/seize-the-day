@@ -8,7 +8,6 @@ import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
 import { createFileList } from 'src/app/shared/factory/file';
 import { ItemListService } from '../item-list/item-list.service';
 import { EditorComponent } from './../../components/editor/editor.component';
-import { MarkdownPipe } from './../../shared/pipes/markdown.pipe';
 import { ItemEditComponent } from './item-edit.component';
 
 class MockItemListService implements Partial<ItemListService> {
@@ -26,7 +25,7 @@ describe('ItemEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemEditComponent, MarkdownPipe, EditorComponent],
+      declarations: [ItemEditComponent, EditorComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [RouterTestingModule, FormsModule, ReactiveFormsModule],
       providers: [
