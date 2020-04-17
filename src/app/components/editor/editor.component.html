@@ -25,7 +25,7 @@
         class="editor-input-btn"
         (click)="imageInput.click()"
       >
-        写真をつける
+        Upload Image
       </button>
       <input
         type="file"
@@ -45,11 +45,13 @@
       >
         Contents is required
       </div>
-      <button type="submit">
-        <app-button disabled="subForm.invalid" type="circle" color="pink"
-          >check</app-button
-        >
-      </button>
+      <app-button
+        [disabled]="subForm.invalid"
+        shape="circle"
+        color="pink"
+        type="submit"
+        >check</app-button
+      >
     </div>
   </div>
 </form>
