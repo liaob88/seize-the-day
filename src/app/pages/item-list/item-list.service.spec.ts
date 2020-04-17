@@ -4,7 +4,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
-import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import { ItemListService } from './item-list.service';
 
 // class MockFirebaseService implements Partial<FirebaseService> {
@@ -32,7 +31,6 @@ describe('ItemListService', () => {
         AngularFirestoreModule,
         AngularFireStorageModule
       ],
-      declarations: [MarkdownPipe],
       // providers: [{ provider: FirebaseService, useClass: MockFirebaseService }],
       schemas: [NO_ERRORS_SCHEMA]
     });

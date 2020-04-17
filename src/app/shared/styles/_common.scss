@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Coustard&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Coustard&display=swap');
 
 // font-family
-$f-family-app-title: "Coustard", serif;
+$f-family-app-title: 'Coustard', serif;
 
 // font-size
 $f-size-small: 10px;
@@ -22,6 +22,7 @@ $GREEN: #b8f3b8;
 $RED: red;
 $LIGHT_BLUE: cornflowerblue;
 $CODE_AREA: #eee;
+$LIGHT_GREY: lightgrey;
 
 // media query
 $tab: 768px; // タブレット

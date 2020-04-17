@@ -15,7 +15,7 @@ export class ItemCreateComponent implements OnInit {
   previewImageSrc: string;
 
   formValue: FormGroup = this.fb.group({
-    title: [''],
+    title: ['# '],
     contents: ['']
   });
 

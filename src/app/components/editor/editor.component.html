@@ -1,15 +1,13 @@
 <form [formGroup]="subForm" (ngSubmit)="onSubmit()">
   <div class="editor">
     <div class="preview-area">
-      <h1
-        name="preview-title"
-        [innerHTML]="subForm.value.title | markdown"
-      ></h1>
+      <div markdown [data]="subForm.value.title" ngPreserveWhitespaces></div>
       <img class="preview-image" [src]="previewImageSrc" alt="" />
       <div
+        markdown
+        ngPreserveWhitespaces
         name="preview-contents"
-        class="highLight"
-        [innerHTML]="subForm.value.contents | markdown"
+        [data]="subForm.value.contents"
       ></div>
     </div>
     <div class="editor-area">

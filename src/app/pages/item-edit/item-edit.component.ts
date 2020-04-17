@@ -36,7 +36,7 @@ export class ItemEditComponent implements OnInit {
       this.id = params.get('id');
       this.itemListService.getArticle(this.id).subscribe(article => {
         this.formValue.setValue({
-          title: article.title,
+          title: `# ${article.title}`,
           contents: article.contents
         });
         this.imageSrc = article.imageSrc;
