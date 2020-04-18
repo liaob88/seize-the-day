@@ -4,6 +4,10 @@
   color: $WHITE;
   font-size: $f-size-medium;
   background-color: $WHITE;
+  &:disabled {
+    opacity: 0.3;
+  }
+  border: none;
 }
 
 .circle {

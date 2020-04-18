@@ -58,8 +58,8 @@
     box-sizing: border-box;
     background-color: $GREY;
     border: 1px solid $LIGHT_GREY;
-    min-height: 1000px;
-    max-height: 1000px;
+    min-height: 600px;
+    max-height: 600px;
     font-size: $f-size-medium;
     padding: 15px;
 
@@ -86,4 +86,12 @@
   width: 100%;
   height: auto;
   background-size: cover;
+}
+
+.error-area {
+  border: 2px solid red;
+  color: #ff6d6d;
+  padding: 10px;
+  background-color: #fff2f2;
+  margin-bottom: 20px;
 }

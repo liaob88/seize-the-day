@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ItemListService } from '../item-list/item-list.service';
 
@@ -15,8 +15,8 @@ export class ItemCreateComponent implements OnInit {
   previewImageSrc: string;
 
   formValue: FormGroup = this.fb.group({
-    title: ['# '],
-    contents: ['']
+    title: this.fb.control('# ', [Validators.required]),
+    contents: this.fb.control('', [Validators.required])
   });
 
   constructor(
@@ -33,10 +33,7 @@ export class ItemCreateComponent implements OnInit {
   }
 
   async post() {
-    await this.itemListService.createArticle(
-      this.formValue.value,
-      this.image
-    );
+    await this.itemListService.createArticle(this.formValue.value, this.image);
     this.route.navigateByUrl('/list');
   }
 }
