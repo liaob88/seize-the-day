@@ -1,25 +1,31 @@
 <form [formGroup]="subForm" (ngSubmit)="onSubmit()">
   <div class="editor">
     <div class="preview-area">
-      <h1
-        name="preview-title"
-        [innerHTML]="subForm.value.title | markdown"
-      ></h1>
+      <div markdown [data]="subForm.value.title" ngPreserveWhitespaces></div>
       <img class="preview-image" [src]="previewImageSrc" alt="" />
       <div
+        markdown
+        ngPreserveWhitespaces
         name="preview-contents"
-        class="highLight"
-        [innerHTML]="subForm.value.contents | markdown"
+        [data]="subForm.value.contents"
       ></div>
     </div>
     <div class="editor-area">
       <input type="text" class="editor-title" formControlName="title" />
+      <div
+        class="error-area"
+        *ngIf="
+          formControls.title.touched && formControls.title.errors?.required
+        "
+      >
+        Name is required.
+      </div>
       <button
         type="button"
         class="editor-input-btn"
         (click)="imageInput.click()"
       >
-        写真をつける
+        Upload Image
       </button>
       <input
         type="file"
@@ -27,11 +33,25 @@
         hidden
         #imageInput
         (change)="onImageUpload($event)"
+        required
       />
       <textarea class="editor-text-area" formControlName="contents"></textarea>
-      <button type="submit">
-        <app-button type="circle" color="pink">check</app-button>
-      </button>
+      <div
+        class="error-area"
+        *ngIf="
+          formControls.contents.touched &&
+          formControls.contents.errors?.required
+        "
+      >
+        Contents is required
+      </div>
+      <app-button
+        [disabled]="subForm.invalid"
+        shape="circle"
+        color="pink"
+        type="submit"
+        >check</app-button
+      >
     </div>
   </div>
 </form>

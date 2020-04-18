@@ -38,7 +38,7 @@
     max-height: 50px;
     outline: none;
     background-color: $GREY;
-    border: 1px solid;
+    border: 1px solid $LIGHT_GREY;
     box-sizing: border-box;
     margin-bottom: 20px;
     font-size: $f-size-medium;
@@ -57,9 +57,9 @@
     width: 100%;
     box-sizing: border-box;
     background-color: $GREY;
-    border: 1px solid;
-    min-height: 1000px;
-    max-height: 1000px;
+    border: 1px solid $LIGHT_GREY;
+    min-height: 600px;
+    max-height: 600px;
     font-size: $f-size-medium;
     padding: 15px;
 
@@ -88,18 +88,10 @@
   background-size: cover;
 }
 
-.highLight {
-  h1 {
-    font-size: $f-size-h1;
-  }
-  code {
-    background-color: $CODE_AREA;
-    color: $BLACK;
-    padding: 0.1em 0.4em;
-  }
-  a {
-    text-decoration: none;
-    color: $LIGHT_BLUE;
-    font-weight: $f-weight-bold;
-  }
+.error-area {
+  border: 2px solid red;
+  color: #ff6d6d;
+  padding: 10px;
+  background-color: #fff2f2;
+  margin-bottom: 20px;
 }

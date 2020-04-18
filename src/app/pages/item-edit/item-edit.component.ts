@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ItemListService } from '../item-list/item-list.service';
@@ -27,8 +27,8 @@ export class ItemEditComponent implements OnInit {
   ) {}
 
   formValue: FormGroup = this.fb.group({
-    title: [''],
-    contents: ['']
+    title: this.fb.control('', [Validators.required]),
+    contents: this.fb.control('', [Validators.required])
   });
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class ItemEditComponent implements OnInit {
       this.id = params.get('id');
       this.itemListService.getArticle(this.id).subscribe(article => {
         this.formValue.setValue({
-          title: article.title,
+          title: `# ${article.title}`,
           contents: article.contents
         });
         this.imageSrc = article.imageSrc;

@@ -21,6 +21,10 @@ export class EditorComponent implements OnInit {
 
   constructor() {}
 
+  get formControls() {
+    return this.subForm.controls;
+  }
+
   onImageUpload(event: Event): void {
     // hostComponent に image data を emit
     this.imageUpload.emit(event);

@@ -5,6 +5,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { MarkdownModule } from 'ngx-markdown';
 import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +17,6 @@ import { ItemListComponent } from './pages/item-list/item-list.component';
 import { ItemListService } from './pages/item-list/item-list.service';
 import { ItemComponent } from './pages/item/item.component';
 import { ButtonComponent } from './shared/components/button/button.component';
-import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 import { FirebaseService } from './shared/services/firebase.service';
 import { MaterialModule } from './shared/styles/material.module';
 
@@ -28,7 +28,6 @@ import { MaterialModule } from './shared/styles/material.module';
     ItemEditComponent,
     ItemCreateComponent,
     ButtonComponent,
-    MarkdownPipe,
     ItemComponent,
     EditorComponent
   ],
@@ -41,7 +40,8 @@ import { MaterialModule } from './shared/styles/material.module';
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MarkdownModule.forRoot()
   ],
   providers: [ItemListService, FirebaseService],
   bootstrap: [AppComponent]

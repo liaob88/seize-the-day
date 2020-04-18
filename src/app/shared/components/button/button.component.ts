@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ButtonColors, ButtonShapes, ButtonTypes } from './button';
 
 @Component({
   selector: 'app-button',
@@ -9,9 +10,13 @@ export class ButtonComponent {
   constructor() {}
 
   @Input()
-  type: 'large' | 'small' | 'circle';
+  shape: ButtonShapes;
   @Input()
-  color: 'red' | 'pink' | 'blue' | 'green';
+  color: ButtonColors;
+  @Input()
+  disabled: boolean;
+  @Input()
+  type: ButtonTypes;
   @Output()
   clicked = new EventEmitter();
 
@@ -20,7 +25,7 @@ export class ButtonComponent {
   }
 
   get className() {
-    const { type, color } = this;
-    return `button ${type} ${color}`;
+    const { shape, color } = this;
+    return `button ${shape} ${color}`;
   }
 }
