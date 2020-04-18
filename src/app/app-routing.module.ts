@@ -15,7 +15,7 @@ const routes: Routes = [
       { path: ':id/edit', component: ItemEditComponent }
     ]
   },
-  { path: '**', redirectTo: 'list', pathMatch: 'full' }
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
