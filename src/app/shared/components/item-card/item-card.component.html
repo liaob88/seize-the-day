@@ -1,0 +1,41 @@
+<div class="item-container">
+  <div class="item-div" *ngFor="let article of articles">
+    <div class="item-content">
+      <div class="item-info-area">
+        <p class="item-created_at">
+          {{ getDateString(article) | date }}
+        </p>
+        <p class="item-title">{{ article.title }}</p>
+      </div>
+      <div class="item-image-area">
+        <img class="image" src="{{ article.imageSrc }}" alt="" />
+      </div>
+      <div class="item-read-button">
+        <app-button
+          shape="small"
+          class="more-button"
+          color="blue"
+          (click)="navigateToItemPage(article.id)"
+          >Read</app-button
+        >
+      </div>
+      <div class="item-footer">
+        <app-button
+          shape="circle"
+          class="item-button"
+          color="blue"
+          (click)="navigateToEditPage(article.id)"
+        >
+          create
+        </app-button>
+        <app-button
+          shape="circle"
+          color="pink"
+          (click)="deleteArticle(article.id)"
+        >
+          delete
+        </app-button>
+      </div>
+    </div>
+  </div>
+</div>

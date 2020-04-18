@@ -1,4 +1,3 @@
-import { HomeModule } from './home/home.module';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
@@ -11,27 +10,26 @@ import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './components/editor/editor.component';
-import { ItemCardComponent } from './components/item-card/item-card.component';
+import { HomeModule } from './home/home.module';
+import { ItemListService } from './home/services/item-list.service';
 import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { ItemEditComponent } from './pages/item-edit/item-edit.component';
-import { ItemListService } from './home/home-page/item-list.service';
-import { ButtonComponent } from './shared/components/button/button.component';
 import { FirebaseService } from './shared/services/firebase.service';
+import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/styles/material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ItemCardComponent,
     ItemEditComponent,
     ItemCreateComponent,
-    ButtonComponent,
     EditorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HomeModule,
+    SharedModule,
     FormsModule,
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
