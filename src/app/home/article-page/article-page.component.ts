@@ -6,10 +6,10 @@ import { ArticleOfStore } from '../../shared/models';
 
 @Component({
   selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+  templateUrl: './article-page.component.html',
+  styleUrls: ['./article-page.component.scss']
 })
-export class ItemComponent implements OnInit {
+export class ArticlePageComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private itemListService: ItemListService

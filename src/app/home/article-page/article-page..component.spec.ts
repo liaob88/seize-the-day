@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
 import { ItemListService } from '../item-list/item-list.service';
-import { ItemComponent } from './item.component';
+import { ArticlePageComponent } from './article-page.component';
 
 class MockItemListService implements Partial<ItemListService> {
   getArticle(id: string) {
@@ -13,13 +13,13 @@ class MockItemListService implements Partial<ItemListService> {
 }
 
 describe('ItemComponent', () => {
-  let component: ItemComponent;
-  let fixture: ComponentFixture<ItemComponent>;
+  let component: ArticlePageComponent;
+  let fixture: ComponentFixture<ArticlePageComponent>;
   let itemListService: MockItemListService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemComponent],
+      declarations: [ArticlePageComponent],
       providers: [
         { provide: ItemListService, useClass: MockItemListService },
         {
@@ -34,7 +34,7 @@ describe('ItemComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemComponent);
+    fixture = TestBed.createComponent(ArticlePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
