@@ -15,7 +15,6 @@ import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { ItemEditComponent } from './pages/item-edit/item-edit.component';
 import { ItemListComponent } from './home/item-list/item-list.component';
 import { ItemListService } from './home/item-list/item-list.service';
-import { ItemComponent } from './home/item/item.component';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { FirebaseService } from './shared/services/firebase.service';
 import { MaterialModule } from './shared/styles/material.module';
@@ -28,7 +27,6 @@ import { MaterialModule } from './shared/styles/material.module';
     ItemEditComponent,
     ItemCreateComponent,
     ButtonComponent,
-    ItemComponent,
     EditorComponent
   ],
   imports: [
