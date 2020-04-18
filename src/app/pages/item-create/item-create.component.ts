@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ItemListService } from '../item-list/item-list.service';
+import { ArticleService } from '../../shared/services/article.service';
 
 @Component({
   selector: 'app-item-add',
@@ -21,7 +21,7 @@ export class ItemCreateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private itemListService: ItemListService,
+    private articleService: ArticleService,
     private route: Router
   ) {}
 
@@ -33,7 +33,7 @@ export class ItemCreateComponent implements OnInit {
   }
 
   async post() {
-    await this.itemListService.createArticle(this.formValue.value, this.image);
+    await this.articleService.createArticle(this.formValue.value, this.image);
     this.route.navigateByUrl('/list');
   }
 }

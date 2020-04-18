@@ -3,11 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ItemListService } from '../item-list/item-list.service';
+import { ArticleService } from '../../shared/services/article.service';
 import { createFileList } from './../../shared/factory/file';
 import { ItemCreateComponent } from './item-create.component';
 
-class MockItemListService implements Partial<ItemListService> {
+class MockArticleService implements Partial<ArticleService> {
   createArticle() {}
 }
 
@@ -15,18 +15,18 @@ describe('ItemCreateComponent', () => {
   let component: ItemCreateComponent;
   let fixture: ComponentFixture<ItemCreateComponent>;
   let router: Router;
-  let itemListService: MockItemListService;
+  let articleService: MockArticleService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ItemCreateComponent],
-      providers: [{ provide: ItemListService, useClass: MockItemListService }],
+      providers: [{ provide: ArticleService, useClass: MockArticleService }],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [FormsModule, RouterTestingModule, ReactiveFormsModule]
     }).compileComponents();
 
     router = TestBed.get(Router);
-    itemListService = TestBed.get(ItemListService);
+    articleService = TestBed.get(ArticleService);
   }));
 
   beforeEach(() => {
@@ -53,10 +53,10 @@ describe('ItemCreateComponent', () => {
   });
 
   describe('onSubmit()', () => {
-    it('itemListService の createArticle が呼ばれる', async () => {
-      spyOn(itemListService, 'createArticle');
+    it('articleService の createArticle が呼ばれる', async () => {
+      spyOn(articleService, 'createArticle');
       await component.post();
-      expect(itemListService.createArticle).toHaveBeenCalled();
+      expect(articleService.createArticle).toHaveBeenCalled();
     });
     it('処理後 list ページに飛ぶこと', async () => {
       spyOn(router, 'navigateByUrl');

@@ -10,40 +10,33 @@ import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './components/editor/editor.component';
-import { ItemCardComponent } from './components/item-card/item-card.component';
+import { HomeModule } from './home/home.module';
 import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { ItemEditComponent } from './pages/item-edit/item-edit.component';
-import { ItemListComponent } from './pages/item-list/item-list.component';
-import { ItemListService } from './pages/item-list/item-list.service';
-import { ItemComponent } from './pages/item/item.component';
-import { ButtonComponent } from './shared/components/button/button.component';
-import { FirebaseService } from './shared/services/firebase.service';
+import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/styles/material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ItemCardComponent,
-    ItemListComponent,
     ItemEditComponent,
     ItemCreateComponent,
-    ButtonComponent,
-    ItemComponent,
     EditorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HomeModule,
+    SharedModule,
     FormsModule,
     MaterialModule,
+    ReactiveFormsModule,
+    MarkdownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,
-    ReactiveFormsModule,
-    MarkdownModule.forRoot()
+    AngularFireStorageModule
   ],
-  providers: [ItemListService, FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

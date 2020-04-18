@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ItemListService } from '../../pages/item-list/item-list.service';
-import { Article, ArticleOfStore } from './../../shared/models';
+import { ArticleService } from '../../services/article.service';
+import { Article, ArticleOfStore } from '../../models';
 
 @Component({
   selector: 'app-item-card',
@@ -11,7 +11,7 @@ import { Article, ArticleOfStore } from './../../shared/models';
 export class ItemCardComponent {
   constructor(
     private router: Router,
-    private itemListService: ItemListService
+    private articleService: ArticleService
   ) {}
   @Input()
   articles: ArticleOfStore[];
@@ -24,7 +24,7 @@ export class ItemCardComponent {
   }
 
   deleteArticle(id: string) {
-    this.itemListService.delete(id);
+    this.articleService.delete(id);
   }
 
   navigateToItemPage(id: string) {

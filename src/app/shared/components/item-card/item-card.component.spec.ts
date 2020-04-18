@@ -6,9 +6,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   createMockArticleCollectionOfStore,
   mockArticleDocOfStore
-} from '../../shared/factory/article';
-import { ItemListService } from '../../pages/item-list/item-list.service';
-import { ArticleOfStore } from './../../shared/models';
+} from '../../factory/article';
+import { ArticleService } from '../../services/article.service';
+import { ArticleOfStore } from '../../models';
 import { ItemCardComponent } from './item-card.component';
 import * as firebase from 'firebase';
 
@@ -21,7 +21,7 @@ class TestComponent {
   articles: ArticleOfStore[];
 }
 
-class MockItemListService implements Partial<ItemListService> {
+class MockArticleService implements Partial<ArticleService> {
   delete() {}
 }
 
@@ -30,18 +30,18 @@ describe('ItemCardComponent', () => {
   let hostComponent: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let router: Router;
-  let itemListService: MockItemListService;
+  let articleService: MockArticleService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ItemCardComponent, TestComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [RouterTestingModule],
-      providers: [{ provide: ItemListService, useClass: MockItemListService }]
+      providers: [{ provide: ArticleService, useClass: MockArticleService }]
     }).compileComponents();
 
     router = TestBed.get(Router);
-    itemListService = TestBed.get(ItemListService);
+    articleService = TestBed.get(ArticleService);
   }));
 
   beforeEach(() => {
@@ -69,9 +69,9 @@ describe('ItemCardComponent', () => {
   });
 
   it('delete() が呼ばれると、itemListService の delete が呼ばれること', () => {
-    spyOn(itemListService, 'delete');
+    spyOn(articleService, 'delete');
     component.deleteArticle('1');
-    expect(itemListService.delete).toHaveBeenCalledWith('1');
+    expect(articleService.delete).toHaveBeenCalledWith('1');
   });
 
   it('navigateToItemPage() が呼ばれると、指定された id を持つ item のページに遷移すること', () => {
