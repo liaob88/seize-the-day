@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import * as marked from 'marked';
 import { Observable } from 'rxjs';
-import { Article, ArticleFormValue } from '../../shared/models';
-import { ArticleOfStore } from './../../shared/models';
-import { FirebaseService } from './../../shared/services/firebase.service';
+import { Article, ArticleFormValue } from '../models';
+import { ArticleOfStore } from '../models';
+import { FirebaseService } from './firebase.service';
 
 @Injectable({ providedIn: 'root' })
-export class ItemListService {
+export class ArticleService {
   private readonly collectionName = 'articles';
   constructor(private firebaseService: FirebaseService) {}
 

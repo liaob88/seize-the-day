@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ItemListService } from '../item-list/item-list.service';
+import { ArticleService } from '../../shared/services/article.service';
 
 @Component({
   selector: 'app-item-add',
-  templateUrl: './item-create.component.html',
-  styleUrls: ['./item-create.component.scss'],
+  templateUrl: './create-page.component.html',
+  styleUrls: ['./create-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ItemCreateComponent implements OnInit {
+export class CreatePageComponent implements OnInit {
   // MEMO: default 画像ができたらここに URL を用意
   image: FileList = null;
   previewImageSrc: string;
@@ -21,7 +21,7 @@ export class ItemCreateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private itemListService: ItemListService,
+    private articleService: ArticleService,
     private route: Router
   ) {}
 
@@ -33,7 +33,7 @@ export class ItemCreateComponent implements OnInit {
   }
 
   async post() {
-    await this.itemListService.createArticle(this.formValue.value, this.image);
+    await this.articleService.createArticle(this.formValue.value, this.image);
     this.route.navigateByUrl('/list');
   }
 }

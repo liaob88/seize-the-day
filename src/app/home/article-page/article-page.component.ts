@@ -1,18 +1,18 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ItemListService } from '../item-list/item-list.service';
-import { ArticleOfStore } from './../../shared/models';
+import { ArticleService } from '../../shared/services/article.service';
+import { ArticleOfStore } from '../../shared/models';
 
 @Component({
   selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+  templateUrl: './article-page.component.html',
+  styleUrls: ['./article-page.component.scss']
 })
-export class ItemComponent implements OnInit {
+export class ArticlePageComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
-    private itemListService: ItemListService
+    private articleService: ArticleService
   ) {}
 
   item$: Observable<ArticleOfStore>;
@@ -20,7 +20,7 @@ export class ItemComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
       const id = params.get('id');
-      this.item$ = this.itemListService.getArticle(id);
+      this.item$ = this.articleService.getArticle(id);
     });
   }
 }

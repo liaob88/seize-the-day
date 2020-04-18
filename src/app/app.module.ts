@@ -3,47 +3,29 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
 import { environment } from './../environments/environment';
+import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EditorComponent } from './components/editor/editor.component';
-import { ItemCardComponent } from './components/item-card/item-card.component';
-import { ItemCreateComponent } from './pages/item-create/item-create.component';
-import { ItemEditComponent } from './pages/item-edit/item-edit.component';
-import { ItemListComponent } from './pages/item-list/item-list.component';
-import { ItemListService } from './pages/item-list/item-list.service';
-import { ItemComponent } from './pages/item/item.component';
-import { ButtonComponent } from './shared/components/button/button.component';
-import { FirebaseService } from './shared/services/firebase.service';
-import { MaterialModule } from './shared/styles/material.module';
+import { HomeModule } from './home/home.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ItemCardComponent,
-    ItemListComponent,
-    ItemEditComponent,
-    ItemCreateComponent,
-    ButtonComponent,
-    ItemComponent,
-    EditorComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    MaterialModule,
+    HomeModule,
+    AdminModule,
+    SharedModule,
+    MarkdownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,
-    ReactiveFormsModule,
-    MarkdownModule.forRoot()
+    AngularFireStorageModule
   ],
-  providers: [ItemListService, FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

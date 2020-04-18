@@ -3,25 +3,25 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
-import { ItemListService } from '../item-list/item-list.service';
-import { ItemComponent } from './item.component';
+import { ArticleService } from '../../shared/services/article.service';
+import { ArticlePageComponent } from './article-page.component';
 
-class MockItemListService implements Partial<ItemListService> {
+class MockArticleService implements Partial<ArticleService> {
   getArticle(id: string) {
     return of(createMockArticleDocOfStore());
   }
 }
 
 describe('ItemComponent', () => {
-  let component: ItemComponent;
-  let fixture: ComponentFixture<ItemComponent>;
-  let itemListService: MockItemListService;
+  let component: ArticlePageComponent;
+  let fixture: ComponentFixture<ArticlePageComponent>;
+  let articleService: MockArticleService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemComponent],
+      declarations: [ArticlePageComponent],
       providers: [
-        { provide: ItemListService, useClass: MockItemListService },
+        { provide: ArticleService, useClass: MockArticleService },
         {
           provide: ActivatedRoute,
           useValue: { paramMap: of(convertToParamMap({ id: '1' })) }
@@ -30,11 +30,11 @@ describe('ItemComponent', () => {
       imports: [RouterTestingModule]
     }).compileComponents();
 
-    itemListService = TestBed.get(ItemListService);
+    articleService = TestBed.get(ArticleService);
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemComponent);
+    fixture = TestBed.createComponent(ArticlePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -44,10 +44,10 @@ describe('ItemComponent', () => {
   });
 
   describe('ngOnInit()', () => {
-    it('component.id を引数として itemListService の getArticle が呼ばれる', () => {
-      spyOn(itemListService, 'getArticle');
+    it('component.id を引数として articleService の getArticle が呼ばれる', () => {
+      spyOn(articleService, 'getArticle');
       component.ngOnInit();
-      expect(itemListService.getArticle).toHaveBeenCalledWith('1');
+      expect(articleService.getArticle).toHaveBeenCalledWith('1');
     });
   });
 });
