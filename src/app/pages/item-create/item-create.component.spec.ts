@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ItemListService } from '../../home/item-list/item-list.service';
+import { ItemListService } from '../../home/home-page/item-list.service';
 import { createFileList } from './../../shared/factory/file';
 import { ItemCreateComponent } from './item-create.component';
 

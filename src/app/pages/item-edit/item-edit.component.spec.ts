@@ -6,7 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
 import { createFileList } from 'src/app/shared/factory/file';
-import { ItemListService } from '../../home/item-list/item-list.service';
+import { ItemListService } from '../../home/home-page/item-list.service';
 import { EditorComponent } from './../../components/editor/editor.component';
 import { ItemEditComponent } from './item-edit.component';
 

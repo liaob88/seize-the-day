@@ -5,10 +5,10 @@ import { ItemListService } from './item-list.service';
 
 @Component({
   selector: 'app-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.scss']
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss']
 })
-export class ItemListComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   articles$: Observable<ArticleOfStore[]>;
 
   constructor(private itemListService: ItemListService) {}

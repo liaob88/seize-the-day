@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ItemListService } from '../../home/item-list/item-list.service';
+import { ItemListService } from '../../home/home-page/item-list.service';
 import { Article, ArticleOfStore } from './../../shared/models';
 
 @Component({

@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { createMockArticleCollectionOfStore } from '../../shared/factory/article';
-import { ItemListComponent } from './item-list.component';
+import { HomePageComponent } from './home-page.component';
 import { ItemListService } from './item-list.service';
 
 class MockItemListService implements Partial<ItemListService> {
@@ -12,13 +12,13 @@ class MockItemListService implements Partial<ItemListService> {
 }
 
 describe('ItemListComponent', () => {
-  let component: ItemListComponent;
-  let fixture: ComponentFixture<ItemListComponent>;
+  let component: HomePageComponent;
+  let fixture: ComponentFixture<HomePageComponent>;
   let itemListService: ItemListService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemListComponent],
+      declarations: [HomePageComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [{ provide: ItemListService, useClass: MockItemListService }]
     }).compileComponents();
@@ -27,7 +27,7 @@ describe('ItemListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemListComponent);
+    fixture = TestBed.createComponent(HomePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -7,7 +7,7 @@ import {
   createMockArticleCollectionOfStore,
   mockArticleDocOfStore
 } from '../../shared/factory/article';
-import { ItemListService } from '../../home/item-list/item-list.service';
+import { ItemListService } from '../../home/home-page/item-list.service';
 import { ArticleOfStore } from './../../shared/models';
 import { ItemCardComponent } from './item-card.component';
 import * as firebase from 'firebase';
