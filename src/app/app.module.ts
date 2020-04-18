@@ -11,10 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { HomeModule } from './home/home.module';
-import { ItemListService } from './home/services/item-list.service';
 import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { ItemEditComponent } from './pages/item-edit/item-edit.component';
-import { FirebaseService } from './shared/services/firebase.service';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/styles/material.module';
 
@@ -32,14 +30,13 @@ import { MaterialModule } from './shared/styles/material.module';
     SharedModule,
     FormsModule,
     MaterialModule,
+    ReactiveFormsModule,
+    MarkdownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,
-    ReactiveFormsModule,
-    MarkdownModule.forRoot()
+    AngularFireStorageModule
   ],
-  providers: [ItemListService, FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

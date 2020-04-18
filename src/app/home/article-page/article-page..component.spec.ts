@@ -3,10 +3,10 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
-import { ItemListService } from '../services/item-list.service';
+import { ArticleService } from '../../shared/services/article.service';
 import { ArticlePageComponent } from './article-page.component';
 
-class MockItemListService implements Partial<ItemListService> {
+class MockArticleService implements Partial<ArticleService> {
   getArticle(id: string) {
     return of(createMockArticleDocOfStore());
   }
@@ -15,13 +15,13 @@ class MockItemListService implements Partial<ItemListService> {
 describe('ItemComponent', () => {
   let component: ArticlePageComponent;
   let fixture: ComponentFixture<ArticlePageComponent>;
-  let itemListService: MockItemListService;
+  let articleService: MockArticleService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ArticlePageComponent],
       providers: [
-        { provide: ItemListService, useClass: MockItemListService },
+        { provide: ArticleService, useClass: MockArticleService },
         {
           provide: ActivatedRoute,
           useValue: { paramMap: of(convertToParamMap({ id: '1' })) }
@@ -30,7 +30,7 @@ describe('ItemComponent', () => {
       imports: [RouterTestingModule]
     }).compileComponents();
 
-    itemListService = TestBed.get(ItemListService);
+    articleService = TestBed.get(ArticleService);
   }));
 
   beforeEach(() => {
@@ -44,10 +44,10 @@ describe('ItemComponent', () => {
   });
 
   describe('ngOnInit()', () => {
-    it('component.id を引数として itemListService の getArticle が呼ばれる', () => {
-      spyOn(itemListService, 'getArticle');
+    it('component.id を引数として articleService の getArticle が呼ばれる', () => {
+      spyOn(articleService, 'getArticle');
       component.ngOnInit();
-      expect(itemListService.getArticle).toHaveBeenCalledWith('1');
+      expect(articleService.getArticle).toHaveBeenCalledWith('1');
     });
   });
 });

@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
-import { ItemListService } from './item-list.service';
+import { ArticleService } from './article.service';
 
 // class MockFirebaseService implements Partial<FirebaseService> {
 //   getCollection<T>(collectionName: string): Observable<T[]> {
@@ -19,8 +19,8 @@ import { ItemListService } from './item-list.service';
 //   createDoc() {}
 // }
 
-describe('ItemListService', () => {
-  let itemListService: ItemListService;
+describe('articleService', () => {
+  let articleService: ArticleService;
   // let firebaseService: MockFirebaseService;
   // const collectionName = 'articles';
 
@@ -34,11 +34,11 @@ describe('ItemListService', () => {
       // providers: [{ provider: FirebaseService, useClass: MockFirebaseService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
-    itemListService = TestBed.get(ItemListService);
+    articleService = TestBed.get(ArticleService);
     // firebaseService = TestBed.get(FirebaseService);
   });
 
   it('should be created', () => {
-    expect(itemListService).toBeTruthy();
+    expect(articleService).toBeTruthy();
   });
 });

@@ -2,10 +2,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { createMockArticleCollectionOfStore } from '../../shared/factory/article';
+import { ArticleService } from '../../shared/services/article.service';
 import { HomePageComponent } from './home-page.component';
-import { ItemListService } from '../services/item-list.service';
 
-class MockItemListService implements Partial<ItemListService> {
+class MockArticleService implements Partial<ArticleService> {
   getArticles() {
     return of(createMockArticleCollectionOfStore());
   }
@@ -14,16 +14,16 @@ class MockItemListService implements Partial<ItemListService> {
 describe('ItemListComponent', () => {
   let component: HomePageComponent;
   let fixture: ComponentFixture<HomePageComponent>;
-  let itemListService: ItemListService;
+  let articleService: ArticleService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HomePageComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: ItemListService, useClass: MockItemListService }]
+      providers: [{ provide: ArticleService, useClass: MockArticleService }]
     }).compileComponents();
 
-    itemListService = TestBed.get(ItemListService);
+    articleService = TestBed.get(ArticleService);
   }));
 
   beforeEach(() => {
@@ -37,8 +37,8 @@ describe('ItemListComponent', () => {
   });
 
   it('ngOnInit() が呼ばれると、itemListService の getArticles が呼ばれること', () => {
-    spyOn(itemListService, 'getArticles');
+    spyOn(articleService, 'getArticles');
     component.ngOnInit();
-    expect(itemListService.getArticles).toHaveBeenCalled();
+    expect(articleService.getArticles).toHaveBeenCalled();
   });
 });
