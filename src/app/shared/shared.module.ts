@@ -10,6 +10,6 @@ import { MaterialModule } from './styles/material.module';
   declarations: [ItemCardComponent, ButtonComponent],
   imports: [CommonModule, MaterialModule],
   providers: [ArticleService, FirebaseService],
-  exports: [ItemCardComponent, ButtonComponent]
+  exports: [ItemCardComponent, ButtonComponent, MaterialModule]
 })
 export class SharedModule {}

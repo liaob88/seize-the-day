@@ -3,14 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ArticleService } from '../../shared/services/article.service';
-import { ArticleOfStore } from './../../shared/models';
+import { ArticleOfStore } from '../../shared/models';
 
 @Component({
   selector: 'app-item-edit',
-  templateUrl: './item-edit.component.html',
-  styleUrls: ['./item-edit.component.scss']
+  templateUrl: './edit-page.component.html',
+  styleUrls: ['./edit-page.component.scss']
 })
-export class ItemEditComponent implements OnInit {
+export class EditPageComponent implements OnInit {
   id: string;
   image: FileList = null;
   previewImageSrc: string;

@@ -5,11 +5,11 @@ import { ArticleService } from '../../shared/services/article.service';
 
 @Component({
   selector: 'app-item-add',
-  templateUrl: './item-create.component.html',
-  styleUrls: ['./item-create.component.scss'],
+  templateUrl: './create-page.component.html',
+  styleUrls: ['./create-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ItemCreateComponent implements OnInit {
+export class CreatePageComponent implements OnInit {
   // MEMO: default 画像ができたらここに URL を用意
   image: FileList = null;
   previewImageSrc: string;

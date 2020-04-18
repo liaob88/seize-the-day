@@ -3,34 +3,23 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
 import { environment } from './../environments/environment';
+import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EditorComponent } from './components/editor/editor.component';
 import { HomeModule } from './home/home.module';
-import { ItemCreateComponent } from './pages/item-create/item-create.component';
-import { ItemEditComponent } from './pages/item-edit/item-edit.component';
 import { SharedModule } from './shared/shared.module';
-import { MaterialModule } from './shared/styles/material.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ItemEditComponent,
-    ItemCreateComponent,
-    EditorComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HomeModule,
+    AdminModule,
     SharedModule,
-    FormsModule,
-    MaterialModule,
-    ReactiveFormsModule,
     MarkdownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,

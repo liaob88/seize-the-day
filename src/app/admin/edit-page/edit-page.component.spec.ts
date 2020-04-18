@@ -7,8 +7,8 @@ import { of } from 'rxjs';
 import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
 import { createFileList } from 'src/app/shared/factory/file';
 import { ArticleService } from '../../shared/services/article.service';
-import { EditorComponent } from './../../components/editor/editor.component';
-import { ItemEditComponent } from './item-edit.component';
+import { EditorComponent } from '../components/editor/editor.component';
+import { EditPageComponent } from './edit-page.component';
 
 class MockArticleService implements Partial<ArticleService> {
   getArticle(id: string) {
@@ -18,14 +18,14 @@ class MockArticleService implements Partial<ArticleService> {
 }
 
 describe('ItemEditComponent', () => {
-  let component: ItemEditComponent;
-  let fixture: ComponentFixture<ItemEditComponent>;
+  let component: EditPageComponent;
+  let fixture: ComponentFixture<EditPageComponent>;
   let articleService: MockArticleService;
   let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemEditComponent, EditorComponent],
+      declarations: [EditPageComponent, EditorComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [RouterTestingModule, FormsModule, ReactiveFormsModule],
       providers: [
@@ -42,7 +42,7 @@ describe('ItemEditComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemEditComponent);
+    fixture = TestBed.createComponent(EditPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
