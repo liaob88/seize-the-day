@@ -4,22 +4,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ArticleService } from '../../shared/services/article.service';
-import { createFileList } from './../../shared/factory/file';
-import { ItemCreateComponent } from './item-create.component';
+import { createFileList } from '../../shared/factory/file';
+import { CreatePageComponent } from './create-page.component';
 
 class MockArticleService implements Partial<ArticleService> {
   createArticle() {}
 }
 
 describe('ItemCreateComponent', () => {
-  let component: ItemCreateComponent;
-  let fixture: ComponentFixture<ItemCreateComponent>;
+  let component: CreatePageComponent;
+  let fixture: ComponentFixture<CreatePageComponent>;
   let router: Router;
   let articleService: MockArticleService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemCreateComponent],
+      declarations: [CreatePageComponent],
       providers: [{ provide: ArticleService, useClass: MockArticleService }],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [FormsModule, RouterTestingModule, ReactiveFormsModule]
@@ -30,7 +30,7 @@ describe('ItemCreateComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemCreateComponent);
+    fixture = TestBed.createComponent(CreatePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
