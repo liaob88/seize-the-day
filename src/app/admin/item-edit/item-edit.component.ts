@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ArticleService } from '../../shared/services/article.service';
-import { ArticleOfStore } from './../../shared/models';
+import { ArticleOfStore } from '../../shared/models';
 
 @Component({
   selector: 'app-item-edit',

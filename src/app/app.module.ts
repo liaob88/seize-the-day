@@ -9,10 +9,10 @@ import { MarkdownModule } from 'ngx-markdown';
 import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EditorComponent } from './components/editor/editor.component';
+import { EditorComponent } from './admin/components/editor/editor.component';
 import { HomeModule } from './home/home.module';
-import { ItemCreateComponent } from './pages/item-create/item-create.component';
-import { ItemEditComponent } from './pages/item-edit/item-edit.component';
+import { ItemCreateComponent } from './admin/item-create/item-create.component';
+import { ItemEditComponent } from './admin/item-edit/item-edit.component';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/styles/material.module';
 

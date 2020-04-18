@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
 import { createFileList } from 'src/app/shared/factory/file';
 import { ArticleService } from '../../shared/services/article.service';
-import { EditorComponent } from './../../components/editor/editor.component';
+import { EditorComponent } from '../components/editor/editor.component';
 import { ItemEditComponent } from './item-edit.component';
 
 class MockArticleService implements Partial<ArticleService> {

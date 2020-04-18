@@ -2,8 +2,8 @@ import { HomePageComponent } from './home/home-page/home-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArticlePageComponent } from './home/article-page/article-page.component';
-import { ItemCreateComponent } from './pages/item-create/item-create.component';
-import { ItemEditComponent } from './pages/item-edit/item-edit.component';
+import { ItemCreateComponent } from './admin/item-create/item-create.component';
+import { ItemEditComponent } from './admin/item-edit/item-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
