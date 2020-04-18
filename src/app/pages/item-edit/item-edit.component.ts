@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ItemListService } from '../../home/home-page/item-list.service';
+import { ItemListService } from '../../home/services/item-list.service';
 import { ArticleOfStore } from './../../shared/models';
 
 @Component({

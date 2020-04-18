@@ -3,7 +3,7 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
-import { ItemListService } from '../home-page/item-list.service';
+import { ItemListService } from '../services/item-list.service';
 import { ArticlePageComponent } from './article-page.component';
 
 class MockItemListService implements Partial<ItemListService> {

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { createMockArticleCollectionOfStore } from '../../shared/factory/article';
 import { HomePageComponent } from './home-page.component';
-import { ItemListService } from './item-list.service';
+import { ItemListService } from '../services/item-list.service';
 
 class MockItemListService implements Partial<ItemListService> {
   getArticles() {
