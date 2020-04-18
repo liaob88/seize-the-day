@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemListService } from '../item-list/item-list.service';
-import { ArticleOfStore } from './../../shared/models';
+import { ArticleOfStore } from '../../shared/models';
 
 @Component({
   selector: 'app-item',

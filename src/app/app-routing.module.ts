@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { ItemEditComponent } from './pages/item-edit/item-edit.component';
-import { ItemListComponent } from './pages/item-list/item-list.component';
-import { ItemComponent } from './pages/item/item.component';
+import { ItemListComponent } from './home/item-list/item-list.component';
+import { ItemComponent } from './home/item/item.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },

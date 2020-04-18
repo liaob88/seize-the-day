@@ -1,7 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { createMockArticleCollectionOfStore } from './../../shared/factory/article';
+import { createMockArticleCollectionOfStore } from '../../shared/factory/article';
 import { ItemListComponent } from './item-list.component';
 import { ItemListService } from './item-list.service';
 
