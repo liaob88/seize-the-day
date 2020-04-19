@@ -18,17 +18,8 @@ export class AuthenticationService {
   }
 
   signOut() {
-    this.auth.auth.signOut().then(() => this.router.navigateByUrl('/'));
-  }
-
-  isAuthenticated(): boolean {
-    let authState;
-    this.auth.auth.onAuthStateChanged(user => {
-      if (!user) {
-        authState = false;
-      }
-      authState = true;
-    });
-    return authState;
+    this.auth.auth
+      .signOut()
+      .then(() => this.router.navigateByUrl('admin/login'));
   }
 }
