@@ -6,9 +6,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { MarkdownModule } from 'ngx-markdown';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
-  declarations: [CreatePageComponent, EditPageComponent, EditorComponent],
+  declarations: [
+    CreatePageComponent,
+    EditPageComponent,
+    EditorComponent,
+    LoginPageComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
