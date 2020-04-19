@@ -8,13 +8,15 @@ import { EditorComponent } from './components/editor/editor.component';
 import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     CreatePageComponent,
     EditPageComponent,
     EditorComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
