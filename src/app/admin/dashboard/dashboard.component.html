@@ -1,2 +1,25 @@
-<p>dashboard works!</p>
-<button (click)="logOut()">LogOut</button>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened>
+    <ul>
+      <li>
+        <a class="admin-link dashboard-icon" routerLink="/admin/dashboard"
+          >DashBoard</a
+        >
+      </li>
+      <li>
+        <a class="admin-link add-icon" routerLink="/admin/create"
+          >New Article</a
+        >
+      </li>
+      <li>
+        <a class="admin-link edit-icon" routerLink="/admin/edit">
+          Edit Article</a
+        >
+      </li>
+      <li>
+        <a class="admin-link logout-icon" (click)="logOut()">LogOut</a>
+      </li>
+    </ul>
+  </mat-sidenav>
+  <mat-sidenav-content>Main content</mat-sidenav-content>
+</mat-sidenav-container>
