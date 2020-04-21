@@ -56,3 +56,22 @@ li {
   margin-bottom: 30px;
   list-style: none;
 }
+
+.admin-link {
+  color: $BLACK;
+  font-weight: bold;
+}
+
+table {
+  width: 80%;
+}
+
+.table-title {
+  text-align: center;
+}
+
+.table-image {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+}
