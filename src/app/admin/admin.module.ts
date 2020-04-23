@@ -1,20 +1,30 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditorComponent } from './components/editor/editor.component';
-import { EditPageComponent } from './edit-page/edit-page.component';
-import { CreatePageComponent } from './create-page/create-page.component';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../shared/shared.module';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
+import { SharedModule } from '../shared/shared.module';
+import { AdminRoutingModule } from './admin-routing.module';
+import { EditorComponent } from './components/editor/editor.component';
+import { CreatePageComponent } from './create-page/create-page.component';
+import { EditPageComponent } from './edit-page/edit-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [CreatePageComponent, EditPageComponent, EditorComponent],
+  declarations: [
+    CreatePageComponent,
+    EditPageComponent,
+    EditorComponent,
+    LoginPageComponent,
+    DashboardComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MarkdownModule.forChild()
+    MarkdownModule.forChild(),
+    AdminRoutingModule
   ]
 })
 export class AdminModule {}

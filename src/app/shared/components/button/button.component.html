@@ -2,7 +2,7 @@
   <ng-content></ng-content>
 </ng-template>
 
-<button [disabled]="disabled" [class]="className" (click)="onClick()">
+<button [type]="type" [disabled]="disabled" [class]="className" (click)="onClick()">
   <ng-container *ngIf="shape !== 'circle'; else typeIcon">
     <ng-container *ngTemplateOutlet="child"></ng-container>
   </ng-container>
