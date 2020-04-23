@@ -1,0 +1,63 @@
+@import '../shared/styles/common';
+
+// content は https://github.com/google/material-design-icons/blob/master/iconfont/codepoints を参照
+@mixin material-icon {
+  font-family: 'Material Icons';
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.container {
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+
+  a {
+    color: $BLACK;
+    font-weight: bold;
+  }
+}
+
+.mat-sidenav {
+  width: 200px;
+}
+
+.menus {
+  width: 100%;
+  background-color: $WHITE;
+}
+
+.dashboard-icon::before {
+  @include material-icon;
+  content: '\e871';
+}
+
+.create-icon::before {
+  @include material-icon;
+  content: '\e145';
+}
+
+.edit-icon::before {
+  @include material-icon;
+  content: '\e3c9';
+}
+
+.logout-icon::before {
+  @include material-icon;
+  content: '\e5c4';
+}
+
+ul {
+  margin-top: 50px;
+  padding-left: 30px;
+}
+
+li {
+  margin-bottom: 30px;
+  list-style: none;
+}
