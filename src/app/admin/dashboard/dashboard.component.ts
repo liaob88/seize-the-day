@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { ArticleOfStore } from './../../shared/models';
 import { ArticleService } from './../../shared/services/article.service';
-import { AuthenticationService } from './../services/authentication.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
