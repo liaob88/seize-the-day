@@ -1,0 +1,21 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav mode="side" opened>
+    <ul>
+      <li>
+        <a class="dashboard-icon" routerLink="/admin/dashboard">DashBoard</a>
+      </li>
+      <li>
+        <a class="create-icon" routerLink="/admin/create">New Article</a>
+      </li>
+      <li>
+        <a class="edit-icon" routerLink="/admin/edit">Edit Article</a>
+      </li>
+      <li>
+        <a class="logout-icon" (click)="logOut()">LogOut</a>
+      </li>
+    </ul>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
