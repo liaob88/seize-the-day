@@ -1,9 +1,7 @@
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AuthGuard } from './../guards/auth.guard';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthGuard } from '../shared/guards/auth.guard';
 import { DashboardComponent } from './dashboard.component';
-import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
