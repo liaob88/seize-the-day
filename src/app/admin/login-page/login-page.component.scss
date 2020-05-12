@@ -1,0 +1,38 @@
+@import '../../shared/styles/common';
+
+.login-form-container {
+  margin: 20px auto 0;
+  padding: 25px;
+  width: 50%;
+  height: auto;
+  background-color: $WHITE;
+
+  .login-title {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  li {
+    list-style: none;
+  }
+
+  app-button {
+    margin: 30px auto 10px;
+  }
+
+  .login-form-field {
+    margin: 10px 0px;
+  }
+
+  .error-message {
+    border: 2px solid red;
+    color: #ff6d6d;
+    padding: 3px;
+    background-color: #fff2f2;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+}
