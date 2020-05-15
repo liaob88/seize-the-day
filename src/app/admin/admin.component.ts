@@ -1,19 +1,22 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { ArticleOfStore } from './../../shared/models';
-import { ArticleService } from './../../shared/services/article.service';
-import { AuthenticationService } from '../shared/services/authentication.service';
+import { ArticleOfStore } from '../shared/models';
+import { ArticleService } from '../shared/services/article.service';
+import { AuthenticationService } from './shared/services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class AdminComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private route: ActivatedRoute
   ) {}
+  parameter: string;
   articles$: Observable<ArticleOfStore[]> = this.articleService.getArticles();
   dataSource;
   displayedColumns: string[] = [

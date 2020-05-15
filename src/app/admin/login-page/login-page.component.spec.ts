@@ -1,12 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthenticationService } from '../services/authentication.service';
-import { SharedModule } from './../../shared/shared.module';
-import { AuthGuard } from './../guards/auth.guard';
-import { LoginPageComponent } from './login-page.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from '../shared/guards/auth.guard';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { SharedModule } from './../../shared/shared.module';
+import { LoginPageComponent } from './login-page.component';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
