@@ -9,10 +9,7 @@ import { Article, ArticleOfStore } from '../../models';
   styleUrls: ['./item-card.component.scss']
 })
 export class ItemCardComponent {
-  constructor(
-    private router: Router,
-    private articleService: ArticleService
-  ) {}
+  constructor(private router: Router, private articleService: ArticleService) {}
   @Input()
   articles: ArticleOfStore[];
 
@@ -23,15 +20,7 @@ export class ItemCardComponent {
     return displayedDate.toDate();
   }
 
-  deleteArticle(id: string) {
-    this.articleService.delete(id);
-  }
-
   navigateToItemPage(id: string) {
     this.router.navigateByUrl(`/articles/${id}`);
-  }
-
-  navigateToEditPage(id: string) {
-    this.router.navigateByUrl(`/articles/${id}/edit`);
   }
 }

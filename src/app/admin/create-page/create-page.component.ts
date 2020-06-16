@@ -34,6 +34,6 @@ export class CreatePageComponent implements OnInit {
 
   async post() {
     await this.articleService.createArticle(this.formValue.value, this.image);
-    this.route.navigateByUrl('/list');
+    this.route.navigateByUrl('/admin/dashboard');
   }
 }
