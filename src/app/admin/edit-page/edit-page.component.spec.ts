@@ -112,7 +112,7 @@ describe('ItemEditComponent', () => {
     it('ホームに遷移すること', async () => {
       spyOn(router, 'navigateByUrl');
       await component.onSubmit();
-      expect(router.navigateByUrl).toHaveBeenCalledWith('/list');
+      expect(router.navigateByUrl).toHaveBeenCalledWith('/admin/dashboard');
     });
   });
 });

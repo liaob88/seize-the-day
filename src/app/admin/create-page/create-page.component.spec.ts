@@ -61,7 +61,7 @@ describe('ItemCreateComponent', () => {
     it('処理後 list ページに飛ぶこと', async () => {
       spyOn(router, 'navigateByUrl');
       await component.post();
-      expect(router.navigateByUrl).toHaveBeenCalledWith('/list');
+      expect(router.navigateByUrl).toHaveBeenCalledWith('/admin/dashboard');
     });
   });
 });
