@@ -36,7 +36,10 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
   });
 
-  // 'should create' の段階で NullInjectorError: StaticInjectorError(DynamicTestModule)[AngularFireAuth -> InjectionToken angularity2.app.options]... を解決できない
+  // MEMO:
+  // 'should create' の段階で
+  // NullInjectorError: StaticInjectorError(DynamicTestModule)[AngularFireAuth -> InjectionToken angularity2.app.options]...
+  // を解決できない
 
   // it('should create', () => {
   //   expect(component).toBeTruthy();
