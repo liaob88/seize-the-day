@@ -73,10 +73,4 @@ describe('ItemCardComponent', () => {
     component.navigateToItemPage('3');
     expect(router.navigateByUrl).toHaveBeenCalledWith('/articles/3');
   });
-
-  it('navigateToEditPage() が呼ばれると、指定された id を持つ item の編集ページに遷移すること', () => {
-    spyOn(router, 'navigateByUrl');
-    component.navigateToEditPage('3');
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/articles/3/edit');
-  });
 });
