@@ -68,12 +68,6 @@ describe('ItemCardComponent', () => {
     expect(result).toEqual(updatedArticle.updatedAt.toDate());
   });
 
-  it('delete() が呼ばれると、itemListService の delete が呼ばれること', () => {
-    spyOn(articleService, 'delete');
-    component.deleteArticle('1');
-    expect(articleService.delete).toHaveBeenCalledWith('1');
-  });
-
   it('navigateToItemPage() が呼ばれると、指定された id を持つ item のページに遷移すること', () => {
     spyOn(router, 'navigateByUrl');
     component.navigateToItemPage('3');
