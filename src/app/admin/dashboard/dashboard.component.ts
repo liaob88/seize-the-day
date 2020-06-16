@@ -21,7 +21,8 @@ export class DashboardComponent implements OnInit {
     'title',
     'image',
     'created_at',
-    'updated_at'
+    'updated_at',
+    'edit'
   ];
 
   ngOnInit() {}

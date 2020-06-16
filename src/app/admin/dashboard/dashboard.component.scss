@@ -57,11 +57,6 @@ table {
   content: '\e145';
 }
 
-.edit-icon::before {
-  @include material-icon;
-  content: '\e3c9';
-}
-
 .logout-icon::before {
   @include material-icon;
   content: '\e5c4';

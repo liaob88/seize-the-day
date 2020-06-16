@@ -8,9 +8,6 @@
         <a class="create-icon" routerLink="/admin/create">New Article</a>
       </li>
       <li>
-        <a class="edit-icon" routerLink="/admin/edit">Edit Article</a>
-      </li>
-      <li>
         <a class="logout-icon" (click)="logOut()">LogOut</a>
       </li>
     </ul>
@@ -54,6 +51,14 @@
           <th mat-header-cell *matHeaderCellDef>updatedAt</th>
           <td mat-cell *matCellDef="let element">
             {{ element.updatedAt?.toDate() | date }}
+          </td>
+        </ng-container>
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>edit</th>
+          <td mat-cell *matCellDef="let element">
+            <a href="" routerLink="../{{ element.id }}/edit">edit</a>
           </td>
         </ng-container>
 
