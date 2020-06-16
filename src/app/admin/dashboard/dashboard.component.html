@@ -2,9 +2,6 @@
   <mat-sidenav mode="side" opened>
     <ul>
       <li>
-        <a class="dashboard-icon" routerLink="/admin/dashboard">DashBoard</a>
-      </li>
-      <li>
         <a class="create-icon" routerLink="/admin/create">New Article</a>
       </li>
       <li>
@@ -58,7 +55,27 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>edit</th>
           <td mat-cell *matCellDef="let element">
-            <a href="" routerLink="../{{ element.id }}/edit">edit</a>
+            <app-button
+              shape="circle"
+              class="item-button"
+              color="blue"
+              (click)="navigateToEditPage(element.id)"
+              >edit
+            </app-button>
+          </td>
+        </ng-container>
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>edit</th>
+          <td mat-cell *matCellDef="let element">
+            <app-button
+              shape="circle"
+              color="pink"
+              (click)="deleteArticle(element.id)"
+            >
+              delete
+            </app-button>
           </td>
         </ng-container>
 
