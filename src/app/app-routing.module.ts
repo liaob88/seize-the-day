@@ -5,7 +5,6 @@ import { HomePageComponent } from './home/home-page/home-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
-  { path: '**', redirectTo: '' },
   {
     path: 'articles',
     children: [{ path: ':id', component: ArticlePageComponent }]
@@ -13,7 +12,8 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-  }
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
