@@ -15,7 +15,6 @@ export class EditPageComponent implements OnInit {
   image: FileList = null;
   previewImageSrc: string;
   hasImageEdited: boolean = false;
-  article$: Observable<ArticleOfStore>;
   hasValueSet: boolean;
   imageSrc: string;
 
@@ -35,19 +34,16 @@ export class EditPageComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
       this.articleService.getArticle(this.id).subscribe(article => {
-        this.formValue.setValue({
-          title: `# ${article.title}`,
-          contents: article.contents
-        });
+        this.patchFormValue(article);
         this.imageSrc = article.imageSrc;
         this.hasValueSet = true;
       });
     });
   }
 
-  patchFormValue(article: ArticleOfStore) {
-    this.formValue.patchValue({
-      title: article.title,
+  private patchFormValue(article: ArticleOfStore) {
+    this.formValue.setValue({
+      title: `# ${article.title}`,
       contents: article.contents
     });
     return this.formValue;

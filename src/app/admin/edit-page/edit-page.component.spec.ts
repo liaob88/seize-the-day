@@ -4,7 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { createMockArticleDocOfStore } from 'src/app/shared/factory/article';
+import {
+  createMockArticleDocOfStore,
+  mockArticleDocOfStore
+} from 'src/app/shared/factory/article';
 import { createFileList } from 'src/app/shared/factory/file';
 import { ArticleService } from '../../shared/services/article.service';
 import { EditorComponent } from '../shared/components/editor/editor.component';
@@ -57,11 +60,14 @@ describe('ItemEditComponent', () => {
       expect(component.id).toBe('1');
     });
 
-    it('articleService.getArticle が component.id を引数にして呼び出され、component.articles$ にその結果が入る', () => {
+    it('articleService の getArticle が呼ばれ、その結果が formValue、imageSrc に代入され、hasValueSet が false になる', () => {
       spyOn(articleService, 'getArticle');
       component.ngOnInit();
+      const formValue = component.formValue.value;
       expect(articleService.getArticle).toHaveBeenCalledWith('1');
-      expect(component.article$).toBe(articleService.getArticle('1'));
+      expect(formValue.title).toBe(`# ${mockArticleDocOfStore.title}`);
+      expect(formValue.contents).toBe(mockArticleDocOfStore.contents);
+      expect(component.hasValueSet).toBe(true);
     });
   });
 
