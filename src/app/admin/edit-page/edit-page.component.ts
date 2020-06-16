@@ -68,10 +68,9 @@ export class EditPageComponent implements OnInit {
         this.formValue.value,
         this.image
       );
-    }
-    if (!this.hasImageEdited) {
+    } else {
       await this.articleService.updateArticle(this.id, this.formValue.value);
     }
-    this.route.navigateByUrl('/list');
+    this.route.navigateByUrl('/admin/dashboard');
   }
 }
