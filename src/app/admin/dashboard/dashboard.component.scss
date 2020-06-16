@@ -47,11 +47,6 @@ table {
   background-color: $WHITE;
 }
 
-.dashboard-icon::before {
-  @include material-icon;
-  content: '\e871';
-}
-
 .create-icon::before {
   @include material-icon;
   content: '\e145';
