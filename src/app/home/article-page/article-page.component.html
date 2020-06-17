@@ -1,7 +1,9 @@
 <ng-container *ngIf="item$ | async as item">
-  <div class="item-div">
+  <article>
     <h2 class="title">{{ item.title }}</h2>
-    <img class="item-image" src="{{ item.imageSrc }}" alt="" />
-    <div [innerHTML]="item.contents"></div>
-  </div>
+    <div class="thumbnail">
+      <img class="item-image" src="{{ item.imageSrc }}" alt="" />
+    </div>
+    <div class="contents" [innerHTML]="item.contents"></div>
+  </article>
 </ng-container>
