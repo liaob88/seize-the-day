@@ -1,3 +1,5 @@
+@import '../../shared/styles/common';
+
 article {
   padding: 20px;
   margin: 0 auto;
@@ -6,7 +8,10 @@ article {
 .thumbnail {
   text-align: center;
   .item-image {
-    width: 100%;
+    @media screen and (max-width: $sp) {
+      width: 100%;
+    }
+    width: 70%;
     height: auto;
     background-size: cover;
   }

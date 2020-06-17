@@ -31,7 +31,7 @@ $LIGHT_GREY: lightgrey;
 
 // media query
 $tab: 768px; // タブレット
-$sp: 480px; // スマホ
+$sp: 380px; // スマホ
 
 @mixin mq-m {
   @media (max-width: ($tab)) {
